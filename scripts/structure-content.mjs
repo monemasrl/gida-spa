@@ -541,6 +541,18 @@ for (const [file, d] of out) {
 	if (coll === 'certificazioni') d.tipo = cert.id[lang].get(d.tipo);
 	for (const b of d.blocks ?? []) if (b.type === 'certificazioni') b.tipi = b.tipi.map((t) => cert.id[lang].get(t));
 }
+// FAQ: da elenco nella pagina a collezione `faq` (una voce per domanda, chiave dalla domanda in italiano)
+for (const [file, d] of [...out]) {
+	const [coll, lang, name] = file.split('/');
+	if (coll !== 'pagine' || !Array.isArray(d.faq) || lang !== 'it') continue;
+	const keys = d.faq.map((f) => slugify(cheerio.load(f.question, null, false).root().text()).slice(0, 80).replace(/-$/, ""));
+	for (const l of ['it', 'en']) {
+		const page = out.get(`pagine/${l}/${name}`);
+		if (!page?.faq) continue;
+		page.faq.forEach((f, i) => out.set(`faq/${l}/${keys[i]}.json`, { title: clean(f.question), answer: f.answer, order: i + 1 }));
+		page.faq = true;
+	}
+}
 delete taxonomy.trasparenza.archivio; // anni prima dell'anno corrente
 
 // I testi con markup che l'editor visuale non conserva (classi CSS, box, media, immagini, stili):
@@ -626,7 +638,10 @@ for (let [file, data] of out) {
 	const ordered = { title, ...(description ? { description } : {}), ...(p ? { path: p } : {}), ...rest };
 	fs.writeFileSync(f, JSON.stringify(ordered, null, '\t') + '\n');
 }
-fs.writeFileSync(path.join(outDir, 'tassonomie.json'), JSON.stringify(taxonomy, null, '\t') + '\n');
+fs.mkdirSync(path.join(outDir, 'configurazioni'), { recursive: true });
+const { annoCorrente, anni } = taxonomy.trasparenza;
+fs.writeFileSync(path.join(outDir, 'configurazioni/anni.json'), JSON.stringify({ annoCorrente, anni }, null, '\t') + '\n');
+fs.writeFileSync(path.join(outDir, 'configurazioni/categorie.json'), JSON.stringify({ trasparenza: taxonomy.trasparenza.categorie, certificazioni: taxonomy.certificazioni.tipi }, null, '\t') + '\n');
 fs.writeFileSync(path.join(outDir, 'forms.json'), JSON.stringify(forms, null, '\t') + '\n');
 
 const counts = {};

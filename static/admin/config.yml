@@ -169,15 +169,7 @@ collections:
             label: HTML libero
             fields:
               - { name: html, label: HTML, widget: code, default_language: html, allow_language_selection: false, output_code_only: true, i18n: true }
-      - name: faq
-        label: Domande frequenti
-        widget: list
-        required: false
-        i18n: true
-        summary: '{{question}}'
-        fields:
-          - { name: question, label: Domanda, widget: string, i18n: true }
-          - { name: answer, label: Risposta, widget: richtext, format: html, i18n: true }
+      - { name: faq, label: Mostra le FAQ, widget: boolean, required: false, default: false, i18n: duplicate, hint: Elenca le domande della collezione FAQ (nel loro ordine) }
       - name: blocks
         label: Blocchi sotto il contenuto
         label_singular: Blocco
@@ -198,11 +190,11 @@ collections:
                 widget: relation
                 multiple: true
                 i18n: true
-                collection: _singletons
-                file: tassonomie
-                value_field: certificazioni.tipi.*.id
-                display_fields: [certificazioni.tipi.*.it]
-                search_fields: [certificazioni.tipi.*.it]
+                collection: configurazioni
+                file: categorie
+                value_field: certificazioni.*.id
+                display_fields: [certificazioni.*.it]
+                search_fields: [certificazioni.*.it]
               - { name: view, widget: hidden, i18n: true }
           - name: impianti
             label: Elenco impianti
@@ -249,6 +241,24 @@ collections:
       - *body
 
   # -------------------------------------------------------------------------------------------
+  - name: faq
+    label: FAQ
+    label_singular: Domanda
+    icon: quiz
+    folder: /src/content/faq
+    format: json
+    i18n: true
+    identifier_field: title
+    slug: '{{slug}}'
+    summary: '{{order}}. {{title}}'
+    description: Domande frequenti, mostrate nelle pagine con "Mostra le FAQ" attivo (pagina FAQ).
+    sortable_fields: { fields: [order, title], default: { field: order, direction: ascending } }
+    fields:
+      - { name: title, label: Domanda, widget: string, i18n: true }
+      - { name: answer, label: Risposta, widget: richtext, format: html, i18n: true }
+      - *order
+
+  # -------------------------------------------------------------------------------------------
   - name: impianti
     label: Impianti
     label_singular: Impianto
@@ -272,7 +282,12 @@ collections:
     icon: verified
     folder: /src/content/certificazioni
     <<: *entries
-    summary: '{{title}}'
+    summary: "{{title}} · {{tipo}} · ordine {{order}}{{unlisted | ternary(' · nascosto', '')}}"
+    table_columns:
+      - title
+      - { field: tipo, label: Tipo }
+      - { field: order, label: Ordine }
+      - { field: unlisted, label: Nascosto }
     sortable_fields: { fields: [order, title], default: { field: order, direction: ascending } }
     view_groups:
       - { label: Tipo, field: tipo }
@@ -285,11 +300,11 @@ collections:
         widget: relation
         i18n: duplicate
         dropdown_threshold: 0
-        collection: _singletons
-        file: tassonomie
-        value_field: certificazioni.tipi.*.id
-        display_fields: [certificazioni.tipi.*.it]
-        search_fields: [certificazioni.tipi.*.it]
+        collection: configurazioni
+        file: categorie
+        value_field: certificazioni.*.id
+        display_fields: [certificazioni.*.it]
+        search_fields: [certificazioni.*.it]
       - *order
       - *unlisted
 
@@ -300,7 +315,12 @@ collections:
     icon: folder_open
     folder: /src/content/trasparenza
     <<: *entries
-    summary: '{{title}}'
+    summary: "{{title}} · {{tipo}}{{unlisted | ternary(' · nascosto', '')}}"
+    table_columns:
+      - title
+      - { field: tipo, label: Categoria }
+      - { field: order, label: Ordine }
+      - { field: unlisted, label: Nascosto }
     # Una cartella per anno (trasparenza/<lingua>/<anno>/): nella barra laterale gli anni compaiono
     # come sottocartelle. L'anno del documento è quello della cartella in cui si trova.
     nested: { depth: 2, subfolders: false }
@@ -315,15 +335,55 @@ collections:
         label: Categoria
         widget: relation
         i18n: duplicate
-        collection: _singletons
-        file: tassonomie
-        value_field: trasparenza.categorie.*.id
-        display_fields: [trasparenza.categorie.*.it]
-        search_fields: [trasparenza.categorie.*.it]
+        collection: configurazioni
+        file: categorie
+        value_field: trasparenza.*.id
+        display_fields: [trasparenza.*.it]
+        search_fields: [trasparenza.*.it]
       - *body
       - { name: files, label: File, widget: list, required: false, i18n: true, field: { name: file, label: File, widget: file } }
       - *order
       - *unlisted
+
+  # -------------------------------------------------------------------------------------------
+  - divider: true
+  - name: configurazioni
+    label: Configurazioni
+    icon: settings
+    files:
+      - name: anni
+        label: Anni (Società trasparente)
+        icon: calendar_month
+        file: /src/content/configurazioni/anni.json
+        format: json
+        fields:
+          - { name: annoCorrente, label: Anno corrente, widget: string, pattern: ['^\d{4}$', Anno a quattro cifre], hint: Documenti mostrati nella pagina Società trasparente; gli anni precedenti vanno in Archivio }
+          - { name: anni, label: Anni con pagina d'archivio, label_singular: Anno, widget: list, hint: "Gli anni che hanno documenti (cartelle in Società trasparente) si aggiungono da soli", field: { name: anno, label: Anno, widget: string } }
+      - name: categorie
+        label: Categorie
+        icon: category
+        file: /src/content/configurazioni/categorie.json
+        format: json
+        fields:
+          - name: trasparenza
+            label: Categorie di Società trasparente (nell'ordine di visualizzazione)
+            label_singular: Categoria
+            widget: list
+            summary: '{{it}} / {{en}}'
+            fields:
+              - { name: id, label: Id, widget: string, hint: Identificativo stabile (minuscole e trattini), pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
+              - { name: it, label: Nome italiano, widget: string, required: false }
+              - { name: en, label: Nome inglese, widget: string, required: false }
+              - { name: parent, label: Categoria superiore (id), widget: string, required: false }
+          - name: certificazioni
+            label: Tipi di certificazione
+            label_singular: Tipo
+            widget: list
+            summary: '{{it}} / {{en}}'
+            fields:
+              - { name: id, label: Id, widget: string, pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
+              - { name: it, label: Nome italiano, widget: string, required: false }
+              - { name: en, label: Nome inglese, widget: string, required: false }
 
 # ---------------------------------------------------------------------------------------------
 # Documenti singoli (pagina iniziale e impostazioni del sito)
@@ -516,36 +576,3 @@ singletons:
               - { name: href, label: Link (certificato), widget: string, i18n: true }
               - { name: newTab, label: Apri in una nuova scheda, widget: boolean, required: false, default: false, i18n: duplicate }
           - { name: links, label: Pulsanti, label_singular: Pulsante, widget: list, i18n: true, summary: '{{label}}', fields: *footer_link }
-  - name: tassonomie
-    label: Categorie e anni
-    icon: category
-    file: /src/content/tassonomie.json
-    format: json
-    fields:
-      - name: trasparenza
-        label: Società trasparente
-        widget: object
-        fields:
-          - { name: annoCorrente, label: Anno corrente, widget: string, hint: Documenti mostrati nella pagina principale; gli anni precedenti vanno in Archivio }
-          - { name: anni, label: Anni con pagina d'archivio, widget: list, hint: "Gli anni che hanno documenti (cartelle in Società trasparente) si aggiungono da soli", field: { name: anno, label: Anno, widget: string } }
-          - name: categorie
-            label: Categorie (nell'ordine di visualizzazione)
-            widget: list
-            summary: '{{it}} / {{en}}'
-            fields:
-              - { name: id, label: Id, widget: string, hint: Identificativo stabile (minuscole e trattini), pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
-              - { name: it, label: Nome italiano, widget: string, required: false }
-              - { name: en, label: Nome inglese, widget: string, required: false }
-              - { name: parent, label: Categoria superiore (id), widget: string, required: false }
-      - name: certificazioni
-        label: Certificazioni
-        widget: object
-        fields:
-          - name: tipi
-            label: Tipi
-            widget: list
-            summary: '{{it}} / {{en}}'
-            fields:
-              - { name: id, label: Id, widget: string, pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
-              - { name: it, label: Nome italiano, widget: string, required: false }
-              - { name: en, label: Nome inglese, widget: string, required: false }

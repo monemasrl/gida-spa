@@ -41,10 +41,13 @@ export type Pagina = Base & Text & {
 	hero?: Img;
 	icon?: Img;
 	sezioni?: Sezione[];
-	faq?: { question: string; answer: string }[];
+	/** mostra l'elenco delle FAQ (collezione `faq`) */
+	faq?: boolean;
 	blocks?: Block[];
 };
 export type News = Base & Text & { image?: Img };
+/** Domanda frequente: il titolo è la domanda. */
+export type Faq = { title: string; answer: string; order?: number };
 export type Impianto = Base & Text & { image?: Img; order?: number };
 /** `unlisted`: la pagina esiste ma non compare negli elenchi generati. */
 export type Certificazione = Base & { file: string; tipo: string; order?: number; unlisted?: boolean };

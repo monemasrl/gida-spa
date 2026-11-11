@@ -3,7 +3,7 @@
  * originale continua a funzionare. Funzioni pure: usate dal sito in prerender e da
  * scripts/check-parity.mjs per confrontare il risultato con l'HTML originale.
  */
-import type { Block, Certificazione, Documento, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Sezione, Tassonomie } from './model.ts';
+import type { Block, Certificazione, Documento, Faq, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Sezione, Tassonomie } from './model.ts';
 
 export type Dims = (src: string) => { width: number; height: number } | undefined;
 
@@ -16,6 +16,7 @@ export type SiteData = {
 	impianti: Impianto[];
 	certificazioni: Certificazione[];
 	documenti: Documento[];
+	faq: Faq[];
 };
 
 // ---------------------------------------------------------------------------------------------
@@ -85,8 +86,8 @@ export function renderPagina(p: Pagina, site: SiteData) {
 	html += lb('block-field-blocknodepagetitle', ` <span class="field field--name-title field--type-string field--label-above">${esc(p.title)}</span>`);
 	const body = text(p) + (p.sezioni ?? []).map((s) => renderSezione(s, site)).join('');
 	if (body) html += lb('block-field-blocknodepagebody', textField(body));
-	if (p.faq?.length) {
-		const items = p.faq.map((f) => `<h3 class="faqfield-question">${f.question}</h3><div class="faqfield-answer">${f.answer}</div>`).join('');
+	if (p.faq && site.faq.length) {
+		const items = [...site.faq].sort(byOrder).map((f) => `<h3 class="faqfield-question">${f.title}</h3><div class="faqfield-answer">${f.answer}</div>`).join('');
 		html += lb('block-field-blocknodepagefield-campo-faq', `<div class="field field--name-field-campo-faq field--type-faqfield field--label-hidden field__items"><div class="field__item"><div id="faqfield_field_campo_faq">${items}</div></div></div>`);
 	}
 	const blocks = p.blocks ?? [];

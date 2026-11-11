@@ -38,7 +38,9 @@ per le traduzioni:
 | `src/content/certificazioni/…` | certificazioni e autorizzazioni (file + tipo) |
 | `src/content/trasparenza/<lingua>/<anno>/…` | documenti di Società trasparente (categoria, testo, file); l'anno è la cartella |
 | `src/content/home/{it,en}.json` | blocchi della home |
-| `src/content/tassonomie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN), anno corrente, anni d'archivio (si aggiungono anche quelli che hanno documenti) |
+| `src/content/faq/<lingua>/…` | domande frequenti (domanda, risposta, ordine), elencate nelle pagine con "Mostra le FAQ" |
+| `src/content/configurazioni/anni.json` | anno corrente e anni d'archivio di Società trasparente (si aggiungono anche quelli che hanno documenti) |
+| `src/content/configurazioni/categorie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN) |
 | `src/content/forms.json` | markup dei form |
 | `src/content/layout/{testata,menu-superiore,menu-principale,footer}/<lingua>.json` | logo e contatti in alto; menu; footer a blocchi (cruscotto energia, dati societari, menu, loghi e pulsanti delle certificazioni) |
 
@@ -95,9 +97,9 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 
 - **Traduzioni affiancate** (`i18n.structure: multiple_folders`): ogni voce ha le versioni IT ed EN nello stesso
   editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
-- **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, FAQ, blocchi
-  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, nel documento singolo "Categorie e anni"). Home page, Testata (logo e
-  contatti), Menu superiore, Menu principale, Footer e "Categorie e anni" sono documenti singoli (singleton), sotto
+- **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, "Mostra le FAQ", blocchi
+  sotto la pagina; categorie e tipi scelti da elenco (collezione "Configurazioni" → "Categorie"; l'anno corrente in "Configurazioni" → "Anni"). Home page, Testata (logo e
+  contatti), Menu superiore, Menu principale, Footer sono documenti singoli (singleton), sotto
   "File" nella barra laterale.
 - **Testo** usa l'editor visuale (HTML). Le pagine con impaginazione particolare usano **Contenuto a sezioni**,
   mostrate in ordine dopo il Testo: Testo (anche centrato), Allegati (file, anche come elenco puntato), Galleria di

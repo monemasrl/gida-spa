@@ -2,7 +2,7 @@
  * Costruisce le pagine del sito (percorso → HTML, metadati, traduzioni) dai contenuti strutturati.
  * Funzione pura: la usano sia SvelteKit (content.server.ts) sia scripts/check-parity.mjs.
  */
-import type { Certificazione, CollectionName, Documento, FormEntry, Home, Impianto, Lang, News, Pagina, Tassonomie } from './model.ts';
+import type { Certificazione, CollectionName, Documento, FormEntry, Home, Impianto, Lang, News, Pagina, Tassonomie, Termine, Faq } from './model.ts';
 import type { Page } from './types.ts';
 import { anniArchivio, archivePath, renderArchivio, renderCertificazione, renderDocumento, renderHome, renderImpianto, renderNews, renderPagina, type Dims, type SiteData } from './render.ts';
 
@@ -23,10 +23,14 @@ type Item = { collection: CollectionName; lang: Lang; key: string; data: { path:
 const defaultPath = (lang: Lang, key: string) => (lang === 'en' ? `/en/${key}` : `/${key}`);
 
 export function buildSite(raw: RawContent, dims: Dims) {
-	const tassonomie = raw['tassonomie.json'] as Tassonomie;
+	// Configurazioni del CMS: anni di Società trasparente e categorie/tipi (id + nome IT/EN)
+	const anni = raw['configurazioni/anni.json'] as Pick<Tassonomie['trasparenza'], 'annoCorrente' | 'anni'>;
+	const categorie = raw['configurazioni/categorie.json'] as { trasparenza: Termine[]; certificazioni: Termine[] };
+	const tassonomie: Tassonomie = { trasparenza: { ...anni, categorie: categorie.trasparenza }, certificazioni: { tipi: categorie.certificazioni } };
 	const forms = raw['forms.json'] as Record<string, FormEntry>;
 	const items: Item[] = [];
 	const homes: Partial<Record<Lang, Home>> = {};
+	const faq: Partial<Record<Lang, Faq[]>> = {};
 	for (const [file, data] of Object.entries(raw)) {
 		const m = file.match(/^(pagine|news|impianti|certificazioni|trasparenza)\/(it|en)\/(.+)\.json$/);
 		if (m) {
@@ -36,6 +40,8 @@ export function buildSite(raw: RawContent, dims: Dims) {
 			const name = m[3].split('/').pop()!;
 			items.push({ collection: m[1] as CollectionName, lang: m[2] as Lang, key: m[3], data: { ...d, ...(year ? { anno: year } : {}), path: d.path || defaultPath(m[2] as Lang, name) } });
 		}
+		const q = file.match(/^faq\/(it|en)\/.+\.json$/);
+		if (q) (faq[q[1] as Lang] ??= []).push(data as Faq);
 		const h = file.match(/^home\/(it|en)\.json$/);
 		if (h) homes[h[1] as Lang] = data as Home;
 	}
@@ -50,7 +56,8 @@ export function buildSite(raw: RawContent, dims: Dims) {
 				forms,
 				impianti: of<Impianto>('impianti', lang),
 				certificazioni: of<Certificazione>('certificazioni', lang),
-				documenti: of<Documento>('trasparenza', lang)
+				documenti: of<Documento>('trasparenza', lang),
+				faq: faq[lang] ?? []
 			}
 		])
 	) as Record<Lang, SiteData>;
