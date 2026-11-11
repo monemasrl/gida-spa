@@ -111,14 +111,31 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - Elenchi generati: un nuovo documento di Società trasparente compare nella pagina principale se il suo anno è
   l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
   "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.
-- **Online**: `/admin/index.html` → "Accedi con Token di Accesso", con un token GitHub *fine-grained* su
-  `monemasrl/gida-spa` con permessi *Contents* e *Pull requests* in lettura/scrittura.
+- **Online**: `/admin/index.html` → "Accedi con GitHub" (serve un account GitHub con accesso in scrittura a
+  `monemasrl/gida-spa`; vedi *Accesso con GitHub (OAuth)* sotto).
   Con `publish_mode: editorial_workflow` ogni modifica apre una pull request (con anteprima Vercel);
   va in produzione solo quando la si pubblica dal CMS (merge su `main`).
 - **In locale**: `npm run dev`, apri `http://localhost:5173/admin/index.html` in Chrome/Edge →
   "Lavora con Repository Locale" e scegli la cartella del progetto. Le modifiche vengono scritte sui file.
-- Per "Accedi con GitHub" serve un server OAuth (es. [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth))
-  da indicare in `backend.base_url`, togliendo `auth_methods: [token]`.
+
+### Accesso con GitHub (OAuth)
+
+Il client OAuth è nel sito stesso (al posto di sveltia-cms-auth su Cloudflare): `src/routes/api/cms-auth/`
+(`auth` → GitHub → `callback`) e `src/lib/server/cms-auth.ts`. Il CMS lo raggiunge da `backend.base_url` +
+`auth_endpoint` in `static/admin/config.yml`, sempre sull'host di produzione perché la OAuth App ammette un solo
+callback URL. Anche il CMS delle anteprime Vercel (`gida-sito-*-monema-5f86ca5f.vercel.app`) accede da lì: il
+token viene consegnato solo alle origin ammesse (`CMS_ALLOWED_ORIGINS`, default in `cms-auth.ts`).
+
+Configurazione (una volta):
+
+1. GitHub → organizzazione `monemasrl` → Settings → Developer settings → **OAuth Apps** → New OAuth App:
+   *Homepage URL* `https://gida-sito.vercel.app`, *Authorization callback URL*
+   `https://gida-sito.vercel.app/api/cms-auth/callback`. Poi "Generate a new client secret".
+2. Vercel → progetto `gida-sito` → Settings → Environment Variables (Production e Preview):
+   `GITHUB_OAUTH_CLIENT_ID` e `GITHUB_OAUTH_CLIENT_SECRET` (*Sensitive*), quindi un nuovo deploy.
+3. Col dominio definitivo: cambiare `base_url` in `config.yml` e il callback URL nella OAuth App.
+
+Gli editor accedono con il proprio account GitHub, che deve avere accesso in scrittura al repository.
 
 ## Deploy (Vercel)
 
