@@ -20,16 +20,37 @@ Le uniche parti davvero dinamiche erano i due form, quindi il sito si presta ben
 ## Come funziona
 
 ```
-scripts/mirror-pages.py      scarica le pagine HTML (dalla sitemap)
-scripts/mirror-assets.py     scarica PDF/immagini/CSS/font mantenendo gli stessi URL
-scripts/import-drupal.mjs    HTML Drupal → src/content/pages/*.json + layout.json + static/css/drupal.css
-scripts/check-links.mjs      verifica che tutti i link interni del build esistano
+scripts/mirror-pages.py        scarica le pagine HTML (dalla sitemap)
+scripts/mirror-assets.py       scarica PDF/immagini/CSS/font mantenendo gli stessi URL
+scripts/import-drupal.mjs      HTML Drupal → .drupal-mirror/import/pages/*.json + layout.json + CSS
+scripts/structure-content.mjs  pagine importate → contenuti strutturati in src/content/
+scripts/check-parity.mjs       confronta le pagine rigenerate con l'HTML originale
+scripts/check-links.mjs        verifica che tutti i link interni del build esistano
 ```
 
-- `src/routes/[...path=page]` è un'unica route catch-all che prerenderizza ogni pagina presente in `src/content/pages/`.
-- Header (menu, lingua, header sticky) è un componente Svelte; footer e contenuti sono l'HTML originale ripulito.
+Contenuti strutturati (modificabili da Sveltia CMS), una cartella per lingua con lo **stesso nome di file**
+per le traduzioni:
+
+| Cartella | Contenuto |
+|---|---|
+| `src/content/pagine/{it,en}/` | pagine: immagine di testata, icona, testo, FAQ, blocchi (form, elenchi, …) |
+| `src/content/news/…`, `impianti/…` | news e impianti |
+| `src/content/certificazioni/…` | certificazioni e autorizzazioni (file + tipo) |
+| `src/content/trasparenza/…` | documenti di Società trasparente (anno, categoria, testo, file) |
+| `src/content/home/{it,en}.json` | blocchi della home |
+| `src/content/tassonomie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN), anno corrente, anni d'archivio |
+| `src/content/forms.json`, `layout.json` | markup dei form; menu, contatti e footer |
+
+- `src/lib/render.ts` rigenera da questi dati **lo stesso markup di Drupal** (il CSS originale continua a funzionare),
+  compresi gli elenchi che Drupal generava: certificazioni per tipo, impianti con menu di ancore, Società trasparente
+  per categoria (pagina principale = anno corrente) e archivi annuali. `npm run check-parity` verifica che 587/589
+  pagine siano identiche all'originale (le 2 differenze sono un'etichetta EN incoerente già in Drupal: "AIT Resolution"
+  sulla pagina del documento, "Delibera AIT" nell'elenco).
+- Collegamenti tra traduzioni (`hreflang`, selettore lingua) calcolati dalla chiave condivisa.
+- Una pagina senza `path` usa `/<nome-file>` (`/en/<nome-file>`): le voci nuove create dal CMS non devono indicarlo.
+- `src/routes/[...path=page]` è un'unica route catch-all che prerenderizza tutte le pagine.
+- Header (menu, lingua, header sticky) è un componente Svelte; footer dall'HTML originale ripulito.
 - Gli URL sono **identici** a quelli di Drupal (anche `/sites/default/files/...`), così SEO e link esterni restano validi.
-- Pulizia in import: email Cloudflare decodificate, link `/node/N` risolti, link alla tassonomia trasformati in testo, link rotti dell'originale corretti.
 - Il JS di Bootstrap Italia (≈500 KB) è sostituito da poche righe Svelte (collapse, dropdown, menu mobile, header sticky, torna-su).
 
 ## Comandi
@@ -43,12 +64,14 @@ npm run check-links
 npm run preview
 ```
 
-Re-import da Drupal (finché il vecchio sito è online):
+Re-import da Drupal (finché il vecchio sito è online). **Sovrascrive i contenuti modificati dal CMS**:
 
 ```bash
 python3 scripts/mirror-pages.py urls.txt .drupal-mirror/pages
 python3 scripts/mirror-assets.py files.txt .drupal-mirror/assets
 npm run import -- .drupal-mirror
+npm run structure
+npm run check-parity
 ```
 
 ## Form (procmail.sh + Cap)
@@ -68,21 +91,25 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 ## CMS (Sveltia CMS)
 
 [Sveltia CMS](https://sveltiacms.app) è in `static/admin/` (pagina `/admin/index.html`, configurazione `/admin/config.yml`).
-Modifica direttamente i JSON in `src/content/`: titolo, descrizione e HTML delle pagine (divise in Pagine, News,
-Impianti, Certificazioni e Società trasparente), più menu, contatti e footer (`layout.json`).
-I campi non esposti (alternates, forms, bodyClass, …) vengono conservati così come sono.
 
+- **Traduzioni affiancate** (`i18n.structure: multiple_folders`): ogni voce ha le versioni IT ed EN nello stesso
+  editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
+- **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, FAQ, blocchi
+  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, in "Menu, footer e categorie").
+- **Testo** usa l'editor visuale (HTML). I 21 testi con impaginazione particolare (classi CSS, box, allegati e
+  immagini nel testo: es. Chi siamo, Contatti, Recupero, MOG 231) sono in **Testo (HTML)**, modificato come codice,
+  perché l'editor visuale eliminerebbe classi e box. Se "Testo (HTML)" è compilato, sostituisce "Testo".
+- Elenchi generati: un nuovo documento di Società trasparente compare nella pagina principale se il suo anno è
+  l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
+  "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.
 - **Online**: `/admin/index.html` → "Accedi con Token di Accesso", con un token GitHub *fine-grained* su
   `monemasrl/gida-spa` con permessi *Contents* e *Pull requests* in lettura/scrittura.
   Con `publish_mode: editorial_workflow` ogni modifica apre una pull request (con anteprima Vercel);
   va in produzione solo quando la si pubblica dal CMS (merge su `main`).
 - **In locale**: `npm run dev`, apri `http://localhost:5173/admin/index.html` in Chrome/Edge →
   "Lavora con Repository Locale" e scegli la cartella del progetto. Le modifiche vengono scritte sui file.
-- Per l'accesso con "Accedi con GitHub" serve un server OAuth (es. [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth))
+- Per "Accedi con GitHub" serve un server OAuth (es. [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth))
   da indicare in `backend.base_url`, togliendo `auth_methods: [token]`.
-- Non si possono creare o eliminare pagine dal CMS (i JSON hanno una struttura derivata da Drupal), e gli archivi
-  annuali di Società trasparente non sono modificabili: cambiare il titolo di un documento non aggiorna l'elenco dell'archivio.
-- **Attenzione**: `npm run import` rigenera i JSON e sovrascrive le modifiche fatte dal CMS.
 
 ## Deploy (Vercel)
 

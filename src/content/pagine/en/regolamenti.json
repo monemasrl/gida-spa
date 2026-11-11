@@ -1,0 +1,17 @@
+{
+	"title": "Regulations",
+	"path": "/en/regulations",
+	"hero": {
+		"src": "/sites/default/files/2022-01/certificazioni_0.jpg",
+		"alt": " certificazioni"
+	},
+	"blocks": [
+		{
+			"type": "certificazioni",
+			"view": "block-3",
+			"tipi": [
+				"regolamenti-gida"
+			]
+		}
+	]
+}

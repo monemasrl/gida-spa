@@ -1,0 +1,74 @@
+{
+	"title": "Home",
+	"hero": {
+		"src": "/sites/default/files/2022-01/home_head_3.jpg",
+		"alt": "home header"
+	},
+	"mission": "<h1>la nostra mission</h1><p>Forniamo ai cittadini e alle industrie della Provincia di Prato servizi ambientali nel settore delle acque di scarico e dei rifiuti liquidi.<br>Offriamo servizi di recupero e distribuzione delle acque usate, ci occupiamo di svolgere lo smaltimento in proprio di gran parte dei residui di depurazione dei prodotti e forniamo servizi a costi competitivi.<br><strong>Svolgiamo le nostre attività nel rispetto dell’ambiente e della normativa ambientale.</strong></p>",
+	"settori": {
+		"title": "i nostri settori",
+		"items": [
+			{
+				"icon": {
+					"src": "/sites/default/files/inline-images/icona-depurazione.png",
+					"alt": "icona settore"
+				},
+				"title": "depurazione",
+				"text": "Il sistema centralizzato di depurazione è formato da pochi grandi impianti collegati con gli utenti domestici e industriali da un reticolo fognario.",
+				"link": "/depurazione"
+			},
+			{
+				"icon": {
+					"src": "/sites/default/files/inline-images/icona-recupero_1.png",
+					"alt": "icona settore"
+				},
+				"title": "recupero",
+				"text": "Gida, consapevole di possedere le due principali sorgenti di acqua “riciclabile”, ha acquisito un ruolo determinante nel recupero ai fini del riutilizzo delle acque reflue.",
+				"link": "/recupero"
+			},
+			{
+				"icon": {
+					"src": "/sites/default/files/inline-images/icona-trattamento.png",
+					"alt": "icona settore"
+				},
+				"title": "trattamento",
+				"text": "L’impianto di trattamento liquami è collocato all’interno degli Impianti di depurazione di Calice e Baciacavallo ed è attivo dal 1992.",
+				"link": "/trattamento-rifiuti-liquidi-su-gomma"
+			}
+		]
+	},
+	"percorso": {
+		"background": {
+			"src": "/sites/default/files/2022-01/back-percorso_1.jpg",
+			"alt": "back percorso acqua"
+		},
+		"icon": {
+			"src": "/sites/default/files/inline-images/icona-acqua_0.png",
+			"alt": "icona acqua"
+		},
+		"text": "Scarica la mappa con il percorso dell'acqua",
+		"file": "/sites/default/files/2024-10/GIDA FLYERWEB2024.pdf"
+	},
+	"ricerca": {
+		"title": "Formazione e ricerca",
+		"text": "Notevole è l’impegno della società nell’attività di ricerca, di studio e di sperimentazione. Spesso le ricerche sono effettuate in collaborazione con enti esterni, in prevalenza istituti universitari, e sono finalizzate all’approfondimento di temi più generali e più propriamente scientifici. GIDA sperimenta nuove forme di riutilizzo dell’acqua depurata nel settore industriale, vivaistico e paesaggistico",
+		"link": "/formazione-e-ricerca",
+		"image": {
+			"src": "/sites/default/files/2021-12/home-ricerca.jpg",
+			"alt": "home ricerca"
+		}
+	},
+	"scuole": {
+		"title": "gida nelle scuole",
+		"linkText": "Richiedi una visita guidata alla nostra struttura",
+		"link": "/gida-scuole",
+		"mascotte": {
+			"src": "/sites/default/files/2021-12/mascotte.png",
+			"alt": "mascotte-gida"
+		},
+		"background": {
+			"src": "/sites/default/files/2021-12/back-scuole.jpg",
+			"alt": "back-scuola"
+		}
+	}
+}

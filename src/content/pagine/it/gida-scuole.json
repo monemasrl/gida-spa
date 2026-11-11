@@ -1,0 +1,15 @@
+{
+	"title": "Gida per le scuole",
+	"path": "/gida-scuole",
+	"hero": {
+		"src": "/sites/default/files/2022-01/scuole_0.jpg",
+		"alt": "scuole"
+	},
+	"blocks": [
+		{
+			"type": "form",
+			"form": "scuole"
+		}
+	],
+	"bodyHtml": "<h2 style=\"text-align: center\">Richiedi una visita guidata</h2><p style=\"text-align: center\">Compila il form con le infromazioni richieste e vi contatteremo al più presto</p>"
+}

@@ -14,6 +14,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"import": "node scripts/import-drupal.mjs",
+		"structure": "node scripts/structure-content.mjs .drupal-mirror/import/pages src/content",
+		"check-parity": "node scripts/check-parity.mjs .drupal-mirror/import/pages",
 		"check-links": "node scripts/check-links.mjs .vercel/output/static"
 	},
 	"devDependencies": {
@@ -29,7 +31,8 @@
 		"vite": "^8.3.0"
 	},
 	"dependencies": {
-		"@cap.js/widget": "^0.1.62"
+		"@cap.js/widget": "^0.1.62",
+		"image-size": "^2.1.0"
 	},
 	"engines": {
 		"node": "24.x"

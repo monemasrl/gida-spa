@@ -10,7 +10,8 @@
  *   assets/  copia di /sites/default/files e /themes/... (stessa struttura degli URL)
  *
  * Output:
- *   src/content/pages/*.json   una pagina per file (metadati + HTML del contenuto)
+ *   <mirror-dir>/import/pages/*.json   una pagina per file (metadati + HTML del contenuto),
+ *                                     da convertire con scripts/structure-content.mjs
  *   src/content/layout.json    menu, footer e top-bar per lingua
  *   static/css/drupal.css      unione (deduplicata) dei bundle CSS di Drupal
  */
@@ -25,7 +26,8 @@ if (!mirror) {
 	process.exit(1);
 }
 const ROOT = path.resolve(import.meta.dirname, '..');
-const OUT_PAGES = path.join(ROOT, 'src/content/pages');
+// HTML ripulito di ogni pagina: è l'input di scripts/structure-content.mjs (non va nel repo)
+const OUT_PAGES = path.join(mirror, 'import/pages');
 const ORIGIN = 'https://www.gida-spa.it';
 
 // ---------------------------------------------------------------- helpers

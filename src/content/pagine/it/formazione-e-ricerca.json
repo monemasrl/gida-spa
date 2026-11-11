@@ -1,0 +1,103 @@
+{
+	"title": "Formazione e ricerca",
+	"path": "/formazione-e-ricerca",
+	"hero": {
+		"src": "/sites/default/files/2022-01/formazione.jpg",
+		"alt": "formazione"
+	},
+	"body": "<p>Notevole è l’impegno della società nell’attività di ricerca, di studio e di sperimentazione.<br>Spesso le ricerche sono effettuate in collaborazione con enti esterni, in prevalenza istituti universitari, e sono finalizzate all’approfondimento di temi più generali e più propriamente scientifici. GIDA sperimenta nuove forme di riutilizzo dell’acqua depurata nel settore industriale, vivaistico e paesaggistico.</p><p>&nbsp;</p><p><a href=\"/gida-scuole\">Richiedi informazioni od una visita guidata alla nostra struttura</a></p><p>&nbsp;</p>",
+	"blocks": [
+		{
+			"type": "pubblicazioni",
+			"title": "Pubblicazioni scientifiche",
+			"items": [
+				{
+					"title": "J Sci Food Agric 2021",
+					"href": "/sites/default/files/2022-01/J Sci Food Agric 2021_FP.pdf"
+				},
+				{
+					"title": "Journal of Chromatography A 2021",
+					"href": "/sites/default/files/2022-01/Journal of Chromatography A 2021_FP.pdf"
+				},
+				{
+					"title": "Enviromental Science 2021",
+					"href": "/sites/default/files/2022-01/Enviromental Science 2021_FP.pdf"
+				},
+				{
+					"title": "Journal of Bacteriology and Mycology 2020",
+					"href": "/sites/default/files/2022-01/Journal of Bacteriology and Mycology 2020_FP.pdf"
+				},
+				{
+					"title": "STOTEN 2020",
+					"href": "/sites/default/files/2022-01/STOTEN 2020_FP.pdf"
+				},
+				{
+					"title": "Frontiers in Microbiology 2020",
+					"href": "/sites/default/files/2022-01/Frontiers in Microbiology 2020_FP.pdf"
+				},
+				{
+					"title": "Science of the Total Environment 2020",
+					"href": "/sites/default/files/2022-01/Science of the Total Environment 2020_FP.pdf"
+				},
+				{
+					"title": "Future Microbiology 2021",
+					"href": "/sites/default/files/2022-01/Future Microbiology 2021_FP.pdf"
+				},
+				{
+					"title": "Journal of Chromatography A 2020",
+					"href": "/sites/default/files/2022-01/Journal of Chromatography A 2020_FP.pdf"
+				},
+				{
+					"title": "Microbiology Research 2021",
+					"href": "/sites/default/files/2022-01/Microbiology Research 2021_FP.pdf"
+				},
+				{
+					"title": "Analytical & Bioanalytical Chemestry 2016",
+					"href": "/sites/default/files/2022-01/Analytical_Bioanalytical_Chemestry_2016.pdf"
+				},
+				{
+					"title": "Analytica Chimica Acta",
+					"href": "/sites/default/files/2022-01/20160619_Analytica_Chimica_Acta.pdf"
+				},
+				{
+					"title": "Hi-Tech Ambiente n. 8",
+					"href": "/sites/default/files/2022-01/201611_Hi-Tech_Ambiente_n._8_0.pdf"
+				},
+				{
+					"title": "A Performance Measurement Tool Leading Wastewater Treatment Plants toward Economic Efficiency and Sustainability",
+					"href": "/sites/default/files/2022-01/A_Performance_Measurement_Tool_Leading_Wastewater_Treatment_Plants_toward_Economic_Efficiency_and_Sustainability.pdf"
+				}
+			]
+		},
+		{
+			"type": "progetti",
+			"title": "Ricerca e sviluppo",
+			"items": [
+				{
+					"document": {
+						"title": "Iformativa Convenzione Università",
+						"href": "/sites/default/files/2025-03/INF_17_InfomativaConvenzioneUniversita_Rev01.pdf"
+					}
+				},
+				{
+					"links": [
+						{
+							"title": "IMPIANTO PILOTA DI FITODEPURAZIONE",
+							"href": "https://drive.google.com/file/d/0B-Y4ixZL1Db9RksyTlk3OHBZeW8/view?usp=sharing"
+						},
+						{
+							"title": "PHYTODEPUTATION PILOT PLANT",
+							"href": "https://drive.google.com/file/d/0B-Y4ixZL1Db9a2xaZHJJWkxMaGs/view?usp=sharing"
+						}
+					]
+				},
+				{
+					"document": {
+						"title": "Analisi acqua erogata acquedotto industriale M2",
+						"href": "/sites/default/files/2022-01/Analisi Acqua Erogata Acquedotto Industriale M2.pdf"
+					}
+				}
+			]
+		}
+	]
+}

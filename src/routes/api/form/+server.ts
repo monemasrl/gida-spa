@@ -1,7 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { PROCMAIL_API_URL, PROCMAIL_API_KEY, FORM_FROM, FORM_TO } from '$app/env/private';
 import { validateToken } from '#lib/server/cap.ts';
-import { pages } from '#lib/content.server.ts';
+import forms from '../../../content/forms.json' with { type: 'json' };
+import type { FormEntry } from '#lib/model.ts';
 import type { FormDef } from '#lib/types.ts';
 import type { RequestHandler } from './$types';
 
@@ -17,10 +18,10 @@ export const prerender = false;
  *   FORM_TO            destinatari, separati da virgola (default gida@gida-spa.it)
  */
 
-// Definizioni dei form ricavate dai contenuti importati (le etichette italiane vanno nell'email)
+// Definizioni dei form (src/content/forms.json): le etichette italiane vanno nell'email
 const FORMS = new Map<string, FormDef>();
-for (const p of [...pages.values()].sort((a) => (a.lang === 'it' ? -1 : 1))) {
-	for (const f of p.forms) if (!FORMS.has(f.id)) FORMS.set(f.id, f);
+for (const [key, f] of Object.entries(forms as Record<string, FormEntry>).sort(([a]) => (a.endsWith('.it') ? -1 : 1))) {
+	if (!FORMS.has(f.def.id)) FORMS.set(f.def.id, f.def);
 }
 
 const SUBJECTS: Record<string, string> = {

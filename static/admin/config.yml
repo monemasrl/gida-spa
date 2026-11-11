@@ -1,9 +1,12 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.262.4/schema/sveltia-cms.json
 #
-# Sveltia CMS per il sito GIDA: modifica i JSON in src/content/ (generati da scripts/import-drupal.mjs).
-# Accesso: "Sign In with Token" (token GitHub con permessi Contents + Pull requests in lettura/scrittura)
-# oppure "Work with Local Repository" in Chrome/Edge con `npm run dev`.
-# ATTENZIONE: rieseguire `npm run import` sovrascrive le modifiche fatte dal CMS.
+# Sveltia CMS per il sito GIDA. I contenuti sono in src/content/<collezione>/<lingua>/<chiave>.json:
+# le traduzioni hanno lo stesso nome di file e si modificano affiancate.
+# Il sito ricostruisce da questi dati il markup originale (src/lib/render.ts), compresi gli elenchi
+# generati: certificazioni, impianti, Società trasparente e archivi annuali.
+#
+# Accesso: "Accedi con Token di Accesso" (token GitHub con permessi Contents + Pull requests)
+# oppure "Lavora con Repository Locale" in Chrome/Edge con `npm run dev`.
 
 backend:
   name: github
@@ -25,76 +28,313 @@ public_folder: /sites/default/files
 output:
   json:
     indent_style: tab
+  omit_empty_optional_fields: true
 
-# Campi comuni delle pagine: i campi non elencati (alternates, forms, bodyClass, ...) restano invariati.
-_page_fields: &page_fields
-  - { name: title, label: Titolo, widget: string }
-  - { name: description, label: Descrizione (meta), widget: text, required: false }
-  - { name: path, label: URL, widget: string, readonly: true }
-  - { name: lang, label: Lingua, widget: select, options: [it, en], readonly: true }
-  - { name: bodyClass, widget: hidden } # tipo di contenuto Drupal, usato dai filtri delle collezioni
-  - name: html
-    label: Contenuto (HTML)
-    hint: Markup originale di Bootstrap Italia. I form (data-gida-form) vanno lasciati intatti.
+i18n:
+  structure: multiple_folders
+  locales: [it, en]
+  default_locale: it
+  # le voci nuove partono solo in italiano; la traduzione inglese si attiva quando serve
+  initial_locales: default
+
+# ---------------------------------------------------------------------------------------------
+# Campi riutilizzati (ancore YAML)
+# ---------------------------------------------------------------------------------------------
+_f:
+  title: &title { name: title, label: Titolo, widget: string, i18n: true }
+  description: &description
+    { name: description, label: Descrizione (meta), widget: text, required: false, i18n: true, hint: Testo per i motori di ricerca }
+  path: &path
+    name: path
+    label: URL
+    widget: string
+    required: false
+    i18n: true
+    hint: Lasciare vuoto per usare il nome del file (es. /nome-file, /en/nome-file). Cambiarlo rompe i link esistenti.
+    pattern: ['^/[a-z0-9][a-z0-9/._-]*$', "Percorso che inizia con / (minuscole, numeri e trattini)"]
+  body: &body { name: body, label: Testo, widget: richtext, format: html, required: false, i18n: true }
+  bodyHtml: &bodyHtml
+    name: bodyHtml
+    label: Testo (HTML)
     widget: code
     default_language: html
     allow_language_selection: false
     output_code_only: true
+    required: false
+    i18n: true
+    hint: Per i testi con impaginazione particolare (classi CSS, box, allegati, immagini), che l'editor visuale non conserverebbe. Se compilato, sostituisce "Testo".
+  order: &order
+    { name: order, label: Ordine negli elenchi, widget: number, value_type: int, required: false, i18n: duplicate, hint: I numeri più bassi vengono prima }
+  unlisted: &unlisted
+    { name: unlisted, label: Nascondi negli elenchi, widget: boolean, required: false, default: false, i18n: duplicate, hint: La pagina resta raggiungibile dal suo URL }
+  image: &image
+    widget: object
+    i18n: true
+    summary: '{{alt}}'
+    fields:
+      - { name: src, label: Immagine, widget: image, i18n: true }
+      - { name: alt, label: Testo alternativo, widget: string, required: false, i18n: true }
+  link: &link
+    widget: object
+    i18n: true
+    summary: '{{title}}'
+    fields:
+      - { name: title, label: Testo, widget: string, i18n: true }
+      - { name: href, label: Link (URL o file), widget: string, i18n: true, hint: 'Es. /sites/default/files/... oppure https://...' }
 
-_page_defaults: &page_defaults
-  folder: /src/content/pages
-  format: json
-  create: false
-  delete: false
-  duplicate: false
-  identifier_field: title
-  summary: '{{title}} — {{path}}'
-  preview_path: '{{fields.path}}'
-  sortable_fields: [title, path]
-  view_filters:
-    - { label: Italiano, field: lang, pattern: '^it$' }
-    - { label: English, field: lang, pattern: '^en$' }
-  fields: *page_fields
+_c:
+  entries: &entries
+    format: json
+    i18n: true
+    identifier_field: title
+    slug: '{{slug}}'
+    duplicate: false
+    sortable_fields: [title, path]
 
 collections:
+  # -------------------------------------------------------------------------------------------
   - name: pagine
     label: Pagine
     label_singular: Pagina
     icon: description
-    <<: *page_defaults
-    filter: { field: bodyClass, pattern: '(page-node-typepage|path-frontpage)\b' }
+    folder: /src/content/pagine
+    <<: *entries
+    summary: '{{title}} — {{path}}'
+    fields:
+      - *title
+      - *description
+      - *path
+      - { name: hero, label: Immagine di testata, required: false, <<: *image }
+      - { name: icon, label: Icona, required: false, <<: *image }
+      - *body
+      - *bodyHtml
+      - name: faq
+        label: Domande frequenti
+        widget: list
+        required: false
+        i18n: true
+        summary: '{{question}}'
+        fields:
+          - { name: question, label: Domanda, widget: string, i18n: true }
+          - { name: answer, label: Risposta, widget: richtext, format: html, i18n: true }
+      - name: blocks
+        label: Blocchi sotto il contenuto
+        label_singular: Blocco
+        widget: list
+        required: false
+        i18n: true
+        types:
+          - name: form
+            label: Modulo di contatto
+            fields:
+              - { name: form, label: Modulo, widget: select, i18n: true, options: [{ label: Contatti, value: form-contatti }, { label: Visite scuole, value: scuole }] }
+          - name: certificazioni
+            label: Elenco certificazioni
+            summary: '{{tipi}}'
+            fields:
+              - name: tipi
+                label: Tipi da mostrare (in quest'ordine)
+                widget: relation
+                multiple: true
+                i18n: true
+                collection: impostazioni
+                file: tassonomie
+                value_field: certificazioni.tipi.*.id
+                display_fields: [certificazioni.tipi.*.it]
+                search_fields: [certificazioni.tipi.*.it]
+              - { name: view, widget: hidden, i18n: true }
+          - name: impianti
+            label: Elenco impianti
+            fields:
+              - { name: menu, label: Menu di ancore, widget: list, required: false, i18n: true, summary: '{{title}}', fields: [{ name: title, label: Testo, widget: string, i18n: true }, { name: href, label: 'Ancora (#titolo impianto in minuscolo)', widget: string, i18n: true }] }
+          - name: pubblicazioni
+            label: Pubblicazioni scientifiche
+            summary: '{{title}}'
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: items, label: Pubblicazioni, widget: list, i18n: true, summary: '{{title}}', fields: [{ name: title, label: Titolo, widget: string, i18n: true }, { name: href, label: File, widget: file, i18n: true }] }
+          - name: progetti
+            label: Progetti di ricerca
+            summary: '{{title}}'
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - name: items
+                label: Progetti
+                widget: list
+                i18n: true
+                fields:
+                  - { name: document, label: Documento, required: false, <<: *link }
+                  - { name: links, label: Link esterni, widget: list, required: false, i18n: true, summary: '{{title}}', fields: [{ name: title, label: Testo, widget: string, i18n: true }, { name: href, label: URL, widget: string, i18n: true }] }
+          - name: trasparenza
+            label: Società trasparente (documenti dell'anno corrente e archivio)
+            fields: []
+          - name: html
+            label: HTML libero
+            fields:
+              - { name: html, label: HTML, widget: code, default_language: html, allow_language_selection: false, output_code_only: true, i18n: true }
 
+  # -------------------------------------------------------------------------------------------
   - name: news
     label: News
+    label_singular: News
     icon: newspaper
-    <<: *page_defaults
-    filter: { field: bodyClass, pattern: 'page-node-typenews\b' }
+    folder: /src/content/news
+    <<: *entries
+    fields:
+      - *title
+      - *description
+      - *path
+      - { name: image, label: Immagine, required: false, <<: *image }
+      - *body
+      - *bodyHtml
 
+  # -------------------------------------------------------------------------------------------
   - name: impianti
     label: Impianti
     label_singular: Impianto
     icon: factory
-    <<: *page_defaults
-    filter: { field: bodyClass, pattern: 'page-node-typeimpianti\b' }
+    folder: /src/content/impianti
+    <<: *entries
+    hint: Compaiono nell'elenco della pagina Depurazione, nell'ordine indicato.
+    sortable_fields: { fields: [order, title], default: { field: order, direction: ascending } }
+    fields:
+      - *title
+      - *description
+      - *path
+      - { name: image, label: Immagine, required: false, <<: *image }
+      - *body
+      - *bodyHtml
+      - *order
 
+  # -------------------------------------------------------------------------------------------
   - name: certificazioni
-    label: Certificazioni
-    label_singular: Certificazione
+    label: Certificazioni e autorizzazioni
+    label_singular: Documento
     icon: verified
-    <<: *page_defaults
-    filter: { field: bodyClass, pattern: 'page-node-typecertificazioni\b' }
+    folder: /src/content/certificazioni
+    <<: *entries
+    summary: '{{title}}'
+    sortable_fields: { fields: [order, title], default: { field: order, direction: ascending } }
+    view_groups:
+      - { label: Tipo, field: tipo }
+    fields:
+      - *title
+      - *path
+      - { name: file, label: File, widget: file, i18n: true }
+      - name: tipo
+        label: Tipo
+        widget: relation
+        i18n: duplicate
+        collection: impostazioni
+        file: tassonomie
+        value_field: certificazioni.tipi.*.id
+        display_fields: [certificazioni.tipi.*.it]
+        search_fields: [certificazioni.tipi.*.it]
+      - *order
+      - *unlisted
 
+  # -------------------------------------------------------------------------------------------
   - name: trasparenza
     label: Società trasparente — documenti
     label_singular: Documento
     icon: folder_open
-    <<: *page_defaults
-    filter: { field: bodyClass, pattern: 'page-node-typesocieta-trasparente-documenti\b' }
+    folder: /src/content/trasparenza
+    <<: *entries
+    summary: '{{anno}} · {{title}}'
+    sortable_fields: { fields: [anno, title, order], default: { field: anno, direction: descending } }
+    view_groups:
+      - { label: Anno, field: anno }
+      - { label: Categoria, field: tipo }
+    view_filters:
+      - { label: Anno corrente, field: anno, pattern: '^2025$' }
+    fields:
+      - *title
+      - *path
+      - name: anno
+        label: Anno
+        widget: string
+        i18n: duplicate
+        pattern: ['^\d{4}$', Anno a quattro cifre]
+        hint: I documenti dell'anno corrente (vedi Impostazioni) compaiono nella pagina Società trasparente, gli altri nell'archivio del loro anno.
+      - name: tipo
+        label: Categoria
+        widget: relation
+        i18n: duplicate
+        collection: impostazioni
+        file: tassonomie
+        value_field: trasparenza.categorie.*.id
+        display_fields: [trasparenza.categorie.*.it]
+        search_fields: [trasparenza.categorie.*.it]
+      - *body
+      - *bodyHtml
+      - { name: files, label: File, widget: list, required: false, i18n: true, field: { name: file, label: File, widget: file } }
+      - *order
+      - *unlisted
 
-  - name: layout
-    label: Menu e footer
-    icon: menu
-    delete: false
+  # -------------------------------------------------------------------------------------------
+  - name: home
+    label: Home page
+    icon: home
+    files:
+      - name: home
+        label: Home page
+        file: /src/content/home/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - *title
+          - *description
+          - { name: hero, label: Immagine di testata, <<: *image }
+          - { name: mission, label: La nostra mission, widget: richtext, format: html, i18n: true }
+          - name: settori
+            label: I nostri settori
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - name: items
+                label: Settori
+                widget: list
+                i18n: true
+                summary: '{{title}}'
+                fields:
+                  - { name: icon, label: Icona, <<: *image }
+                  - { name: title, label: Titolo, widget: string, i18n: true }
+                  - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
+                  - { name: link, label: Link, widget: string, i18n: true }
+          - name: percorso
+            label: Percorso dell'acqua
+            widget: object
+            i18n: true
+            fields:
+              - { name: background, label: Sfondo, <<: *image }
+              - { name: icon, label: Icona, <<: *image }
+              - { name: text, label: Testo del pulsante, widget: string, i18n: true }
+              - { name: file, label: File (mappa), widget: file, i18n: true }
+          - name: ricerca
+            label: Formazione e ricerca
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
+              - { name: link, label: Link, widget: string, i18n: true }
+              - { name: image, label: Immagine, <<: *image }
+          - name: scuole
+            label: GIDA nelle scuole
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: linkText, label: Testo del link, widget: string, i18n: true }
+              - { name: link, label: Link, widget: string, i18n: true }
+              - { name: mascotte, label: Mascotte, <<: *image }
+              - { name: background, label: Sfondo, <<: *image }
+
+  # -------------------------------------------------------------------------------------------
+  - name: impostazioni
+    label: Menu, footer e categorie
+    icon: settings
     files:
       - name: layout
         label: Menu, contatti e footer
@@ -141,3 +381,35 @@ collections:
                 allow_language_selection: false
                 output_code_only: true
           - { name: en, label: English, widget: object, fields: *layout_fields }
+      - name: tassonomie
+        label: Categorie e anni
+        file: /src/content/tassonomie.json
+        format: json
+        fields:
+          - name: trasparenza
+            label: Società trasparente
+            widget: object
+            fields:
+              - { name: annoCorrente, label: Anno corrente, widget: string, hint: Documenti mostrati nella pagina principale; gli anni precedenti vanno in Archivio }
+              - { name: anni, label: Anni con pagina d'archivio, widget: list, field: { name: anno, label: Anno, widget: string } }
+              - name: categorie
+                label: Categorie (nell'ordine di visualizzazione)
+                widget: list
+                summary: '{{it}} / {{en}}'
+                fields:
+                  - { name: id, label: Id, widget: string, hint: Identificativo stabile (minuscole e trattini), pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
+                  - { name: it, label: Nome italiano, widget: string, required: false }
+                  - { name: en, label: Nome inglese, widget: string, required: false }
+                  - { name: parent, label: Categoria superiore (id), widget: string, required: false }
+          - name: certificazioni
+            label: Certificazioni
+            widget: object
+            fields:
+              - name: tipi
+                label: Tipi
+                widget: list
+                summary: '{{it}} / {{en}}'
+                fields:
+                  - { name: id, label: Id, widget: string, pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
+                  - { name: it, label: Nome italiano, widget: string, required: false }
+                  - { name: en, label: Nome inglese, widget: string, required: false }

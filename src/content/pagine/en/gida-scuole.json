@@ -1,0 +1,15 @@
+{
+	"title": "Gida for schools",
+	"path": "/en/gida-scuole",
+	"hero": {
+		"src": "/sites/default/files/2022-01/scuole_0.jpg",
+		"alt": "scuole"
+	},
+	"blocks": [
+		{
+			"type": "form",
+			"form": "scuole"
+		}
+	],
+	"bodyHtml": "<h2 style=\"text-align: center\">Request a guided tour</h2><p style=\"text-align: center\">Fill out the form with the requested information and we will contact you as soon as possible</p>"
+}

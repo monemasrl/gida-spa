@@ -1,0 +1,9 @@
+{
+	"title": "MOG 231-01",
+	"path": "/mog-231-01",
+	"hero": {
+		"src": "/sites/default/files/2022-01/gdpr.jpg",
+		"alt": "gdpr"
+	},
+	"bodyHtml": "<article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-01/Gida_Sistema%20disciplinare-1.pdf\" type=\"application/pdf\">Gida_Sistema disciplinare-1.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-01/Codice%20etico.pdf\" type=\"application/pdf\">Codice etico.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-01/Parte%20Generale.pdf\" type=\"application/pdf\">Parte Generale.pdf</a></span></div></div> </article><p>&nbsp;</p>"
+}

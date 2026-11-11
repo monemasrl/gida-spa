@@ -1,0 +1,18 @@
+{
+	"title": "Permissions",
+	"path": "/en/permissions",
+	"hero": {
+		"src": "/sites/default/files/2022-01/certificazioni_0.jpg",
+		"alt": " certificazioni"
+	},
+	"blocks": [
+		{
+			"type": "certificazioni",
+			"view": "block-2",
+			"tipi": [
+				"autorizzazioni-trattamento-rifiuti",
+				"autorizzazioni-allo-scarico"
+			]
+		}
+	]
+}
