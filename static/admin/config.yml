@@ -92,6 +92,9 @@ collections:
     folder: /src/content/pagine
     <<: *entries
     summary: '{{title}} — {{path}}'
+    table_columns:
+      - title
+      - { field: path, label: URL }
     fields:
       - *title
       - *description
@@ -347,10 +350,208 @@ collections:
 
   # -------------------------------------------------------------------------------------------
   - divider: true
+  - name: home
+    label: Home page
+    icon: home
+    i18n: true
+    files:
+      - name: home
+        label: Home page
+        icon: home
+        file: /src/content/home/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - *title
+          - *description
+          - { name: hero, label: Immagine di testata, <<: *image }
+          - { name: mission, label: La nostra mission, widget: richtext, format: html, i18n: true }
+          - name: settori
+            label: I nostri settori
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - name: items
+                label: Settori
+                widget: list
+                i18n: true
+                summary: '{{title}}'
+                fields:
+                  - { name: icon, label: Icona, <<: *image }
+                  - { name: title, label: Titolo, widget: string, i18n: true }
+                  - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
+                  - { name: link, label: Link, widget: string, i18n: true }
+          - name: percorso
+            label: Percorso dell'acqua
+            widget: object
+            i18n: true
+            fields:
+              - { name: background, label: Sfondo, <<: *image }
+              - { name: icon, label: Icona, <<: *image }
+              - { name: text, label: Testo del pulsante, widget: string, i18n: true }
+              - { name: file, label: File (mappa), widget: file, i18n: true }
+          - name: ricerca
+            label: Formazione e ricerca
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
+              - { name: link, label: Link, widget: string, i18n: true }
+              - { name: image, label: Immagine, <<: *image }
+          - name: scuole
+            label: GIDA nelle scuole
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: linkText, label: Testo del link, widget: string, i18n: true }
+              - { name: link, label: Link, widget: string, i18n: true }
+              - { name: mascotte, label: Mascotte, <<: *image }
+              - { name: background, label: Sfondo, <<: *image }
+  - name: menu
+    label: Menu
+    icon: menu
+    i18n: true
+    files:
+      - name: menu-superiore
+        label: Menu superiore
+        icon: more_horiz
+        file: /src/content/layout/menu-superiore/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - name: items
+            label: Voci
+            label_singular: Voce
+            widget: list
+            i18n: true
+            summary: '{{label}} → {{href}}'
+            fields:
+              - { name: label, label: Etichetta, widget: string, i18n: true }
+              - { name: href, label: Link, widget: string, i18n: true }
+      - name: menu-principale
+        label: Menu principale
+        icon: menu
+        file: /src/content/layout/menu-principale/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - name: items
+            label: Voci
+            label_singular: Voce
+            widget: list
+            i18n: true
+            summary: '{{label}}'
+            fields:
+              - { name: label, label: Etichetta, widget: string, i18n: true }
+              - { name: href, label: Link, widget: string, required: false, i18n: true, hint: Vuoto per una voce che apre solo il sottomenu }
+              - name: children
+                label: Sottomenu
+                label_singular: Voce
+                widget: list
+                required: false
+                i18n: true
+                summary: '{{label}} → {{href}}'
+                fields:
+                  - { name: label, label: Etichetta, widget: string, i18n: true }
+                  - { name: href, label: Link, widget: string, i18n: true }
+  - divider: true
   - name: configurazioni
     label: Configurazioni
     icon: settings
+    i18n: true
     files:
+      - name: testata
+        label: Testata (logo e contatti)
+        icon: web_asset
+        file: /src/content/layout/testata/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - { name: logo, label: Logo, widget: image, i18n: duplicate }
+          - name: contatti
+            label: Contatti in alto
+            label_singular: Contatto
+            widget: list
+            i18n: true
+            summary: '{{label}} {{text}}'
+            fields:
+              - { name: label, label: Etichetta (in grassetto), widget: string, i18n: true, hint: 'Es. Tel, mail:' }
+              - { name: text, label: Testo, widget: string, i18n: true }
+              - { name: href, label: Link, widget: string, required: false, i18n: duplicate, hint: 'Es. tel:+39 0574 646511, mailto:gida@gida-spa.it' }
+      - name: footer
+        label: Footer
+        icon: call_to_action
+        file: /src/content/layout/footer/{{locale}}.json
+        format: json
+        i18n: true
+        fields:
+          - name: cruscotto
+            label: Cruscotto energia solare
+            widget: object
+            i18n: true
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - name: items
+                label: Valori
+                label_singular: Valore
+                widget: list
+                i18n: true
+                summary: '{{label}}: {{value}}'
+                fields: &valore
+                  - { name: label, label: Etichetta, widget: string, i18n: true }
+                  - { name: value, label: Valore, widget: string, i18n: true, hint: Es. 2860.0 KWh }
+              - { name: totale, label: Totale, widget: object, i18n: true, fields: *valore }
+          - name: dati
+            label: Dati societari (prima colonna)
+            widget: object
+            i18n: true
+            fields:
+              - { name: logo, label: Logo, required: false, <<: *image }
+              - name: righe
+                label: Righe
+                label_singular: Riga
+                widget: list
+                i18n: true
+                summary: '{{testo}}'
+                fields:
+                  - { name: testo, label: Testo, widget: string, required: false, i18n: true }
+                  - name: links
+                    label: Link (dopo il testo, separati da |)
+                    label_singular: Link
+                    widget: list
+                    required: false
+                    i18n: true
+                    summary: '{{label}}'
+                    fields: &footer_link
+                      - { name: label, label: Testo, widget: string, i18n: true }
+                      - { name: href, label: Link (URL o file), widget: string, i18n: true }
+                      - { name: newTab, label: Apri in una nuova scheda, widget: boolean, required: false, default: false, i18n: duplicate }
+          - name: menu
+            label: Menu del footer (seconda colonna)
+            label_singular: Voce
+            widget: list
+            i18n: true
+            summary: '{{label}} → {{href}}'
+            fields: *footer_link
+          - name: certificazioni
+            label: Certificazioni (terza colonna)
+            widget: object
+            i18n: true
+            fields:
+              - name: loghi
+                label: Loghi
+                label_singular: Logo
+                widget: list
+                i18n: true
+                summary: '{{image.alt}}'
+                fields:
+                  - { name: image, label: Immagine, <<: *image }
+                  - { name: href, label: Link (certificato), widget: string, i18n: true }
+                  - { name: newTab, label: Apri in una nuova scheda, widget: boolean, required: false, default: false, i18n: duplicate }
+              - { name: links, label: Pulsanti, label_singular: Pulsante, widget: list, i18n: true, summary: '{{label}}', fields: *footer_link }
       - name: anni
         label: Anni (Società trasparente)
         icon: calendar_month
@@ -384,195 +585,3 @@ collections:
               - { name: id, label: Id, widget: string, pattern: ['^[a-z0-9-]+$', 'Solo minuscole, numeri e trattini'] }
               - { name: it, label: Nome italiano, widget: string, required: false }
               - { name: en, label: Nome inglese, widget: string, required: false }
-
-# ---------------------------------------------------------------------------------------------
-# Documenti singoli (pagina iniziale e impostazioni del sito)
-# ---------------------------------------------------------------------------------------------
-singletons:
-  - name: home
-    label: Home page
-    icon: home
-    file: /src/content/home/{{locale}}.json
-    format: json
-    i18n: true
-    fields:
-      - *title
-      - *description
-      - { name: hero, label: Immagine di testata, <<: *image }
-      - { name: mission, label: La nostra mission, widget: richtext, format: html, i18n: true }
-      - name: settori
-        label: I nostri settori
-        widget: object
-        i18n: true
-        fields:
-          - { name: title, label: Titolo, widget: string, i18n: true }
-          - name: items
-            label: Settori
-            widget: list
-            i18n: true
-            summary: '{{title}}'
-            fields:
-              - { name: icon, label: Icona, <<: *image }
-              - { name: title, label: Titolo, widget: string, i18n: true }
-              - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
-              - { name: link, label: Link, widget: string, i18n: true }
-      - name: percorso
-        label: Percorso dell'acqua
-        widget: object
-        i18n: true
-        fields:
-          - { name: background, label: Sfondo, <<: *image }
-          - { name: icon, label: Icona, <<: *image }
-          - { name: text, label: Testo del pulsante, widget: string, i18n: true }
-          - { name: file, label: File (mappa), widget: file, i18n: true }
-      - name: ricerca
-        label: Formazione e ricerca
-        widget: object
-        i18n: true
-        fields:
-          - { name: title, label: Titolo, widget: string, i18n: true }
-          - { name: text, label: Testo, widget: richtext, format: html, i18n: true }
-          - { name: link, label: Link, widget: string, i18n: true }
-          - { name: image, label: Immagine, <<: *image }
-      - name: scuole
-        label: GIDA nelle scuole
-        widget: object
-        i18n: true
-        fields:
-          - { name: title, label: Titolo, widget: string, i18n: true }
-          - { name: linkText, label: Testo del link, widget: string, i18n: true }
-          - { name: link, label: Link, widget: string, i18n: true }
-          - { name: mascotte, label: Mascotte, <<: *image }
-          - { name: background, label: Sfondo, <<: *image }
-  - divider: true
-  - name: testata
-    label: Testata (logo e contatti)
-    icon: web_asset
-    file: /src/content/layout/testata/{{locale}}.json
-    format: json
-    i18n: true
-    fields:
-      - { name: logo, label: Logo, widget: image, i18n: duplicate }
-      - name: contatti
-        label: Contatti in alto
-        label_singular: Contatto
-        widget: list
-        i18n: true
-        summary: '{{label}} {{text}}'
-        fields:
-          - { name: label, label: Etichetta (in grassetto), widget: string, i18n: true, hint: 'Es. Tel, mail:' }
-          - { name: text, label: Testo, widget: string, i18n: true }
-          - { name: href, label: Link, widget: string, required: false, i18n: duplicate, hint: 'Es. tel:+39 0574 646511, mailto:gida@gida-spa.it' }
-  - name: menu-superiore
-    label: Menu superiore
-    icon: more_horiz
-    file: /src/content/layout/menu-superiore/{{locale}}.json
-    format: json
-    i18n: true
-    fields:
-      - name: items
-        label: Voci
-        label_singular: Voce
-        widget: list
-        i18n: true
-        summary: '{{label}} → {{href}}'
-        fields:
-          - { name: label, label: Etichetta, widget: string, i18n: true }
-          - { name: href, label: Link, widget: string, i18n: true }
-  - name: menu-principale
-    label: Menu principale
-    icon: menu
-    file: /src/content/layout/menu-principale/{{locale}}.json
-    format: json
-    i18n: true
-    fields:
-      - name: items
-        label: Voci
-        label_singular: Voce
-        widget: list
-        i18n: true
-        summary: '{{label}}'
-        fields:
-          - { name: label, label: Etichetta, widget: string, i18n: true }
-          - { name: href, label: Link, widget: string, required: false, i18n: true, hint: Vuoto per una voce che apre solo il sottomenu }
-          - name: children
-            label: Sottomenu
-            label_singular: Voce
-            widget: list
-            required: false
-            i18n: true
-            summary: '{{label}} → {{href}}'
-            fields:
-              - { name: label, label: Etichetta, widget: string, i18n: true }
-              - { name: href, label: Link, widget: string, i18n: true }
-  - name: footer
-    label: Footer
-    icon: call_to_action
-    file: /src/content/layout/footer/{{locale}}.json
-    format: json
-    i18n: true
-    fields:
-      - name: cruscotto
-        label: Cruscotto energia solare
-        widget: object
-        i18n: true
-        fields:
-          - { name: title, label: Titolo, widget: string, i18n: true }
-          - name: items
-            label: Valori
-            label_singular: Valore
-            widget: list
-            i18n: true
-            summary: '{{label}}: {{value}}'
-            fields: &valore
-              - { name: label, label: Etichetta, widget: string, i18n: true }
-              - { name: value, label: Valore, widget: string, i18n: true, hint: Es. 2860.0 KWh }
-          - { name: totale, label: Totale, widget: object, i18n: true, fields: *valore }
-      - name: dati
-        label: Dati societari (prima colonna)
-        widget: object
-        i18n: true
-        fields:
-          - { name: logo, label: Logo, required: false, <<: *image }
-          - name: righe
-            label: Righe
-            label_singular: Riga
-            widget: list
-            i18n: true
-            summary: '{{testo}}'
-            fields:
-              - { name: testo, label: Testo, widget: string, required: false, i18n: true }
-              - name: links
-                label: Link (dopo il testo, separati da |)
-                label_singular: Link
-                widget: list
-                required: false
-                i18n: true
-                summary: '{{label}}'
-                fields: &footer_link
-                  - { name: label, label: Testo, widget: string, i18n: true }
-                  - { name: href, label: Link (URL o file), widget: string, i18n: true }
-                  - { name: newTab, label: Apri in una nuova scheda, widget: boolean, required: false, default: false, i18n: duplicate }
-      - name: menu
-        label: Menu del footer (seconda colonna)
-        label_singular: Voce
-        widget: list
-        i18n: true
-        summary: '{{label}} → {{href}}'
-        fields: *footer_link
-      - name: certificazioni
-        label: Certificazioni (terza colonna)
-        widget: object
-        i18n: true
-        fields:
-          - name: loghi
-            label: Loghi
-            label_singular: Logo
-            widget: list
-            i18n: true
-            summary: '{{image.alt}}'
-            fields:
-              - { name: image, label: Immagine, <<: *image }
-              - { name: href, label: Link (certificato), widget: string, i18n: true }
-              - { name: newTab, label: Apri in una nuova scheda, widget: boolean, required: false, default: false, i18n: duplicate }
-          - { name: links, label: Pulsanti, label_singular: Pulsante, widget: list, i18n: true, summary: '{{label}}', fields: *footer_link }

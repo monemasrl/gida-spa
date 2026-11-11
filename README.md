@@ -98,9 +98,8 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - **Traduzioni affiancate** (`i18n.structure: multiple_folders`): ogni voce ha le versioni IT ed EN nello stesso
   editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
 - **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, "Mostra le FAQ", blocchi
-  sotto la pagina; categorie e tipi scelti da elenco (collezione "Configurazioni" → "Categorie"; l'anno corrente in "Configurazioni" → "Anni"). Home page, Testata (logo e
-  contatti), Menu superiore, Menu principale, Footer sono documenti singoli (singleton), sotto
-  "File" nella barra laterale.
+  sotto la pagina; categorie e tipi scelti da elenco (collezione "Configurazioni" → "Categorie"; l'anno corrente in "Configurazioni" → "Anni"). Nella barra laterale, dopo i contenuti: "Home page";
+  "Menu" (Menu superiore, Menu principale); "Configurazioni" (Testata, Footer, Anni, Categorie).
 - **Testo** usa l'editor visuale (HTML). Le pagine con impaginazione particolare usano **Contenuto a sezioni**,
   mostrate in ordine dopo il Testo: Testo (anche centrato), Allegati (file, anche come elenco puntato), Galleria di
   immagini, Immagine con link, Riquadro evidenziato (es. orari), Organi societari (gruppi di persone con ruolo,
