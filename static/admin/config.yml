@@ -5,7 +5,7 @@
 # Il sito ricostruisce da questi dati il markup originale (src/lib/render.ts), compresi gli elenchi
 # generati: certificazioni, impianti, Società trasparente e archivi annuali.
 #
-# Accesso: "Accedi con Token di Accesso" (token GitHub con permessi Contents + Pull requests)
+# Accesso: "Accedi con GitHub" (OAuth App GitHub + client OAuth in src/routes/api/cms-auth, vedi README)
 # oppure "Lavora con Repository Locale" in Chrome/Edge con `npm run dev`.
 
 backend:
@@ -13,8 +13,14 @@ backend:
   repo: monemasrl/gida-spa
   # Il CMS legge e scrive su main (con l'editorial workflow le modifiche passano da pull request verso main)
   branch: main
-  # Senza un server OAuth (es. sveltia-cms-auth, poi `base_url`) si accede solo con token
-  auth_methods: [token]
+  # Client OAuth: Function Vercel del sito (/api/cms-auth/auth → GitHub → /api/cms-auth/callback).
+  # Sempre l'host di produzione, perché la OAuth App GitHub ammette un solo callback URL:
+  # anche il CMS delle anteprime Vercel accede da qui (origin ammesse in #lib/server/cms-auth.ts).
+  # Col dominio definitivo: cambiare base_url qui e il callback URL nella OAuth App.
+  base_url: https://gida-sito.vercel.app
+  auth_endpoint: api/cms-auth/auth
+  # Solo OAuth; per riattivare il token come riserva: [oauth, token]
+  auth_methods: [oauth]
 
 # Ogni modifica diventa una pull request (con il suo deploy di anteprima su Vercel)
 # e va in produzione solo quando viene pubblicata/unita. Va al primo livello, non dentro `backend`.
