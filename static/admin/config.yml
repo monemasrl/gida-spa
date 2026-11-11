@@ -11,7 +11,9 @@
 backend:
   name: github
   repo: monemasrl/gida-spa
-  branch: main
+  # DA RIPORTARE A `main` PRIMA DEL MERGE: finché i contenuti strutturati sono solo su questo branch,
+  # il CMS deve leggere e scrivere qui (le pull request del CMS puntano a questo branch).
+  branch: cms-sveltia
   # Senza un server OAuth (es. sveltia-cms-auth, poi `base_url`) si accede solo con token
   auth_methods: [token]
   # Ogni modifica diventa una pull request (con il suo deploy di anteprima su Vercel)
