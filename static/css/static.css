@@ -1,0 +1,9 @@
+/* Piccoli adattamenti per la versione statica (sostituiscono il JS di Bootstrap Italia) */
+.collapse:not(.show) { display: none; }
+.collapse.show { display: block; }
+.navbar .dropdown-menu.show { display: block; }
+.back-to-top { transition: opacity .2s; }
+.gida-form-status { margin-top: 1rem; }
+.gida-form-status.error { color: #d9364f; }
+.gida-form-status.ok { color: #008758; }
+.gida-cap { min-height: 60px; }

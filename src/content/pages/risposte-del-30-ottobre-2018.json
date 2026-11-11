@@ -1,0 +1,14 @@
+{
+	"path": "/risposte-del-30-ottobre-2018",
+	"lang": "it",
+	"title": "RISPOSTE DEL 30 OTTOBRE 2018",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/risposte-del-30-ottobre-2018",
+		"en": "/en/risposte-del-30-ottobre-2018"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"field field--name-field-documento-societa-traspare field--type-file field--label-hidden field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-05/RISPOSTE%20DEL%2030%20OTTOBRE%202018.pdf\" type=\"application/pdf\">RISPOSTE DEL 30 OTTOBRE 2018.pdf</a></span></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Chiarimenti / Informazioni Sulla Gara</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2018</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

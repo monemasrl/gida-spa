@@ -1,0 +1,14 @@
+{
+	"path": "/en/aia-baciacavallo-decreto-n1678625-08-2022",
+	"lang": "en",
+	"title": "AIA Baciacavallo Decreto n.16786_25-08-2022",
+	"description": "",
+	"bodyClass": "path-node page-node-typecertificazioni",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/aia-baciacavallo-decreto-n1678625-08-2022",
+		"en": "/en/aia-baciacavallo-decreto-n1678625-08-2022"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-certificazioni node--view-mode-full\"><div class=\"node__content\"><div class=\"field field--name-field-documento-certificazione field--type-file field--label-above\"><div class=\"field__label\">documento certificazione</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-11/AIA_Baciacavallo_Decreto_n.16786_del_25.08.2022.pdf\" type=\"application/pdf\">AIA_Baciacavallo_Decreto_n.16786_del_25.08.2022.pdf</a></span></div></div><div class=\"field field--name-field-tipo-di-certificazione field--type-entity-reference field--label-above\"><div class=\"field__label\">tipo di certificazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">waste treatment authorization</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

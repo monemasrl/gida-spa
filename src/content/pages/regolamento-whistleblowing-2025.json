@@ -1,0 +1,14 @@
+{
+	"path": "/regolamento-whistleblowing-2025",
+	"lang": "it",
+	"title": "Regolamento Whistleblowing 2025",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/regolamento-whistleblowing-2025",
+		"en": "/en/regolamento-whistleblowing-2025"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>Nel sistema è possibile segnalare in modo rapido e semplice fattispecie di condotte effettive/o sospette che possano avere effetti negativi sull’integrità dell’azienda e/o delle persone nell’ambiente di lavoro.</p><p>Accedere con il Link sottostante:</p><p><a href=\"https://gida-spa.integrityline.com/\">Whistleblowing</a></p></div><div class=\"field field--name-field-documento-societa-traspare field--type-file field--label-hidden field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-06/2024%20-%20REGOLAMENTO%20WHISTLEBLOWING%20Rev%2029-11-2023.pdf\" type=\"application/pdf\">2024 - REGOLAMENTO WHISTLEBLOWING Rev 29-11-2023.pdf</a></span></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Whistleblowing</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2025</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

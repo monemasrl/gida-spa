@@ -1,0 +1,13 @@
+{
+	"path": "/prova-2021",
+	"lang": "it",
+	"title": "Prova 2021",
+	"description": "",
+	"bodyClass": "path-node page-node-typenews",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/prova-2021"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-news node--promoted node--view-mode-full\"><div class=\"node__content\"><div class=\"layout layout--onecol\"><div class=\"layout__region layout__region--content\"><div class=\"block block-layout-builder block-field-blocknodenewsfield-immagine-news\" id=\"it-\"><div class=\"field field--name-field-immagine-news field--type-image field--label-hidden field__item\"> <img loading=\"lazy\" src=\"/sites/default/files/2022-01/radoslav-bali-d8-3RZCCIc0-unsplash.jpg\" width=\"1920\" height=\"2400\" alt=\"test news\" class=\"img-fluid\"></div></div><div class=\"block block-layout-builder block-field-blocknodenewstitle\" id=\"it-\"> <span class=\"field field--name-title field--type-string field--label-hidden\">Prova 2021</span></div><div class=\"block block-layout-builder block-field-blocknodenewsbody\" id=\"it-\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>Prova per comunicazioni</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div></div><div class=\"block block-layout-builder block-field-blocknodenewsfield-immagine-news\" id=\"it-\"><div class=\"field field--name-field-immagine-news field--type-image field--label-above\"><div class=\"field__label\">Immagine-news</div><div class=\"field__item\"> <img loading=\"lazy\" src=\"/sites/default/files/2022-01/radoslav-bali-d8-3RZCCIc0-unsplash.jpg\" width=\"1920\" height=\"2400\" alt=\"test news\" class=\"img-fluid\"></div></div></div></div></div></div></article></div></div></div></div></div></div> </main>"
+}

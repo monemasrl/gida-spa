@@ -1,0 +1,14 @@
+{
+	"path": "/scritta-su-accesso-civico-2023",
+	"lang": "it",
+	"title": "Scritta su accesso civico 2023",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/scritta-su-accesso-civico-2023",
+		"en": "/en/scritta-su-accesso-civico-2023"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p><span><span><span><span><span><span>Soggetto a cui presentare la richiesta: Presidente del Consiglio di Amministrazione:&nbsp;</span></span><span><a href=\"mailto:gida@pec.uipservizi.it\"><span>gida@pec.uipservizi.it</span></a></span><span><span> TEL.. &nbsp;+39 -0574-646511.</span></span></span></span></span></span></p><p><span><span><span><span><span><span>Titolare del potere sostitutivo in caso di ritardo o mancata risposta: Coordinatore Amministrazione Finanza e Controllo:&nbsp;</span></span><span><a href=\"mailto:gida@pec.uipservizi.it\"><span>gida@pec.uipservizi.it</span></a></span><span><span> TEL.&nbsp;+39 -0574-646511</span></span></span></span></span></span></p></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Accesso Civico</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2023</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

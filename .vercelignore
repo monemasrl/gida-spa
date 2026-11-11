@@ -1,0 +1,7 @@
+.drupal-mirror
+.svelte-kit
+build
+.env
+.env.local
+.remember
+.claude

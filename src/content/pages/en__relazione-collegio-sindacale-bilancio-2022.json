@@ -1,0 +1,14 @@
+{
+	"path": "/en/relazione-collegio-sindacale-bilancio-2022",
+	"lang": "en",
+	"title": "Relazione Collegio sindacale bilancio 2022",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/relazione-collegio-sindacale-bilancio-2022",
+		"en": "/en/relazione-collegio-sindacale-bilancio-2022"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"field field--name-field-documento-societa-traspare field--type-file field--label-hidden field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2023-07/Relazione%20del%20collegio%20sindacale%20al%20bilancio%202022.pdf\" type=\"application/pdf\">Relazione del collegio sindacale al bilancio 2022.pdf</a></span></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">APPROVED FINANCIAL STATEMENTS</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2022</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

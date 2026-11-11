@@ -1,0 +1,14 @@
+{
+	"path": "/en/servizi-rete-2022",
+	"lang": "en",
+	"title": "Servizi in rete 2022",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/servizi-rete-2022",
+		"en": "/en/servizi-rete-2022"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>It does not apply because G.I.D.A is not a company, wholly owned by public bodies or with prevalent public capital included in the consolidated income statement of the public administration as identified by ISTAT.</p></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Network Services</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2022</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

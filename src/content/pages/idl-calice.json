@@ -1,0 +1,14 @@
+{
+	"path": "/idl-calice",
+	"lang": "it",
+	"title": "I.D.L. Calice",
+	"description": "",
+	"bodyClass": "path-node page-node-typeimpianti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/idl-calice",
+		"en": "/en/idl-calice"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-impianti node--promoted node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>Il secondo depuratore di Prato per dimensioni è quello di Calice, ubicato nella parte ovest del territorio comunale, al confine col Comune di Agliana e avviato nel 1985. L’impianto è stato adeguato strutturalmente nel 2000 e raddoppiato quasi specularmene nel 2002.<br>L’impianto di depurazione liquami di Prato-Calice (190.000 A.E.), ad esso confluiscono i liquami drenati nella parte ovest della città e quelli provenienti dal vicino Comune di Montemurlo.<br><br>L’impianto di depurazione di Calice, nei giorni feriali può trattare sino a 39.000 mc/d, può abbattere fino a 20.000 Kg/d di COD e 1100 kg/d di tensioattivi. Sostanzialmente è costituito da equalizzazione, sedimentazione primaria, denitrificazione, ossidazione biologica, sedimentazione secondaria, chiariflocculazione finale, filtri a sabbia ed ozonizzazione. La linea fanghi è composta da ispessimento a gravità, disidratazione meccanica con centrifuga e filtropressa. I fanghi di risulta del processo depurativo possono ammontare fino a 10.000 t/a con una umidità variabile compresa tra il 64 e 74%.</p></div><div class=\"field field--name-field-imamgine field--type-entity-reference field--label-hidden field__item\"><article class=\"media media--type-image media--view-mode-default\"><div class=\"field field--name-field-media-image field--type-image field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Image</div><div class=\"field__item\"> <img loading=\"lazy\" src=\"/sites/default/files/2022-01/calice_0.jpg\" width=\"400\" height=\"220\" alt=\"calice\" class=\"img-fluid\"></div></div> </article></div></div></article></div></div></div></div></div></div> </main>"
+}

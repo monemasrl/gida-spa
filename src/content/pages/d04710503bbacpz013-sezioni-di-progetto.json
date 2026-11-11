@@ -1,0 +1,13 @@
+{
+	"path": "/d04710503bbacpz013-sezioni-di-progetto",
+	"lang": "it",
+	"title": "D04_710503BBACPZ013 - Sezioni di progetto",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/d04710503bbacpz013-sezioni-di-progetto"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"field field--name-field-documento-societa-traspare field--type-file field--label-hidden field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-05/D04_710503BBACPZ013%20-%20Sezioni%20di%20progetto.pdf\" type=\"application/pdf\">D04_710503BBACPZ013 - Sezioni di progetto.pdf</a></span></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Documentazione Tecnica Elaborati Grafici</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2018</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

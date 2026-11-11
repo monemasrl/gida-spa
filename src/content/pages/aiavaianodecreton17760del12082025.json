@@ -1,0 +1,14 @@
+{
+	"path": "/aiavaianodecreton17760del12082025",
+	"lang": "it",
+	"title": "AIA_Vaiano_Decreto_n_17760_del_12_08_2025",
+	"description": "",
+	"bodyClass": "path-node page-node-typecertificazioni",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/aiavaianodecreton17760del12082025",
+		"en": "/en/aiavaianodecreton17760del12082025"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-certificazioni node--view-mode-full\"><div class=\"node__content\"><div class=\"field field--name-field-documento-certificazione field--type-file field--label-above\"><div class=\"field__label\">documento certificazione</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-08/AIA_Vaiano_Decreto_n_17760_del_12_08_2025.pdf\" type=\"application/pdf\">AIA_Vaiano_Decreto_n_17760_del_12_08_2025.pdf</a></span></div></div><div class=\"field field--name-field-tipo-di-certificazione field--type-entity-reference field--label-above\"><div class=\"field__label\">tipo di certificazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">Autorizzazioni allo scarico</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

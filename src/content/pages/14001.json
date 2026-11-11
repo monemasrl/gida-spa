@@ -1,0 +1,14 @@
+{
+	"path": "/14001",
+	"lang": "it",
+	"title": "14001",
+	"description": "",
+	"bodyClass": "path-node page-node-typecertificazioni",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/14001",
+		"en": "/en/14001"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-certificazioni node--view-mode-full\"><div class=\"node__content\"><div class=\"field field--name-field-documento-certificazione field--type-file field--label-above\"><div class=\"field__label\">documento certificazione</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-06/CERT_8110_ITA_2025%20_ISO%2014001_%20%20GIDA.pdf\" type=\"application/pdf\">CERT_8110_ITA_2025 _ISO 14001_ GIDA.pdf</a></span></div></div><div class=\"field field--name-field-tipo-di-certificazione field--type-entity-reference field--label-above\"><div class=\"field__label\">tipo di certificazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">Certificazioni qualità e ambiente</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

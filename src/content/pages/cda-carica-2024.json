@@ -1,0 +1,14 @@
+{
+	"path": "/cda-carica-2024",
+	"lang": "it",
+	"title": "CDA IN CARICA 2024",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/cda-carica-2024",
+		"en": "/en/cda-carica-2024"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><h3>Presidente</h3><ul><li><strong>Biagini Andrea</strong></li><li>email:&nbsp;<a href=\"mailto:presidente@gida-spa.it\">presidente@gida-spa.it</a></li><li>Nomina: Dati in aggiornamento</li><li>Compenso:&nbsp;Dati in aggiornamento&nbsp;<br>&nbsp;</li></ul><h3>Amministratore Delegato</h3><ul><li><strong>Cristo Franco</strong></li><li>Nomina: Dati in aggiornamento</li><li>Compenso:&nbsp;&nbsp;Dati in aggiornamento<br>&nbsp;</li></ul><h3>Consiglieri</h3><ul><li><strong>Domenicucci Isabella</strong></li><li>Nomina :&nbsp;Dati in aggiornamento</li><li>Compenso: Dati in aggiornamento</li><li><strong>Santianni Daniela</strong></li><li>Nomina: Dati in aggiornamento</li><li>Compenso:&nbsp;Dati in aggiornamento</li><li><strong>Reali Fabio</strong></li><li>Nomina: Dati in aggiornamento</li><li>Compenso:&nbsp;Dati in aggiornamento</li></ul></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Consiglio Di Amministrazione</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2024</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

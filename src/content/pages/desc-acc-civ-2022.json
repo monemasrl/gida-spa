@@ -1,0 +1,14 @@
+{
+	"path": "/desc-acc-civ-2022",
+	"lang": "it",
+	"title": "Desc Acc Civ 2022",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/desc-acc-civ-2022",
+		"en": "/en/desc-acc-civ-2022"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>Soggetto a cui presentare la richiesta : Presidente del Consiglio di Amministrazione <a href=\"mailto:gida@pec.uipservizi.it\" class=\"\">gida@pec.uipservizi.it</a>&nbsp; &nbsp;+39 -0574-646511</p><p>Titolare del potere sostitutivo in caso di ritardo o mancata risposta : Coordinatore Amministrazione Finanza e Controllo&nbsp; <a href=\"mailto:gida@pec.uipservizi.it\" class=\"\">gida@pec.uipservizi.it</a>&nbsp; &nbsp;+39 -0574-646511</p></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Accesso Civico</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2022</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

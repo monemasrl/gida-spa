@@ -1,0 +1,14 @@
+{
+	"path": "/en/cda-carica-2025",
+	"lang": "en",
+	"title": "CDA IN CARICA 2025",
+	"description": "",
+	"bodyClass": "path-node page-node-typesocieta-trasparente-documenti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/cda-carica-2025",
+		"en": "/en/cda-carica-2025"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-societa-trasparente-documenti node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><h3>President</h3><ul><li><strong>Biagini Andrea</strong></li><li>email:&nbsp;<a href=\"mailto:presidente@gida-spa.it\">presidente@gida-spa.it</a></li><li>Appointment: Data being updated</li><li>Compensation: Data being updated&nbsp;</li></ul><h3>Chief Executive Officer</h3><ul><li><strong>Cristo Franco</strong></li><li>Appointment: Data being updated</li><li>Compensation: Data being updated&nbsp;</li></ul><h3>Board Members</h3><ul><li><strong>Domenicucci Isabella</strong></li><li>Appointment: Data being updated</li><li>Compensation: Data being updated&nbsp;</li><li><strong>Santianni Daniela</strong></li><li>Appointment: Data being updated</li><li>Compensation: Data being updated&nbsp;</li><li><strong>Reali Fabio</strong></li><li>Appointment: Data being updated</li><li>Compensation: Data being updated&nbsp;</li></ul></div><div class=\"field field--name-field-societa-trasparente-tipo-d field--type-entity-reference field--label-above\"><div class=\"field__label\">societa trasparente tipo di documento</div><div class=\"field__item\"><span class=\"taxonomy-term\">Board of Directors</span></div></div><div class=\"field field--name-field-anno-documentazione field--type-entity-reference field--label-above\"><div class=\"field__label\">anno documentazione</div><div class=\"field__item\"><span class=\"taxonomy-term\">2025</span></div></div></div></article></div></div></div></div></div></div> </main>"
+}

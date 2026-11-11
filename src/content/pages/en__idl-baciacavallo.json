@@ -1,0 +1,14 @@
+{
+	"path": "/en/idl-baciacavallo",
+	"lang": "en",
+	"title": "I.D.L. Baciacavallo",
+	"description": "",
+	"bodyClass": "path-node page-node-typeimpianti",
+	"wrapperId": "page-default",
+	"alternates": {
+		"it": "/idl-baciacavallo",
+		"en": "/en/idl-baciacavallo"
+	},
+	"forms": [],
+	"html": "<main><div role=\"main\" class=\"container main-container\"><div class=\"row\"><div class=\"col\"></div></div><div class=\"row\"><div class=\"col\"><div class=\"it-content__wrapper\"><div id=\"it-region-content\" class=\"region content\"><div id=\"it-block-italiagov-content\" class=\"block block-system block-system-main-block\"> <article role=\"article\" class=\"node node--type-impianti node--promoted node--view-mode-full\"> <div class=\"node__content\"><div class=\"clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item\"><p>The centerpiece of the centralized depuration system is Baciacavallo purification plant, located in the south-east of the city, near the border with the Municipality of Poggio a Caiano. The previously existing millponds Mazzoni, Bresci and Romita together with the pressurised collectors that drain the two new industrial areas (macrolotti) converge on it. The first core of the plant dates back to 1980.<br>In 1986 the treatment line was almost doubled.<br>In 1992 the ozonation plant was built for the removal of surfactants and color. In 1999 the tertiary treatment of clariflocculation was doubled and at the same time the dewatering section of the residual sludge was strengthened and modernized.</p><p>On weekdays, the plant can treat up to 130,000 cubic meters/day, reducing up to 100,000 kg/day of COD and 4,500 kg/day of surfactants. Basically it consists of equalization, primary sedimentation, biological oxidation, secondary sedimentation, clariflocculation and final refinement with ozone, for the reduction of color and residual surfactants. The sludge line consists of gravity thickening, mechanical dewatering with centrifuges and sludge incineration.<br>The latter section includes a 100 t/day multistorey incinerator, equipped with post-combustion, gas treatment train, filter bags and continuous emission analyser. The production of sludge resulting from the purification process can reach 30,000 t/year at 75% humidity.</p><p>&nbsp;</p></div><div class=\"field field--name-field-imamgine field--type-entity-reference field--label-hidden field__item\"><article class=\"media media--type-image media--view-mode-default\"><div class=\"field field--name-field-media-image field--type-image field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Image</div><div class=\"field__item\"> <img loading=\"lazy\" src=\"/sites/default/files/2022-01/baciacavallo_0.jpg\" width=\"400\" height=\"220\" alt=\"baciacavallo\" class=\"img-fluid\"></div></div> </article></div></div></article></div></div></div></div></div></div> </main>"
+}
