@@ -11,5 +11,11 @@
 			"form": "scuole"
 		}
 	],
-	"bodyHtml": "<h2 style=\"text-align: center\">Richiedi una visita guidata</h2><p style=\"text-align: center\">Compila il form con le infromazioni richieste e vi contatteremo al più presto</p>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<h2>Richiedi una visita guidata</h2><p>Compila il form con le infromazioni richieste e vi contatteremo al più presto</p>",
+			"centrato": true
+		}
+	]
 }

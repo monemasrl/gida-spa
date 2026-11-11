@@ -9,5 +9,40 @@
 		"src": "/sites/default/files/2022-01/recupero.png",
 		"alt": "icona recupero"
 	},
-	"bodyHtml": "<p>&nbsp;</p><h2>WASTE WATER RECYCLING</h2><p>&nbsp;</p><p>The supply of water for industrial and civil uses, mostly taken from the water table through the wells, has led to the progressive impoverishment of this resource, which alone is no longer able to meet the overall needs.</p><p>Gida, being aware of owning the two main sources of \"recyclable\" water, has acquired a decisive role ito reach the aim of reusing wastewater.<br>In this way it is possible to promptly address the water scarcity, avoiding having to dramatically choose, in the near future, between civil and industrial consumption.</p><p>Gida manages the depuration plant at the Baciacavallo depuration plant and built with public contributions from the 2004 Program Agreement.</p><p>The plant has a production potential of 6 million cubic meters of water per year.<br>About 1.5/2.00 million cubic meters are produced annually.<br>The distribution network of G.I.D.A. extends for 60 km and supplies the II Industrial i, industrial area (Macrolotto) in the city of Prato and the industrial area of Montemurlo.</p><p>Together with the refinement plant owned by the company Conser S.c.c.p.a, 4,000,000 cubic meters of recycled water are dispensed annually.</p><div class=\"cke-ig\"><img alt=\"itl\" draggable=\"false\" height=\"768\" src=\"/sites/default/files/2022-01/itl_impianti18.jpg\" width=\"1024\"><img alt=\"\" draggable=\"false\" height=\"1200\" src=\"/sites/default/files/2022-01/WhatsApp%20Image%202021-11-05%20at%2014.38.21.jpeg\" width=\"1600\"><img alt=\"\" draggable=\"false\" height=\"768\" src=\"/sites/default/files/2022-01/itl_impianti17.jpg\" width=\"576\"><img alt=\"itl\" draggable=\"false\" height=\"768\" src=\"/sites/default/files/2022-01/itl_impianti20.jpg\" width=\"1024\"></div><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2024-02/Water%20recycling%20Layout.pdf\" type=\"application/pdf\">Water recycling Layout.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2024-02/Recycled_water.pdf\" type=\"application/pdf\">Recycled_water.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2024-02/Dati%20e%20Tabelle%20Riciclo%202023.pdf\" type=\"application/pdf\">Dati e Tabelle Riciclo 2023.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2026-08/Dati%20e%20Tabelle%20Riciclo%202024.pdf\" type=\"application/pdf\">Dati e Tabelle Riciclo 2024.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2026-08/Dati%20e%20Tabelle%20Riciclo%202025.pdf\" type=\"application/pdf\">Dati e Tabelle Riciclo 2025.pdf</a></span></div></div> </article><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2026-08/Dati%20e%20Tabelle%20Riciclo%202026.pdf\" type=\"application/pdf\">Dati e Tabelle Riciclo 2026.pdf</a></span></div></div> </article>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<h2>WASTE WATER RECYCLING</h2><p>The supply of water for industrial and civil uses, mostly taken from the water table through the wells, has led to the progressive impoverishment of this resource, which alone is no longer able to meet the overall needs.</p><p>Gida, being aware of owning the two main sources of \"recyclable\" water, has acquired a decisive role ito reach the aim of reusing wastewater.<br>In this way it is possible to promptly address the water scarcity, avoiding having to dramatically choose, in the near future, between civil and industrial consumption.</p><p>Gida manages the depuration plant at the Baciacavallo depuration plant and built with public contributions from the 2004 Program Agreement.</p><p>The plant has a production potential of 6 million cubic meters of water per year.<br>About 1.5/2.00 million cubic meters are produced annually.<br>The distribution network of G.I.D.A. extends for 60 km and supplies the II Industrial i, industrial area (Macrolotto) in the city of Prato and the industrial area of Montemurlo.</p><p>Together with the refinement plant owned by the company Conser S.c.c.p.a, 4,000,000 cubic meters of recycled water are dispensed annually.</p>"
+		},
+		{
+			"type": "galleria",
+			"images": [
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti18.jpg",
+					"alt": "itl"
+				},
+				{
+					"src": "/sites/default/files/2022-01/WhatsApp Image 2021-11-05 at 14.38.21.jpeg"
+				},
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti17.jpg"
+				},
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti20.jpg",
+					"alt": "itl"
+				}
+			]
+		},
+		{
+			"type": "allegati",
+			"files": [
+				"/sites/default/files/2024-02/Water recycling Layout.pdf",
+				"/sites/default/files/2024-02/Recycled_water.pdf",
+				"/sites/default/files/2024-02/Dati e Tabelle Riciclo 2023.pdf",
+				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2024.pdf",
+				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2025.pdf",
+				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2026.pdf"
+			]
+		}
+	]
 }

@@ -55,16 +55,6 @@ _f:
     hint: Lasciare vuoto per usare il nome del file (es. /nome-file, /en/nome-file). Cambiarlo rompe i link esistenti.
     pattern: ['^/[a-z0-9][a-z0-9/._-]*$', "Percorso che inizia con / (minuscole, numeri e trattini)"]
   body: &body { name: body, label: Testo, widget: richtext, format: html, required: false, i18n: true }
-  bodyHtml: &bodyHtml
-    name: bodyHtml
-    label: Testo (HTML)
-    widget: code
-    default_language: html
-    allow_language_selection: false
-    output_code_only: true
-    required: false
-    i18n: true
-    hint: Per i testi con impaginazione particolare (classi CSS, box, allegati, immagini), che l'editor visuale non conserverebbe. Se compilato, sostituisce "Testo".
   order: &order
     { name: order, label: Ordine negli elenchi, widget: number, value_type: int, required: false, i18n: duplicate, hint: I numeri più bassi vengono prima }
   unlisted: &unlisted
@@ -109,7 +99,76 @@ collections:
       - { name: hero, label: Immagine di testata, required: false, <<: *image }
       - { name: icon, label: Icona, required: false, <<: *image }
       - *body
-      - *bodyHtml
+      - name: sezioni
+        label: Contenuto a sezioni
+        label_singular: Sezione
+        widget: list
+        required: false
+        i18n: true
+        hint: Parti del contenuto con un'impaginazione propria (allegati, galleria, organi societari...), mostrate in ordine dopo il Testo.
+        types:
+          - name: testo
+            label: Testo
+            summary: '{{body | truncate(60)}}'
+            fields:
+              - *body
+              - { name: centrato, label: Testo centrato, widget: boolean, required: false, default: false, i18n: duplicate }
+          - name: allegati
+            label: Allegati
+            fields:
+              - { name: files, label: File, widget: file, multiple: true, i18n: true, hint: Il testo del link è il nome del file. }
+              - { name: elenco, label: Mostra come elenco puntato, widget: boolean, required: false, default: false, i18n: duplicate }
+          - name: galleria
+            label: Galleria di immagini
+            fields:
+              - { name: images, label: Immagini, label_singular: Immagine, widget: list, i18n: true, <<: *image }
+          - name: immagine
+            label: Immagine (con link)
+            fields:
+              - { name: image, label: Immagine, <<: *image }
+              - { name: link, label: Link, widget: string, required: false, i18n: true }
+          - name: riquadro
+            label: Riquadro evidenziato
+            hint: Testo su sfondo colorato (es. orari di apertura).
+            fields:
+              - *body
+          - name: organi
+            label: Organi societari
+            summary: '{{title}}'
+            fields:
+              - { name: title, label: Titolo, widget: string, i18n: true }
+              - { name: anchor, label: Ancora, widget: string, required: false, i18n: duplicate, hint: "Per i link diretti alla sezione (es. cda → /chi-siamo#cda)" }
+              - name: groups
+                label: Gruppi
+                label_singular: Gruppo
+                widget: list
+                i18n: true
+                summary: '{{title}}'
+                fields:
+                  - { name: title, label: Titolo, widget: string, i18n: true }
+                  - { name: riquadri, label: Schede affiancate, widget: boolean, required: false, default: false, i18n: duplicate }
+                  - { name: compatto, label: Elenco compatto (solo nomi), widget: boolean, required: false, default: false, i18n: duplicate }
+                  - name: members
+                    label: Persone
+                    label_singular: Persona
+                    widget: list
+                    i18n: true
+                    summary: '{{name}}'
+                    fields:
+                      - { name: name, label: Nome, widget: string, i18n: true }
+                      - { name: role, label: Ruolo, widget: string, required: false, i18n: true }
+                      - { name: email, label: Email, widget: string, required: false, i18n: duplicate }
+                      - { name: nomina, label: Nomina, widget: string, required: false, i18n: true }
+                      - { name: compenso, label: Compenso, widget: string, required: false, i18n: true }
+          - name: avviso
+            label: Avviso "in aggiornamento"
+            fields:
+              - { name: text, label: Testo, widget: string, i18n: true }
+              - { name: visibile, label: Visibile, widget: boolean, required: false, default: false, i18n: duplicate }
+          - name: html
+            label: HTML libero
+            fields:
+              - { name: html, label: HTML, widget: code, default_language: html, allow_language_selection: false, output_code_only: true, i18n: true }
       - name: faq
         label: Domande frequenti
         widget: list
@@ -188,7 +247,6 @@ collections:
       - *path
       - { name: image, label: Immagine, required: false, <<: *image }
       - *body
-      - *bodyHtml
 
   # -------------------------------------------------------------------------------------------
   - name: impianti
@@ -205,7 +263,6 @@ collections:
       - *path
       - { name: image, label: Immagine, required: false, <<: *image }
       - *body
-      - *bodyHtml
       - *order
 
   # -------------------------------------------------------------------------------------------
@@ -268,7 +325,6 @@ collections:
         display_fields: [trasparenza.categorie.*.it]
         search_fields: [trasparenza.categorie.*.it]
       - *body
-      - *bodyHtml
       - { name: files, label: File, widget: list, required: false, i18n: true, field: { name: file, label: File, widget: file } }
       - *order
       - *unlisted

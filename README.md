@@ -96,9 +96,11 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
   editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
 - **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, FAQ, blocchi
   sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, in "Menu, footer e categorie").
-- **Testo** usa l'editor visuale (HTML). I 21 testi con impaginazione particolare (classi CSS, box, allegati e
-  immagini nel testo: es. Chi siamo, Contatti, Recupero, MOG 231) sono in **Testo (HTML)**, modificato come codice,
-  perché l'editor visuale eliminerebbe classi e box. Se "Testo (HTML)" è compilato, sostituisce "Testo".
+- **Testo** usa l'editor visuale (HTML). Le pagine con impaginazione particolare usano **Contenuto a sezioni**,
+  mostrate in ordine dopo il Testo: Testo (anche centrato), Allegati (file, anche come elenco puntato), Galleria di
+  immagini, Immagine con link, Riquadro evidenziato (es. orari), Organi societari (gruppi di persone con ruolo,
+  email, nomina e compenso; ancora `#cda`), Avviso "in aggiornamento" e HTML libero. Usate in Chi siamo, Contatti,
+  Recupero, Trattamento rifiuti, MOG 231, Info GDPR, Lavora con noi, Società trasparente, Gida per le scuole.
 - Elenchi generati: un nuovo documento di Società trasparente compare nella pagina principale se il suo anno è
   l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
   "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.

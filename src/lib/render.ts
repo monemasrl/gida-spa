@@ -3,7 +3,7 @@
  * originale continua a funzionare. Funzioni pure: usate dal sito in prerender e da
  * scripts/check-parity.mjs per confrontare il risultato con l'HTML originale.
  */
-import type { Block, Certificazione, Documento, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Tassonomie } from './model.ts';
+import type { Block, Certificazione, Documento, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Sezione, Tassonomie } from './model.ts';
 
 export type Dims = (src: string) => { width: number; height: number } | undefined;
 
@@ -83,7 +83,8 @@ export function renderPagina(p: Pagina, site: SiteData) {
 	html += lb('block-extra-field-blocknodepagelinks', '');
 	if (p.icon) html += lb('block-field-blocknodepagefield-icona', `<div class="field field--name-field-icona field--type-entity-reference field--label-hidden field__item">${media(site, p.icon, 'default')}</div>`);
 	html += lb('block-field-blocknodepagetitle', ` <span class="field field--name-title field--type-string field--label-above">${esc(p.title)}</span>`);
-	if (text(p)) html += lb('block-field-blocknodepagebody', textField(text(p)));
+	const body = text(p) + (p.sezioni ?? []).map((s) => renderSezione(s, site)).join('');
+	if (body) html += lb('block-field-blocknodepagebody', textField(body));
 	if (p.faq?.length) {
 		const items = p.faq.map((f) => `<h3 class="faqfield-question">${f.question}</h3><div class="faqfield-answer">${f.answer}</div>`).join('');
 		html += lb('block-field-blocknodepagefield-campo-faq', `<div class="field field--name-field-campo-faq field--type-faqfield field--label-hidden field__items"><div class="field__item"><div id="faqfield_field_campo_faq">${items}</div></div></div>`);
@@ -94,6 +95,50 @@ export function renderPagina(p: Pagina, site: SiteData) {
 	if (first) cols.push({ col: 'first', region: 'after_content_first', html: first });
 	if (blocks.some((b) => b.type === 'trasparenza')) cols.push({ col: 'fourth', region: 'societa_trasparente', html: renderTrasparenza(site) });
 	return mainWrap(node('page', layout(html))) + afterContent(cols);
+}
+
+/** Aggiunge un attributo ai tag di apertura indicati (solo a quelli senza attributi). */
+const withAttr = (html: string, tags: string, attr: string) => html.replace(new RegExp(`<(${tags})>`, 'g'), `<$1 ${attr}>`);
+const LABELS = { it: { nomina: 'Nomina', compenso: 'Compenso' }, en: { nomina: 'Nomination', compenso: 'Compensation' } };
+
+/** Allegato come media Drupal di tipo documento. */
+const allegato = (f: string) =>
+	`<article class="align-center media media--type-document media--view-mode-default"><div class="field field--name-field-media-document field--type-file field--label-visually_hidden"><div class="field__label visually-hidden">Document</div><div class="field__item">${fileLink(f)}</div></div> </article>`;
+
+function renderSezione(s: Sezione, site: SiteData): string {
+	switch (s.type) {
+		case 'testo':
+			return s.centrato ? withAttr(s.body, 'p|h[1-6]', 'style="text-align: center"') : s.body;
+		case 'riquadro':
+			return withAttr(s.body, 'p', 'class="orari_impianto"');
+		case 'allegati':
+			return s.elenco ? `<ul>${s.files.map((f) => `<li>${allegato(f)}</li>`).join('')}</ul>` : s.files.map(allegato).join('');
+		case 'galleria':
+			return `<div class="cke-ig">${s.images.map((i) => inlineImg(site, i)).join('')}</div>`;
+		case 'immagine': {
+			const m = media(site, s.image, 'default', 'align-center ');
+			return `<div class="mappa-contatti">${s.link ? `<a href="${esc(url(s.link))}">${m}</a>` : m}</div>`;
+		}
+		case 'organi': {
+			const L = LABELS[site.lang];
+			const li = (label: string, v?: string) => (v ? `<li>${label}: ${esc(v)}</li>` : '');
+			const scheda = (m: (typeof s.groups)[number]['members'][number]) =>
+				`<ul class="lista_chi_siamo"><li><strong>${esc(m.name)}</strong></li>${m.role ? `<li>${esc(m.role)}</li>` : ''}${m.email ? `<li>email: <a href="mailto:${esc(m.email)}">${esc(m.email)}</a></li>` : ''}${li(L.nomina, m.nomina)}${li(L.compenso, m.compenso)}</ul>`;
+			const groups = s.groups
+				.map((g) => {
+					const inner = g.compatto
+						? `<ul class="lista_chi_siamo collegio">${g.members.map((m) => `<li><strong>${esc(m.name)}</strong>${m.role ? ` (${esc(m.role)})` : ''}</li>`).join('')}</ul>`
+						: g.members.map(scheda).join('');
+					return `<h2 class="titolo_cdm">${esc(g.title)}</h2>${g.riquadri ? `<div class="box_chi_siamo">${inner}</div>` : inner}`;
+				})
+				.join('');
+			return `${s.anchor ? `<div class="anchor-offset" id="${esc(s.anchor)}">&nbsp;</div>` : ''}<h2>${esc(s.title)}</h2>${groups}`;
+		}
+		case 'avviso':
+			return `<div class="wrapper-under-construction"${s.visibile ? '' : ' style="display: none"'}><div class="under-construction">${esc(s.text)}</div></div>`;
+		case 'html':
+			return s.html;
+	}
 }
 
 const viewDom = (s: string) => `js-view-dom-id-${s}`;

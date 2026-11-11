@@ -24,9 +24,23 @@ export type Block =
 	| { type: 'trasparenza' }
 	| { type: 'html'; html: string };
 
+/** Membro di un organo societario. */
+export type Membro = { name: string; role?: string; email?: string; nomina?: string; compenso?: string };
+/** Sezioni del contenuto della pagina, rese in ordine dopo il testo. */
+export type Sezione =
+	| { type: 'testo'; body: string; centrato?: boolean }
+	| { type: 'allegati'; files: string[]; elenco?: boolean }
+	| { type: 'galleria'; images: Img[] }
+	| { type: 'immagine'; image: Img; link?: string }
+	| { type: 'riquadro'; body: string }
+	| { type: 'organi'; title: string; anchor?: string; groups: { title: string; riquadri?: boolean; compatto?: boolean; members: Membro[] }[] }
+	| { type: 'avviso'; text: string; visibile?: boolean }
+	| { type: 'html'; html: string };
+
 export type Pagina = Base & Text & {
 	hero?: Img;
 	icon?: Img;
+	sezioni?: Sezione[];
 	faq?: { question: string; answer: string }[];
 	blocks?: Block[];
 };

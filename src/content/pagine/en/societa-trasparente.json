@@ -10,5 +10,14 @@
 			"type": "trasparenza"
 		}
 	],
-	"bodyHtml": "<p>Personal data published can be reused only under the conditions established by current legislation on the reuse of public data (Community Directives 2003/98/CE - 2013/37UE and Legislative Decree 36/2006 - 102/2015 transposing the same), in ways that are consistent with the purposes for which they were collected and recorded, and in compliance with the legislation on the protection of personal data.</p><p>The documentation subject to mandatory publication pursuant to current legislation will be removed, from the various sub-sections, due to the expiry of the publication deadlines, according to the procedures laid down in the three-year plan for the prevention of corruption and transparency by ARPAT and will be accessible with universal access for the time limit prescribed by Annex 6 of the \"IT protocol, document and archive management manual\".</p><div class=\"wrapper-under-construction\" style=\"display: none\"><div class=\"under-construction\">Section being updated</div></div>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<p>Personal data published can be reused only under the conditions established by current legislation on the reuse of public data (Community Directives 2003/98/CE - 2013/37UE and Legislative Decree 36/2006 - 102/2015 transposing the same), in ways that are consistent with the purposes for which they were collected and recorded, and in compliance with the legislation on the protection of personal data.</p><p>The documentation subject to mandatory publication pursuant to current legislation will be removed, from the various sub-sections, due to the expiry of the publication deadlines, according to the procedures laid down in the three-year plan for the prevention of corruption and transparency by ARPAT and will be accessible with universal access for the time limit prescribed by Annex 6 of the \"IT protocol, document and archive management manual\".</p>"
+		},
+		{
+			"type": "avviso",
+			"text": "Section being updated"
+		}
+	]
 }

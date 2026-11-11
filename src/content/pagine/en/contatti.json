@@ -11,5 +11,18 @@
 			"form": "form-contatti"
 		}
 	],
-	"bodyHtml": "<h2>G.I.D.A. S.p.A.</h2><p><b>Registered Office:</b><br>Via Baciacavallo, 36 - 59100 Prato<br>phone: +39 0574 646511 Fax +39 0574 542530<br>email&nbsp;<a href=\"mailto:gida@gida-spa.it\">gida@gida-spa.it</a><br>Certified email:&nbsp;<a href=\"mailto:gida@pec.uipservizi.it\">gida@pec.uipservizi.it</a></p><h2>The plants</h2><p><b>Prato plant&nbsp;</b>Via Baciacavallo, 36 - 59100 Prato<br><b>Calice</b>&nbsp;<b>plant&nbsp;</b>Via Argine del Calice, s.n.c. - 59100 Prato<br><b>Cantagallo</b>&nbsp;<b>plant&nbsp;</b>Loc. Usella - Il Fabbro - 59022 Cantagallo (PO)<br><b>Vaiano</b>&nbsp;<b>plant&nbsp;</b>Via Giuseppe di Vittorio, 76 - 59021 Vaiano (PO)<br><b>Vernio</b>&nbsp;<b>plant&nbsp;</b>Via Montecuccoli, s.n.c. - 59024 Vernio (PO)</p><h2>Plant map</h2><div class=\"mappa-contatti\"><a href=\"https://www.google.com/maps/d/viewer?mid=1r3pFe8eO65lXB3lFMSF5SMh4FCWhES-y&amp;ll=43.93604584588452%2C11.081549227237701&amp;z=12\"><article class=\"align-center media media--type-image media--view-mode-default\"><div class=\"field field--name-field-media-image field--type-image field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Image</div><div class=\"field__item\"> <img loading=\"lazy\" src=\"/sites/default/files/2022-01/mappa_gida.jpg\" width=\"978\" height=\"656\" alt=\"mappa-gida-impianti\" class=\"img-fluid\"></div></div> </article></a></div>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<h2>G.I.D.A. S.p.A.</h2><p><b>Registered Office:</b><br>Via Baciacavallo, 36 - 59100 Prato<br>phone: +39 0574 646511 Fax +39 0574 542530<br>email<a href=\"mailto:gida@gida-spa.it\">gida@gida-spa.it</a><br>Certified email:<a href=\"mailto:gida@pec.uipservizi.it\">gida@pec.uipservizi.it</a></p><h2>The plants</h2><p><b>Prato plant</b>Via Baciacavallo, 36 - 59100 Prato<br><b>Calice</b><b>plant</b>Via Argine del Calice, s.n.c. - 59100 Prato<br><b>Cantagallo</b><b>plant</b>Loc. Usella - Il Fabbro - 59022 Cantagallo (PO)<br><b>Vaiano</b><b>plant</b>Via Giuseppe di Vittorio, 76 - 59021 Vaiano (PO)<br><b>Vernio</b><b>plant</b>Via Montecuccoli, s.n.c. - 59024 Vernio (PO)</p><h2>Plant map</h2>"
+		},
+		{
+			"type": "immagine",
+			"image": {
+				"src": "/sites/default/files/2022-01/mappa_gida.jpg",
+				"alt": "mappa-gida-impianti"
+			},
+			"link": "https://www.google.com/maps/d/viewer?mid=1r3pFe8eO65lXB3lFMSF5SMh4FCWhES-y&ll=43.93604584588452%2C11.081549227237701&z=12"
+		}
+	]
 }

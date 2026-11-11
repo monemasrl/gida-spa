@@ -36,6 +36,19 @@ function canon(html) {
 	const $ = cheerio.load(html, null, false);
 	$('[class*="js-view-dom-id-"]').each((_, e) => $(e).attr('class', $(e).attr('class').replace(/js-view-dom-id-\S+/, 'js-view-dom-id')));
 	$('[id^="faqfield_"]').attr('id', 'faqfield');
+	// markup cosmetico che l'editor visuale non conserva (stili inline, font/span, paragrafi vuoti):
+	// il CSS del sito non ne dipende, quindi non conta come differenza.
+	const BLOCK = 'p,h1,h2,h3,h4,h5,h6';
+	$('.field--name-body font, .field--name-body span:not([class])').each((_, e) => $(e).replaceWith($(e).contents()));
+	$('.field--name-body [style]').each((_, e) => {
+		if (!/display:\s*none|text-align/.test($(e).attr('style'))) $(e).removeAttr('style');
+	});
+	$('.field--name-body [class=""]').removeAttr('class');
+	$('.field--name-body img').removeAttr('draggable').removeAttr('loading');
+	$('.field--name-body b').each((_, e) => (e.name = 'strong'));
+	$(`.field--name-body :is(${BLOCK})`).each((_, e) => {
+		if (!$(e).find('img,a,br,hr').length && !$(e).text().replace(/[\s ]/g, '')) $(e).remove();
+	});
 	$('[href],[src]').each((_, e) => {
 		for (const a of ['href', 'src']) {
 			let v = $(e).attr(a);

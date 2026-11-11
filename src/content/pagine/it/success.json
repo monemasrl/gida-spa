@@ -1,5 +1,11 @@
 {
 	"title": "Grazie per averci contattato",
 	"path": "/success",
-	"bodyHtml": "<p style=\"text-align: center\">Risponderemo al più presto!</p>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<p>Risponderemo al più presto!</p>",
+			"centrato": true
+		}
+	]
 }

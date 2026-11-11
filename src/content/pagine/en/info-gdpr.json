@@ -5,5 +5,23 @@
 		"src": "/sites/default/files/2022-01/gdpr.jpg",
 		"alt": "gdpr"
 	},
-	"bodyHtml": "<h2>Gdpr information</h2><ul><li><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-05/INFORMATIVA%20GDPR%20FORNITORI%20REV3.pdf\" type=\"application/pdf\">INFORMATIVA GDPR FORNITORI REV3.pdf</a></span></div></div> </article></li><li><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-05/INFORMATIVA%20GDPR%20CLIENTI%20REV3.pdf\" type=\"application/pdf\">INFORMATIVA GDPR CLIENTI REV3.pdf</a></span></div></div> </article></li><li><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2025-05/INFORMATIVA%20GDPR%20POTENZIALI%20CLIENTI.pdf\" type=\"application/pdf\">INFORMATIVA GDPR POTENZIALI CLIENTI.pdf</a></span></div></div> </article></li><li></li></ul><p><strong>Data Protection Officer</strong><br>The Data Protection Officer (DPO) can be reached at the following address:<br>G.I.D.A. S.p.A. Via Baciacavallo 36 - 59100 Prato<br>Tel. <a href=\"tel:+39 0574 646511\">+39 0574 646511</a><br>Fax. +39 0574 542530<br>Email: <a href=\"mailto:dpo@gida-spa.it\">dpo@gida-spa.it</a></p>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<h2>Gdpr information</h2>"
+		},
+		{
+			"type": "allegati",
+			"elenco": true,
+			"files": [
+				"/sites/default/files/2025-05/INFORMATIVA GDPR FORNITORI REV3.pdf",
+				"/sites/default/files/2025-05/INFORMATIVA GDPR CLIENTI REV3.pdf",
+				"/sites/default/files/2025-05/INFORMATIVA GDPR POTENZIALI CLIENTI.pdf"
+			]
+		},
+		{
+			"type": "testo",
+			"body": "<p><strong>Data Protection Officer</strong><br>The Data Protection Officer (DPO) can be reached at the following address:<br>G.I.D.A. S.p.A. Via Baciacavallo 36 - 59100 Prato<br>Tel. <a href=\"tel:+39 0574 646511\">+39 0574 646511</a><br>Fax. +39 0574 542530<br>Email: <a href=\"mailto:dpo@gida-spa.it\">dpo@gida-spa.it</a></p>"
+		}
+	]
 }

@@ -10,5 +10,14 @@
 			"type": "trasparenza"
 		}
 	],
-	"bodyHtml": "<p>I dati personali pubblicati sono riutilizzabili solo alle condizioni previste dalla normativa vigente sul riuso dei dati pubblici (Direttive comunitarie 2003/98/CE - 2013/37UE e D.Lgs 36/2006 - 102/2015 di recepimento delle stesse), in termini compatibili con gli scopi per i quali sono stati raccolti e registrati, e nel rispetto della normativa in materia di protezione dei dati personali.</p><p>La documentazione oggetto di pubblicazione obbligatoria ai sensi della normativa vigente sarà rimossa, dalle varie sotto-sezioni, per decorrenza dei termini di pubblicazione, secondo le modalità previste nel Piano triennale della prevenzione della corruzione e della trasparenza di ARPAT e sarà accessibile con accesso generalizzato per i tempi previsti all’allegato 6 del “Manuale di gestione del protocollo informatico, dei documenti e dell’archivio”.</p><div style=\"display: none\" class=\"wrapper-under-construction\"><div class=\"under-construction\">Sezione in aggiornamento</div></div>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<p>I dati personali pubblicati sono riutilizzabili solo alle condizioni previste dalla normativa vigente sul riuso dei dati pubblici (Direttive comunitarie 2003/98/CE - 2013/37UE e D.Lgs 36/2006 - 102/2015 di recepimento delle stesse), in termini compatibili con gli scopi per i quali sono stati raccolti e registrati, e nel rispetto della normativa in materia di protezione dei dati personali.</p><p>La documentazione oggetto di pubblicazione obbligatoria ai sensi della normativa vigente sarà rimossa, dalle varie sotto-sezioni, per decorrenza dei termini di pubblicazione, secondo le modalità previste nel Piano triennale della prevenzione della corruzione e della trasparenza di ARPAT e sarà accessibile con accesso generalizzato per i tempi previsti all’allegato 6 del “Manuale di gestione del protocollo informatico, dei documenti e dell’archivio”.</p>"
+		},
+		{
+			"type": "avviso",
+			"text": "Sezione in aggiornamento"
+		}
+	]
 }

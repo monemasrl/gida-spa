@@ -351,6 +351,114 @@ for (const [file, d] of out) {
 }
 // Categorie con un id e le etichette nelle due lingue: le coppie IT/EN si ricavano dai documenti
 // tradotti (stessa chiave), i genitori senza documenti dalla coppia dei figli.
+// ---------------------------------------------------------------------------------------------
+// Testi complessi → sezioni
+// ---------------------------------------------------------------------------------------------
+const isEmpty = ($, el) => !$(el).find('img,article,a,hr,br').length && !$(el).text().replace(/[\s ]/g, '');
+
+/** Ripulisce un testo come lo salverebbe l'editor visuale: niente stili, classi, font o span vuoti. */
+function cleanText(html) {
+	const $ = cheerio.load(html, null, false);
+	$('font, span').each((_, e) => {
+		$(e).replaceWith($(e).contents());
+	});
+	$('[style]').removeAttr('style');
+	$('[class]').removeAttr('class');
+	$('p, h1, h2, h3, h4, h5, h6').each((_, e) => {
+		if (isEmpty($, e)) $(e).remove();
+	});
+	// testo sciolto (es. &nbsp;) fuori dai paragrafi
+	$.root().contents().each((_, n) => {
+		if (n.type === 'text' && !n.data.replace(/[\s ]/g, '')) $(n).remove();
+	});
+	return $.html().replace(/(&nbsp;| )+</g, '<').replace(/>(&nbsp;| )+/g, '>').trim();
+}
+
+const after = (s) => clean(s.slice(s.indexOf(':') + 1)).replace(/^ | $/g, '').trim();
+
+function organiGroup($, h, box) {
+	const lists = box ? $(box).children('ul') : $(h).next('ul');
+	const compatto = lists.length === 1 && (lists.hasClass('collegio') || lists.children('li').length === 1);
+	let members;
+	if (compatto) {
+		members = lists.children('li').map((_, li) => {
+			const t = clean($(li).text());
+			const m = t.match(/^(.*?)\s*\(([^)]*)\)$/);
+			return m ? { name: m[1], role: m[2] } : { name: t };
+		}).get();
+	} else {
+		members = lists.map((_, ul) => {
+			const m = {};
+			$(ul).children('li').each((i, li) => {
+				const t = clean($(li).text());
+				if (i === 0) m.name = t;
+				else if (/^email/i.test(t)) m.email = $(li).find('a').text().trim();
+				else if (/^(nomina|nomination)/i.test(t)) m.nomina = after(t);
+				else if (/^(compenso|compensation)/i.test(t)) m.compenso = after(t);
+				else m.role = t;
+			});
+			return m;
+		}).get();
+	}
+	return { title: clean($(h).text()), ...(box ? { riquadri: true } : {}), ...(compatto ? { compatto: true } : {}), members };
+}
+
+function toSezioni(html, lang) {
+	const $ = cheerio.load(html, null, false);
+	const out = [];
+	let text = [];
+	const flush = () => {
+		const body = cleanText(text.join(''));
+		if (body) {
+			const centered = text.every((h) => /text-align:\s*center/.test(h) || !h.trim() || /^(&nbsp;|\s)*$/.test(cheerio.load(h, null, false).root().text()));
+			out.push({ type: 'testo', body, ...(centered ? { centrato: true } : {}) });
+		}
+		text = [];
+	};
+	const push = (s) => {
+		flush();
+		const last = out.at(-1);
+		if (s.type === 'allegati' && last?.type === 'allegati' && !!last.elenco === !!s.elenco) last.files.push(...s.files);
+		else out.push(s);
+	};
+	const docs = (el) => $(el).find('article.media--type-document a').map((_, a) => fileHref($, a)).get();
+	const nodes = $.root().contents().toArray();
+	for (let i = 0; i < nodes.length; i++) {
+		const n = nodes[i];
+		const $n = $(n);
+		if (n.type === 'tag' && isEmpty($, n) && !$n.is('hr,div.anchor-offset')) continue;
+		if ($n.is('article.media--type-document')) push({ type: 'allegati', files: docs(n) });
+		else if ($n.is('ul') && $n.find('article.media--type-document').length && $n.children('li').toArray().every((li) => $(li).find('article').length || isEmpty($, li)))
+			push({ type: 'allegati', elenco: true, files: docs(n) });
+		else if ($n.is('div.cke-ig')) push({ type: 'galleria', images: $n.find('img').map((_, im) => ({ src: decode($(im).attr('src')), ...($(im).attr('alt') ? { alt: $(im).attr('alt') } : {}) })).get() });
+		else if ($n.is('div.mappa-contatti')) {
+			const im = $n.find('img');
+			const href = $n.children('a').attr('href');
+			push({ type: 'immagine', image: { src: decode(im.attr('src')), ...(im.attr('alt') ? { alt: im.attr('alt') } : {}) }, ...(href ? { link: href } : {}) });
+		} else if ($n.is('p.orari_impianto')) {
+			$n.removeAttr('class');
+			push({ type: 'riquadro', body: cleanText($.html(n)) });
+		} else if ($n.is('div.wrapper-under-construction')) {
+			push({ type: 'avviso', text: clean($n.text()), ...(/display:\s*none/.test($n.attr('style') ?? '') ? {} : { visibile: true }) });
+		} else if ($n.is('div.anchor-offset')) {
+			// organi societari: ancora, titolo, poi gruppi "h2.titolo_cdm" + schede
+			const s = { type: 'organi', anchor: $n.attr('id'), title: '', groups: [] };
+			let j = i + 1;
+			if ($(nodes[j]).is('h2:not(.titolo_cdm)')) s.title = clean($(nodes[j++]).text());
+			while ($(nodes[j]).is('h2.titolo_cdm')) {
+				const h = nodes[j++];
+				const box = $(nodes[j]).is('div.box_chi_siamo') ? nodes[j++] : null;
+				if (!box) while ($(nodes[j]).is('ul.lista_chi_siamo')) j++;
+				s.groups.push(organiGroup($, h, box));
+			}
+			push(s);
+			i = j - 1;
+		} else text.push(n.type === 'tag' || n.type === 'text' ? $.html(n) : '');
+	}
+	flush();
+	return out;
+}
+
 const slugify = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 function unify(lists, collection, field, parentOf) {
 	const votes = new Map(); // en → Map(it → n)
@@ -435,11 +543,19 @@ for (const [file, d] of out) {
 }
 delete taxonomy.trasparenza.archivio; // anni prima dell'anno corrente
 
-// I testi con markup che l'editor visuale non conserva (classi CSS, box, media, immagini, stili)
-// vanno nel campo `bodyHtml`, modificato come codice HTML; gli altri restano in `body`.
+// I testi con markup che l'editor visuale non conserva (classi CSS, box, media, immagini, stili):
+// nelle pagine diventano sezioni strutturate (allegati, galleria, organi societari...), negli altri
+// contenuti si ripulisce il markup superfluo. Quello che resta non riconosciuto va in `bodyHtml`.
 const COMPLEX = /class="|<div|style="|<article|<table|<iframe|<img|<font/;
-for (const d of out.values()) {
-	if (typeof d.body === 'string' && COMPLEX.test(d.body)) {
+for (const [file, d] of out) {
+	if (typeof d.body !== 'string' || !COMPLEX.test(d.body)) continue;
+	const [coll, lang] = file.split('/');
+	if (coll === 'pagine') {
+		d.sezioni = toSezioni(d.body, lang);
+		delete d.body;
+	} else d.body = cleanText(d.body);
+	if (COMPLEX.test(d.body ?? '')) {
+		warnings.push(`${file}: markup non strutturato, resta in bodyHtml`);
 		d.bodyHtml = d.body;
 		delete d.body;
 	}

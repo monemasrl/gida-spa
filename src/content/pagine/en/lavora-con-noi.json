@@ -5,5 +5,20 @@
 		"src": "/sites/default/files/2022-01/lavora.jpg",
 		"alt": "lavora con noi"
 	},
-	"bodyHtml": "<h2>Privacy Policy</h2><article class=\"align-center media media--type-document media--view-mode-default\"><div class=\"field field--name-field-media-document field--type-file field--label-visually_hidden\"><div class=\"field__label visually-hidden\">Document</div><div class=\"field__item\"><span class=\"file file--mime-application-pdf file--application-pdf\"> <a href=\"/sites/default/files/2022-01/INF_C_InfomativaCandidati_SW_GIDA_SpA.pdf\" type=\"application/pdf\">INF_C_InfomativaCandidati_SW_GIDA_SpA.pdf</a></span></div></div> </article><h2>Job offers</h2><p>There is no job posting.</p><h2>Results</h2>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<h2>Privacy Policy</h2>"
+		},
+		{
+			"type": "allegati",
+			"files": [
+				"/sites/default/files/2022-01/INF_C_InfomativaCandidati_SW_GIDA_SpA.pdf"
+			]
+		},
+		{
+			"type": "testo",
+			"body": "<h2>Job offers</h2><p>There is no job posting.</p><h2>Results</h2>"
+		}
+	]
 }

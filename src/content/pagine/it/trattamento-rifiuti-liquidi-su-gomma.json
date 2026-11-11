@@ -9,5 +9,42 @@
 		"src": "/sites/default/files/2022-01/trattamento.png",
 		"alt": "icona trattamento"
 	},
-	"bodyHtml": "<p><strong>Impianto di trattamento di Calice</strong></p><p>L’impianto di trattamento liquami è collocato all’interno dell’Impianto di depurazione di Calice ed è attivo dal 1992.<br>L’impianto è costituito da 2 linee di smaltimento , la prima dedicata al trattamento dei codici E.E.R. 20.03.4 - 20.03.06 ed una potenzialità di 2.250 t/settimana , 117.000 t/anno.<br>La seconda dedicata al trattamento dei codici E.E.R. 19.07.03 - 16.10.02 ed una potenzialità di 3.750 + 20% t/settimana , 195.000 t/anno.</p><p class=\"orari_impianto\"><strong>L’I.T.L. di Calice svolge il seguente orario:</strong><br>&nbsp; &nbsp; &nbsp;dalle ore 7.30 alle ore 19.00 tutti i giorni feriali;<br>&nbsp; &nbsp; &nbsp;dalle ore 7,30 fino alle 12.00 il sabato;<br><strong>Chiusura settimanale: durante i giorni festivi;</strong></p><p><strong>Impianto di trattamento di Baciacavallo</strong></p><p>L’impianto di trattamento liquami è collocato all’interno dell’Impianto di depurazione di Baciacavallo ed è attivo dal 2016.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; L’impianto è costituito da 1 linea di smaltimento dedicata al trattamento dei codici E.E.R. 20.03.4 ed una potenzialità di 230 t/gg , 900 t/settimana.</p><p class=\"orari_impianto\"><strong>L’I.T.L. di Baciacavallo svolge il seguente orario:</strong><br>&nbsp; &nbsp; &nbsp;dalle ore 7.00 alle ore 18.30 tutti i giorni feriali;<br>&nbsp; &nbsp; &nbsp;dalle ore 7,00 fino alle 12.00 il sabato;<br><strong>Chiusura settimanale: durante i giorni festivi;</strong></p><div class=\"cke-ig\"><img alt=\"itl\" draggable=\"false\" height=\"800\" src=\"/sites/default/files/2022-01/itl_impianti3.jpg\" width=\"900\"><img alt=\"itl\" draggable=\"false\" height=\"800\" src=\"/sites/default/files/2022-01/itl_impianti2.jpg\" width=\"900\"><img alt=\"itl\" draggable=\"false\" height=\"800\" src=\"/sites/default/files/2022-01/itl_impianti4.jpg\" width=\"900\"><img alt=\"\" height=\"768\" src=\"/sites/default/files/2022-01/itl_impianti17.jpg\" width=\"576\"></div><p>&nbsp;</p>"
+	"sezioni": [
+		{
+			"type": "testo",
+			"body": "<p><strong>Impianto di trattamento di Calice</strong></p><p>L’impianto di trattamento liquami è collocato all’interno dell’Impianto di depurazione di Calice ed è attivo dal 1992.<br>L’impianto è costituito da 2 linee di smaltimento , la prima dedicata al trattamento dei codici E.E.R. 20.03.4 - 20.03.06 ed una potenzialità di 2.250 t/settimana , 117.000 t/anno.<br>La seconda dedicata al trattamento dei codici E.E.R. 19.07.03 - 16.10.02 ed una potenzialità di 3.750 + 20% t/settimana , 195.000 t/anno.</p>"
+		},
+		{
+			"type": "riquadro",
+			"body": "<p><strong>L’I.T.L. di Calice svolge il seguente orario:</strong><br> &nbsp; &nbsp;dalle ore 7.30 alle ore 19.00 tutti i giorni feriali;<br> &nbsp; &nbsp;dalle ore 7,30 fino alle 12.00 il sabato;<br><strong>Chiusura settimanale: durante i giorni festivi;</strong></p>"
+		},
+		{
+			"type": "testo",
+			"body": "<p><strong>Impianto di trattamento di Baciacavallo</strong></p><p>L’impianto di trattamento liquami è collocato all’interno dell’Impianto di depurazione di Baciacavallo ed è attivo dal 2016.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; L’impianto è costituito da 1 linea di smaltimento dedicata al trattamento dei codici E.E.R. 20.03.4 ed una potenzialità di 230 t/gg , 900 t/settimana.</p>"
+		},
+		{
+			"type": "riquadro",
+			"body": "<p><strong>L’I.T.L. di Baciacavallo svolge il seguente orario:</strong><br> &nbsp; &nbsp;dalle ore 7.00 alle ore 18.30 tutti i giorni feriali;<br> &nbsp; &nbsp;dalle ore 7,00 fino alle 12.00 il sabato;<br><strong>Chiusura settimanale: durante i giorni festivi;</strong></p>"
+		},
+		{
+			"type": "galleria",
+			"images": [
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti3.jpg",
+					"alt": "itl"
+				},
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti2.jpg",
+					"alt": "itl"
+				},
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti4.jpg",
+					"alt": "itl"
+				},
+				{
+					"src": "/sites/default/files/2022-01/itl_impianti17.jpg"
+				}
+			]
+		}
+	]
 }
