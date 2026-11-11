@@ -50,7 +50,11 @@
 		<div id="it-region-header-top" class="region header_top">
 			<div id="it-block-topmenuinfo" class="block block-block-content">
 				<div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
-					{@html layout.topInfo}
+					<ul class="top-menu-info">
+						{#each layout.testata.contatti as c}
+							<li><strong>{c.label}</strong> {#if c.href}<a href={c.href}>{c.text}</a>{:else}{c.text}{/if}</li>
+						{/each}
+					</ul>
 				</div>
 			</div>
 			<nav aria-label="topMenu" id="block-topmenu-2" class="block block-menu navigation menu--topmenu">
@@ -95,7 +99,7 @@
 							<div id="it-region-logo-header" class="region logo_header">
 								<div id="it-block-brandingdelsito" class="block block-system block-system-branding-block">
 									<a href={homeOf(lang)} title="Home" rel="home">
-										<img src={layout.logo} alt="Home" class="icon img-fluid" />
+										<img src={layout.testata.logo} alt="Home" class="icon img-fluid" />
 										<div class="it-brand-text"></div>
 									</a>
 								</div>
@@ -116,7 +120,7 @@
 										<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 										<div class="overlay" style:display={menuOpen ? 'block' : 'none'} onclick={() => (menuOpen = false)}></div>
 										<div class="close-div">
-											<a href={homeOf(lang)}><img src={layout.logo} alt="Home" /></a>
+											<a href={homeOf(lang)}><img src={layout.testata.logo} alt="Home" /></a>
 											<button class="btn close-menu" type="button" aria-label="Chiudi menu" onclick={() => (menuOpen = false)}>
 												<svg class="icon"><use href="/themes/custom/italiagov/assets/icons/sprite.svg#it-close"></use></svg>
 											</button>

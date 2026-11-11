@@ -1,0 +1,190 @@
+{
+	"cruscotto": {
+		"title": "Solar energy produced Dashboard",
+		"items": [
+			{
+				"label": "Daily Usage",
+				"value": "2860.0 KWh"
+			},
+			{
+				"label": "CO2 Avoided",
+				"value": "1076.0 Ton"
+			},
+			{
+				"label": "T.E.P.",
+				"value": "175.4"
+			}
+		],
+		"totale": {
+			"label": "Total",
+			"value": "1996.0 MWh"
+		}
+	},
+	"dati": {
+		"logo": {
+			"src": "/sites/default/files/inline-images/logo3.jpg",
+			"alt": "logo"
+		},
+		"righe": [
+			{
+				"testo": "Gestione Impianti Depurazione Acque"
+			},
+			{
+				"testo": "Via Baciacavallo, 36 - 59100 Prato"
+			},
+			{
+				"testo": "Tel +39 0574 646511"
+			},
+			{
+				"testo": "Fax +39 0574 542530"
+			},
+			{
+				"testo": "Email",
+				"links": [
+					{
+						"label": "gida@gida-spa.it",
+						"href": "mailto:gida@gida-spa.it"
+					}
+				]
+			},
+			{
+				"testo": "Email Certified:",
+				"links": [
+					{
+						"label": "gida@pec.uipservizi.it",
+						"href": "mailto:gida@pec.uipservizi.it"
+					}
+				]
+			},
+			{
+				"testo": "P. IVA 00289380974"
+			},
+			{
+				"testo": "C.F. 03122430485 R.E.A. PO 302659"
+			},
+			{
+				"testo": "Registration number in the Business Register of Prato e C.F 7491"
+			},
+			{
+				"testo": "Cap. Soc. euro 4.620.000,00 i.v."
+			},
+			{
+				"testo": "Company subject to management and coordination by PLURES S.p.A."
+			},
+			{
+				"links": [
+					{
+						"label": "Privacy Policy",
+						"href": "/sites/default/files/2022-02/INF_A_PrivacyPolicyUtenti_SW_GIDA_SpA_2022.pdf",
+						"newTab": true
+					},
+					{
+						"label": "Cookie Policy",
+						"href": "/sites/default/files/2022-01/INF_B_CookiePolicyUtenti_SW_GIDA_SpA_0.pdf",
+						"newTab": true
+					}
+				]
+			},
+			{
+				"links": [
+					{
+						"label": "Whistleblowing",
+						"href": "https://gida-spa.integrityline.com/"
+					}
+				]
+			}
+		]
+	},
+	"menu": [
+		{
+			"label": "About us",
+			"href": "/en/about-us"
+		},
+		{
+			"label": "Contact",
+			"href": "/en/contact"
+		},
+		{
+			"label": "Depuration",
+			"href": "/depurazione"
+		},
+		{
+			"label": "Education and research",
+			"href": "/en/research-and-education"
+		},
+		{
+			"label": "Retrieval",
+			"href": "/en/retrieval"
+		},
+		{
+			"label": "Treatment",
+			"href": "/en/liquid-waste-treatment-road"
+		},
+		{
+			"label": "Info Gdpr",
+			"href": "/en/info-gdpr"
+		},
+		{
+			"label": "MOG 231-01",
+			"href": "/en"
+		},
+		{
+			"label": "Albo fornitori",
+			"href": "https://albofornitori.gida-spa.it/login"
+		},
+		{
+			"label": "Work with us",
+			"href": "/en/work-us"
+		},
+		{
+			"label": "Società trasparente",
+			"href": "/en/transparent-company"
+		},
+		{
+			"label": "Faq",
+			"href": "/en/faq"
+		}
+	],
+	"certificazioni": {
+		"loghi": [
+			{
+				"image": {
+					"src": "/sites/default/files/2022-01/logo_3.png",
+					"alt": "kiwa14001"
+				},
+				"href": "/sites/default/files/2025-06/CERT_8110_ITA_2025 _ISO 14001_  GIDA_0.pdf",
+				"newTab": true
+			},
+			{
+				"image": {
+					"src": "/sites/default/files/2022-01/kiwa9001.png",
+					"alt": "kiwa9001"
+				},
+				"href": "/sites/default/files/2024-01/CERT_2023_ 8110_ ISO 9001_GIDA_1.pdf",
+				"newTab": true
+			},
+			{
+				"image": {
+					"src": "/sites/default/files/2022-01/LOGO-EMAS2.png",
+					"alt": "logo emas"
+				},
+				"href": "/sites/default/files/2025-10/IT-001624 scad 2028.pdf",
+				"newTab": true
+			}
+		],
+		"links": [
+			{
+				"label": "Certifications",
+				"href": "/en/certifications"
+			},
+			{
+				"label": "Authorizations",
+				"href": "/en/permissions"
+			},
+			{
+				"label": "Regulations",
+				"href": "/en/regulations"
+			}
+		]
+	}
+}

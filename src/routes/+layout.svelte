@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Footer from '#lib/components/Footer.svelte';
 	import Header from '#lib/components/Header.svelte';
 	import { layouts, langOf } from '#lib/layout.ts';
 	import type { LayoutProps } from './$types';
@@ -58,6 +59,6 @@
 		<div id="main-content">
 			{@render children()}
 		</div>
-		{@html layout.footer}
+		<Footer footer={layout.footer} />
 	</div>
 </div>

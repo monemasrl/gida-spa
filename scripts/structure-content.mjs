@@ -561,6 +561,56 @@ for (const [file, d] of out) {
 	}
 }
 
+// ---------------------------------------------------------------------------------------------
+// Testata, menu e footer (dall'HTML della home di ciascuna lingua, <import>/layout.json)
+// ---------------------------------------------------------------------------------------------
+const layoutFile = path.join(srcDir, '..', 'layout.json');
+if (fs.existsSync(layoutFile)) {
+	const layout = JSON.parse(fs.readFileSync(layoutFile, 'utf8'));
+	const txt = ($, el) => clean($(el).text().replace(/ /g, ' '));
+	const linkOf = ($, a) => ({ label: txt($, a), href: decode($(a).attr('href')), ...($(a).attr('target') === '_blank' ? { newTab: true } : {}) });
+	const imgOf = ($, im) => ({ src: decode($(im).attr('src')), ...($(im).attr('alt') ? { alt: $(im).attr('alt') } : {}) });
+	for (const [lang, l] of Object.entries(layout)) {
+		const put = (name, data) => out.set(`layout/${name}/${lang}.json`, data);
+		// testata: logo e contatti ("<strong>Tel</strong> <a href=tel:...>")
+		const $t = cheerio.load(l.topInfo, null, false);
+		put('testata', {
+			logo: l.logo,
+			contatti: $t('li').map((_, li) => {
+				const a = $t(li).find('a').first();
+				return { label: txt($t, $t(li).find('strong, b').first()), text: txt($t, a), href: a.attr('href').replace(/^tel:\s*/, 'tel:') };
+			}).get()
+		});
+		put('menu-superiore', { items: l.topMenu });
+		put('menu-principale', { items: l.mainMenu.map(({ children, ...m }) => ({ ...m, ...(children?.length ? { children } : {}) })) });
+		// footer: cruscotto energia, dati societari, menu, loghi delle certificazioni e link
+		const $ = cheerio.load(l.footer, null, false);
+		const c = $('.wrapper-cruscotto');
+		const valore = (el) => ({ label: clean($(el).clone().children('span').remove().end().text().replace(/ /g, ' ')), value: txt($, $(el).children('span')) });
+		const dati = $('.dati_footer');
+		put('footer', {
+			cruscotto: {
+				title: txt($, c.find('h2')),
+				items: c.find('.testo-cruscotto li').map((_, li) => valore(li)).get(),
+				totale: valore(c.find('.totale h3'))
+			},
+			dati: {
+				logo: imgOf($, dati.children('img')),
+				righe: dati.find('li').map((_, li) => {
+					const links = $(li).find('a').map((_, a) => linkOf($, a)).get();
+					const testo = clean($(li).clone().find('a').remove().end().text().replace(/ /g, ' ').replace(/\|/g, ''));
+					return { ...(testo ? { testo } : {}), ...(links.length ? { links } : {}) };
+				}).get()
+			},
+			menu: $('.menu--footer h4 a').map((_, a) => linkOf($, a)).get(),
+			certificazioni: {
+				loghi: $('#it-region-footer-third a:has(img)').map((_, a) => ({ image: imgOf($, $(a).find('img')), href: decode($(a).attr('href')), ...($(a).attr('target') === '_blank' ? { newTab: true } : {}) })).get(),
+				links: $('#it-region-footer-third a.footer-link-certificazioni').map((_, a) => linkOf($, a)).get()
+			}
+		});
+	}
+}
+
 // Scrittura
 for (let [file, data] of out) {
 	// Società trasparente: una cartella per anno (l'anno è dato dalla cartella, non da un campo)

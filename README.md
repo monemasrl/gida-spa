@@ -22,7 +22,7 @@ Le uniche parti davvero dinamiche erano i due form, quindi il sito si presta ben
 ```
 scripts/mirror-pages.py        scarica le pagine HTML (dalla sitemap)
 scripts/mirror-assets.py       scarica PDF/immagini/CSS/font mantenendo gli stessi URL
-scripts/import-drupal.mjs      HTML Drupal → .drupal-mirror/import/pages/*.json + layout.json + CSS
+scripts/import-drupal.mjs      HTML Drupal → .drupal-mirror/import/{pages/*.json,layout.json} + CSS
 scripts/structure-content.mjs  pagine importate → contenuti strutturati in src/content/
 scripts/check-parity.mjs       confronta le pagine rigenerate con l'HTML originale
 scripts/check-links.mjs        verifica che tutti i link interni del build esistano
@@ -39,7 +39,8 @@ per le traduzioni:
 | `src/content/trasparenza/<lingua>/<anno>/…` | documenti di Società trasparente (categoria, testo, file); l'anno è la cartella |
 | `src/content/home/{it,en}.json` | blocchi della home |
 | `src/content/tassonomie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN), anno corrente, anni d'archivio (si aggiungono anche quelli che hanno documenti) |
-| `src/content/forms.json`, `layout.json` | markup dei form; menu, contatti e footer |
+| `src/content/forms.json` | markup dei form |
+| `src/content/layout/{testata,menu-superiore,menu-principale,footer}/<lingua>.json` | logo e contatti in alto; menu; footer a blocchi (cruscotto energia, dati societari, menu, loghi e pulsanti delle certificazioni) |
 
 - `src/lib/render.ts` rigenera da questi dati **lo stesso markup di Drupal** (il CSS originale continua a funzionare),
   compresi gli elenchi che Drupal generava: certificazioni per tipo, impianti con menu di ancore, Società trasparente
@@ -95,8 +96,9 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - **Traduzioni affiancate** (`i18n.structure: multiple_folders`): ogni voce ha le versioni IT ed EN nello stesso
   editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
 - **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, FAQ, blocchi
-  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, nel documento singolo "Categorie e anni"). Home page, "Menu, contatti e
-  footer" e "Categorie e anni" sono documenti singoli (singleton), sotto "File" nella barra laterale.
+  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, nel documento singolo "Categorie e anni"). Home page, Testata (logo e
+  contatti), Menu superiore, Menu principale, Footer e "Categorie e anni" sono documenti singoli (singleton), sotto
+  "File" nella barra laterale.
 - **Testo** usa l'editor visuale (HTML). Le pagine con impaginazione particolare usano **Contenuto a sezioni**,
   mostrate in ordine dopo il Testo: Testo (anche centrato), Allegati (file, anche come elenco puntato), Galleria di
   immagini, Immagine con link, Riquadro evidenziato (es. orari), Organi societari (gruppi di persone con ruolo,

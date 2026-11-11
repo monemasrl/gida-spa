@@ -1,0 +1,38 @@
+{
+	"items": [
+		{
+			"label": "Chi siamo",
+			"href": "/chi-siamo"
+		},
+		{
+			"label": "Depurazione e territorio",
+			"href": null,
+			"children": [
+				{
+					"label": "Depurazione",
+					"href": "/depurazione"
+				},
+				{
+					"label": "Recupero",
+					"href": "/recupero"
+				},
+				{
+					"label": "Trattamento",
+					"href": "/trattamento-rifiuti-liquidi-su-gomma"
+				}
+			]
+		},
+		{
+			"label": "Formazione e ricerca",
+			"href": "/formazione-e-ricerca"
+		},
+		{
+			"label": "News",
+			"href": "/news"
+		},
+		{
+			"label": "Contatti",
+			"href": "/contatti"
+		}
+	]
+}

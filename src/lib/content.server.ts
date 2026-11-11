@@ -4,7 +4,7 @@ import { buildSite, type RawContent } from './site.ts';
 import type { Page } from './types.ts';
 
 /** Tutti i contenuti strutturati (src/content/**), indicizzati per percorso relativo. */
-const modules = import.meta.glob(['/src/content/**/*.json', '!/src/content/layout.json'], { eager: true, import: 'default' });
+const modules = import.meta.glob(['/src/content/**/*.json', '!/src/content/layout/**'], { eager: true, import: 'default' });
 const raw: RawContent = Object.fromEntries(Object.entries(modules).map(([k, v]) => [k.replace('/src/content/', ''), v]));
 
 /** Dimensioni delle immagini lette dai file in static/ (solo in build/prerender). */

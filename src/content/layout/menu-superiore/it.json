@@ -1,0 +1,16 @@
+{
+	"items": [
+		{
+			"label": "Albo fornitori",
+			"href": "https://albofornitori.gida-spa.it/auth/login"
+		},
+		{
+			"label": "società trasparente",
+			"href": "/societa-trasparente"
+		},
+		{
+			"label": "faq",
+			"href": "/faq"
+		}
+	]
+}

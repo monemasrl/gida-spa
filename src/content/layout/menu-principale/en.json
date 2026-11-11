@@ -1,0 +1,38 @@
+{
+	"items": [
+		{
+			"label": "About us",
+			"href": "/en/about-us"
+		},
+		{
+			"label": "Depuration and territory",
+			"href": null,
+			"children": [
+				{
+					"label": "Depuration",
+					"href": "/en/purification"
+				},
+				{
+					"label": "Retrieval",
+					"href": "/en/retrieval"
+				},
+				{
+					"label": "Treatment",
+					"href": "/en/liquid-waste-treatment-road"
+				}
+			]
+		},
+		{
+			"label": "Research and education",
+			"href": "/en/research-and-education"
+		},
+		{
+			"label": "News",
+			"href": "/en/news"
+		},
+		{
+			"label": "Contacts",
+			"href": "/en/contact"
+		}
+	]
+}

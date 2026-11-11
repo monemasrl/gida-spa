@@ -12,7 +12,7 @@
  * Output:
  *   <mirror-dir>/import/pages/*.json   una pagina per file (metadati + HTML del contenuto),
  *                                     da convertire con scripts/structure-content.mjs
- *   src/content/layout.json    menu, footer e top-bar per lingua
+ *   <mirror>/import/layout.json  menu, footer e top-bar per lingua (HTML)
  *   static/css/drupal.css      unione (deduplicata) dei bundle CSS di Drupal
  */
 import fs from 'node:fs';
@@ -258,7 +258,8 @@ for (const [p, $] of docs) {
 		};
 	}
 }
-fs.writeFileSync(path.join(ROOT, 'src/content/layout.json'), JSON.stringify(layout, null, '\t'));
+// header e footer così come sono: scripts/structure-content.mjs li scompone in src/content/layout/
+fs.writeFileSync(path.join(OUT_PAGES, '..', 'layout.json'), JSON.stringify(layout, null, '\t'));
 console.log(`Pagine importate: ${count}`);
 
 // ---------------------------------------------------------------- CSS

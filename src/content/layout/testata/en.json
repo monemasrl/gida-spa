@@ -1,0 +1,15 @@
+{
+	"logo": "/sites/default/files/logo3_1.jpg",
+	"contatti": [
+		{
+			"label": "Phone",
+			"text": "+39 0574 646511",
+			"href": "tel:+39 0574 646511"
+		},
+		{
+			"label": "mail:",
+			"text": "gida@gida-spa.it",
+			"href": "mailto:gida@gida-spa.it"
+		}
+	]
+}
