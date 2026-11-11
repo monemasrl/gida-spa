@@ -36,14 +36,14 @@ per le traduzioni:
 | `src/content/pagine/{it,en}/` | pagine: immagine di testata, icona, testo, FAQ, blocchi (form, elenchi, …) |
 | `src/content/news/…`, `impianti/…` | news e impianti |
 | `src/content/certificazioni/…` | certificazioni e autorizzazioni (file + tipo) |
-| `src/content/trasparenza/…` | documenti di Società trasparente (anno, categoria, testo, file) |
+| `src/content/trasparenza/<lingua>/<anno>/…` | documenti di Società trasparente (categoria, testo, file); l'anno è la cartella |
 | `src/content/home/{it,en}.json` | blocchi della home |
-| `src/content/tassonomie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN), anno corrente, anni d'archivio |
+| `src/content/tassonomie.json` | categorie di Società trasparente e tipi di certificazione (id + nome IT/EN), anno corrente, anni d'archivio (si aggiungono anche quelli che hanno documenti) |
 | `src/content/forms.json`, `layout.json` | markup dei form; menu, contatti e footer |
 
 - `src/lib/render.ts` rigenera da questi dati **lo stesso markup di Drupal** (il CSS originale continua a funzionare),
   compresi gli elenchi che Drupal generava: certificazioni per tipo, impianti con menu di ancore, Società trasparente
-  per categoria (pagina principale = anno corrente) e archivi annuali. `npm run check-parity` verifica che 587/589
+  per categoria (pagina principale = anno corrente) e archivi annuali. `npm run check-parity` verifica che 584/589
   pagine siano identiche all'originale (le 2 differenze sono un'etichetta EN incoerente già in Drupal: "AIT Resolution"
   sulla pagina del documento, "Delibera AIT" nell'elenco).
 - Collegamenti tra traduzioni (`hreflang`, selettore lingua) calcolati dalla chiave condivisa.
@@ -95,12 +95,16 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - **Traduzioni affiancate** (`i18n.structure: multiple_folders`): ogni voce ha le versioni IT ed EN nello stesso
   editor; le voci nuove partono in italiano e la traduzione si attiva quando serve.
 - **Campi strutturati** per tipo: titolo, descrizione, URL, immagini (con testo alternativo), testo, FAQ, blocchi
-  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, in "Menu, footer e categorie").
+  sotto la pagina; categorie e tipi scelti da elenco (`tassonomie.json`, nel documento singolo "Categorie e anni"). Home page, "Menu, contatti e
+  footer" e "Categorie e anni" sono documenti singoli (singleton), sotto "File" nella barra laterale.
 - **Testo** usa l'editor visuale (HTML). Le pagine con impaginazione particolare usano **Contenuto a sezioni**,
   mostrate in ordine dopo il Testo: Testo (anche centrato), Allegati (file, anche come elenco puntato), Galleria di
   immagini, Immagine con link, Riquadro evidenziato (es. orari), Organi societari (gruppi di persone con ruolo,
   email, nomina e compenso; ancora `#cda`), Avviso "in aggiornamento" e HTML libero. Usate in Chi siamo, Contatti,
   Recupero, Trattamento rifiuti, MOG 231, Info GDPR, Lavora con noi, Società trasparente, Gida per le scuole.
+- Società trasparente: i documenti sono divisi in cartelle per anno, che compaiono come sottocartelle nella barra
+  laterale; l'anno si cambia con "Cartella superiore" (sposta il file in tutte le lingue). Per un anno nuovo:
+  "Nuova cartella" nel selettore mentre si crea il documento.
 - Elenchi generati: un nuovo documento di Società trasparente compare nella pagina principale se il suo anno è
   l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
   "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.

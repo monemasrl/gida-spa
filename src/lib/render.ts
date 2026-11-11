@@ -265,6 +265,8 @@ const TR = {
 	it: { year: 'Documenti per anno', archive: 'Archivio', years: 'consulta la documentazione relativa agli anni:', base: '/societa-trasparente', archiveBase: '/societa-trasparente' },
 	en: { year: 'Document for year', archive: 'Archive', years: 'consult the documentation relating to the years:', base: '/en/transparent-company', archiveBase: '/en/trasparent-company' }
 };
+/** Anni con una pagina d'archivio: quelli indicati nelle impostazioni più quelli che hanno documenti. */
+export const anniArchivio = (site: SiteData) => [...new Set([...site.tassonomie.trasparenza.anni, ...site.documenti.map((d) => d.anno)])].sort();
 export const archivePath = (lang: Lang, year: string) => `${TR[lang].archiveBase}/${year}`;
 
 function transparencyListing(site: SiteData, year: string) {
@@ -292,8 +294,8 @@ function transparencyListing(site: SiteData, year: string) {
 
 function renderTrasparenza(site: SiteData) {
 	const t = TR[site.lang];
-	const { anni, annoCorrente } = site.tassonomie.trasparenza;
-	const years = anni.filter((y) => y < annoCorrente).map((y) => `<div><a href="${archivePath(site.lang, y)}">${y}</a></div>`).join('');
+	const { annoCorrente } = site.tassonomie.trasparenza;
+	const years = anniArchivio(site).filter((y) => y < annoCorrente).map((y) => `<div><a href="${archivePath(site.lang, y)}">${y}</a></div>`).join('');
 	return (
 		`<div id="it-block-documentisocietatrasparente" class="block block-gida-base block-societa-trasparente-documents-block">${transparencyListing(site, site.tassonomie.trasparenza.annoCorrente)}</div>` +
 		`<div id="it-block-anniarchivisocietatrasparente" class="block block-gida-base block-societa-trasparente-years-block"><div class="archivio-anni-container"><h2>${t.archive}</h2><div class="archivio-anni-wrapper"><div class="archivio-anni-wrapper-title">${t.years}</div>${years}</div></div></div>`

@@ -562,7 +562,13 @@ for (const [file, d] of out) {
 }
 
 // Scrittura
-for (const [file, data] of out) {
+for (let [file, data] of out) {
+	// Società trasparente: una cartella per anno (l'anno è dato dalla cartella, non da un campo)
+	if (file.startsWith('trasparenza/')) {
+		const { anno, ...rest } = data;
+		file = file.replace(/^(trasparenza\/[a-z]+)\//, `$1/${anno}/`);
+		data = rest;
+	}
 	const f = path.join(outDir, file);
 	fs.mkdirSync(path.dirname(f), { recursive: true });
 	// chiavi nell'ordine dei campi del CMS, così il primo salvataggio non riordina il file

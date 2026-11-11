@@ -4,7 +4,7 @@
  */
 import type { Certificazione, CollectionName, Documento, FormEntry, Home, Impianto, Lang, News, Pagina, Tassonomie } from './model.ts';
 import type { Page } from './types.ts';
-import { archivePath, renderArchivio, renderCertificazione, renderDocumento, renderHome, renderImpianto, renderNews, renderPagina, type Dims, type SiteData } from './render.ts';
+import { anniArchivio, archivePath, renderArchivio, renderCertificazione, renderDocumento, renderHome, renderImpianto, renderNews, renderPagina, type Dims, type SiteData } from './render.ts';
 
 /** File di contenuto: percorso relativo a src/content (es. `pagine/it/chi-siamo.json`) → dati. */
 export type RawContent = Record<string, unknown>;
@@ -31,7 +31,10 @@ export function buildSite(raw: RawContent, dims: Dims) {
 		const m = file.match(/^(pagine|news|impianti|certificazioni|trasparenza)\/(it|en)\/(.+)\.json$/);
 		if (m) {
 			const d = data as Item['data'];
-			items.push({ collection: m[1] as CollectionName, lang: m[2] as Lang, key: m[3], data: { ...d, path: d.path || defaultPath(m[2] as Lang, m[3]) } });
+			// Società trasparente: i documenti stanno in una cartella per anno (trasparenza/<lingua>/<anno>/<chiave>.json)
+			const year = m[1] === 'trasparenza' ? m[3].match(/^(\d{4})\//)?.[1] : undefined;
+			const name = m[3].split('/').pop()!;
+			items.push({ collection: m[1] as CollectionName, lang: m[2] as Lang, key: m[3], data: { ...d, ...(year ? { anno: year } : {}), path: d.path || defaultPath(m[2] as Lang, name) } });
 		}
 		const h = file.match(/^home\/(it|en)\.json$/);
 		if (h) homes[h[1] as Lang] = data as Home;
@@ -105,7 +108,7 @@ export function buildSite(raw: RawContent, dims: Dims) {
 				html: renderHome(h, sites[lang])
 			});
 		// Archivi annuali di Società trasparente
-		for (const year of tassonomie.trasparenza.anni) {
+		for (const year of anniArchivio(sites[lang])) {
 			const path = archivePath(lang, year);
 			add({
 				path,

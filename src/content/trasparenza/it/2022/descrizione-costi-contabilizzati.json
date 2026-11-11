@@ -1,0 +1,7 @@
+{
+	"title": "Descrizione Costi Contabilizzati",
+	"path": "/descrizione-costi-contabilizzati",
+	"tipo": "costi-contabilizzati",
+	"order": 9999,
+	"unlisted": true
+}
