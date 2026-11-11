@@ -144,22 +144,34 @@ function clean($, $root, lang) {
 	return $root;
 }
 
-/** Sostituisce i form Drupal con un segnaposto e ne estrae la definizione. */
+/**
+ * Mantiene il markup originale dei form Drupal (classi/id da cui dipende il CSS di Bootstrap Italia),
+ * ma lo rende indipendente da Drupal: niente campi nascosti, nomi dei campi semplificati,
+ * invio a /api/form. Ne estrae anche la definizione usata dal server per validare.
+ */
 function extractForms($, $root) {
 	const forms = [];
 	$root.find('form').each((i, form) => {
 		const $f = $(form);
 		const fields = [];
+		$f.find('input[type="hidden"]').remove();
 		$f.find('input, textarea, select').each((_, el) => {
 			const $el = $(el);
 			const type = el.tagName === 'textarea' ? 'textarea' : ($el.attr('type') ?? 'text');
 			const name = $el.attr('name');
-			if (['hidden', 'submit'].includes(type) || !name) return;
+			if (type === 'submit') {
+				$el.removeAttr('name');
+				return;
+			}
+			if (!name) return;
+			const simple = name.replace(/^field_/, '').replace(/\[.*$/, '');
+			$el.attr('name', simple);
+			if (type === 'checkbox') $el.attr('value', 'true');
 			const id = $el.attr('id');
 			const $label = $f.find(`label[for="${id}"]`);
 			const desc = $f.find(`#${id}--description`).html()?.trim();
 			fields.push({
-				name: name.replace(/^field_/, '').replace(/\[.*$/, ''),
+				name: simple,
 				type,
 				label: $label.text().trim(),
 				required: $el.is('[required]'),
@@ -169,7 +181,7 @@ function extractForms($, $root) {
 		const submit = $f.find('[type="submit"]').first().attr('value') ?? 'Invia';
 		const id = ($f.attr('id') ?? `form-${i}`).replace(/^contact-message-/, '').replace(/-form$/, '');
 		forms.push({ id, fields, submit });
-		$f.replaceWith(`<div data-gida-form="${id}"></div>`);
+		$f.attr({ action: '/api/form', method: 'post', 'data-gida-form': id });
 	});
 	return forms;
 }

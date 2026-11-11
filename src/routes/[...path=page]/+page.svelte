@@ -9,16 +9,26 @@
 
 	let root = $state<HTMLElement>();
 
-	// I form sono segnaposto <div data-gida-form="id"> dentro l'HTML importato: il componente
-	// viene montato lì lato client (l'HTML non va spezzato, altrimenti l'idratazione non combacia).
+	// I form originali di Drupal sono nell'HTML importato (form[data-gida-form]): qui li si potenzia
+	// montando, prima del pulsante di invio, il componente con Cap e la gestione dell'invio.
 	$effect(() => {
 		const page = p;
 		if (!root) return;
-		const mounted = [...root.querySelectorAll<HTMLElement>('[data-gida-form]')].flatMap((target) => {
-			const def = page.forms.find((f) => f.id === target.dataset.gidaForm);
-			return def ? [mount(Form, { target, props: { def, lang: page.lang } })] : [];
+		const mounted = [...root.querySelectorAll<HTMLFormElement>('form[data-gida-form]')].flatMap((form) => {
+			const def = page.forms.find((f) => f.id === form.dataset.gidaForm);
+			if (!def) return [];
+			const slot = document.createElement('div');
+			slot.className = 'gida-form-extras';
+			const actions = form.querySelector('.form-actions');
+			if (actions) actions.before(slot);
+			else form.append(slot);
+			return [{ slot, component: mount(Form, { target: slot, props: { form, def, lang: page.lang } }) }];
 		});
-		return () => mounted.forEach((c) => unmount(c));
+		return () =>
+			mounted.forEach(({ slot, component }) => {
+				unmount(component);
+				slot.remove();
+			});
 	});
 </script>
 
