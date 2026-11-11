@@ -1,0 +1,143 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.262.4/schema/sveltia-cms.json
+#
+# Sveltia CMS per il sito GIDA: modifica i JSON in src/content/ (generati da scripts/import-drupal.mjs).
+# Accesso: "Sign In with Token" (token GitHub con permessi Contents + Pull requests in lettura/scrittura)
+# oppure "Work with Local Repository" in Chrome/Edge con `npm run dev`.
+# ATTENZIONE: rieseguire `npm run import` sovrascrive le modifiche fatte dal CMS.
+
+backend:
+  name: github
+  repo: monemasrl/gida-spa
+  branch: main
+  # Senza un server OAuth (es. sveltia-cms-auth, poi `base_url`) si accede solo con token
+  auth_methods: [token]
+  # Ogni modifica diventa una pull request (con il suo deploy di anteprima su Vercel)
+  # e va in produzione solo quando viene pubblicata/unita.
+  publish_mode: editorial_workflow
+
+site_url: https://gida-sito.vercel.app
+display_url: https://www.gida-spa.it
+locale: it
+
+media_folder: /static/sites/default/files
+public_folder: /sites/default/files
+
+output:
+  json:
+    indent_style: tab
+
+# Campi comuni delle pagine: i campi non elencati (alternates, forms, bodyClass, ...) restano invariati.
+_page_fields: &page_fields
+  - { name: title, label: Titolo, widget: string }
+  - { name: description, label: Descrizione (meta), widget: text, required: false }
+  - { name: path, label: URL, widget: string, readonly: true }
+  - { name: lang, label: Lingua, widget: select, options: [it, en], readonly: true }
+  - { name: bodyClass, widget: hidden } # tipo di contenuto Drupal, usato dai filtri delle collezioni
+  - name: html
+    label: Contenuto (HTML)
+    hint: Markup originale di Bootstrap Italia. I form (data-gida-form) vanno lasciati intatti.
+    widget: code
+    default_language: html
+    allow_language_selection: false
+    output_code_only: true
+
+_page_defaults: &page_defaults
+  folder: /src/content/pages
+  format: json
+  create: false
+  delete: false
+  duplicate: false
+  identifier_field: title
+  summary: '{{title}} — {{path}}'
+  preview_path: '{{fields.path}}'
+  sortable_fields: [title, path]
+  view_filters:
+    - { label: Italiano, field: lang, pattern: '^it$' }
+    - { label: English, field: lang, pattern: '^en$' }
+  fields: *page_fields
+
+collections:
+  - name: pagine
+    label: Pagine
+    label_singular: Pagina
+    icon: description
+    <<: *page_defaults
+    filter: { field: bodyClass, pattern: '(page-node-typepage|path-frontpage)\b' }
+
+  - name: news
+    label: News
+    icon: newspaper
+    <<: *page_defaults
+    filter: { field: bodyClass, pattern: 'page-node-typenews\b' }
+
+  - name: impianti
+    label: Impianti
+    label_singular: Impianto
+    icon: factory
+    <<: *page_defaults
+    filter: { field: bodyClass, pattern: 'page-node-typeimpianti\b' }
+
+  - name: certificazioni
+    label: Certificazioni
+    label_singular: Certificazione
+    icon: verified
+    <<: *page_defaults
+    filter: { field: bodyClass, pattern: 'page-node-typecertificazioni\b' }
+
+  - name: trasparenza
+    label: Società trasparente — documenti
+    label_singular: Documento
+    icon: folder_open
+    <<: *page_defaults
+    filter: { field: bodyClass, pattern: 'page-node-typesocieta-trasparente-documenti\b' }
+
+  - name: layout
+    label: Menu e footer
+    icon: menu
+    delete: false
+    files:
+      - name: layout
+        label: Menu, contatti e footer
+        file: /src/content/layout.json
+        format: json
+        fields:
+          - name: it
+            label: Italiano
+            widget: object
+            fields: &layout_fields
+              - { name: logo, label: Logo, widget: image }
+              - name: topInfo
+                label: Contatti in testata (HTML)
+                widget: code
+                default_language: html
+                allow_language_selection: false
+                output_code_only: true
+              - name: topMenu
+                label: Menu superiore
+                widget: list
+                summary: '{{label}}'
+                fields:
+                  - { name: label, label: Etichetta, widget: string }
+                  - { name: href, label: Link, widget: string }
+              - name: mainMenu
+                label: Menu principale
+                widget: list
+                summary: '{{label}}'
+                fields:
+                  - { name: label, label: Etichetta, widget: string }
+                  - { name: href, label: Link, widget: string }
+                  - name: children
+                    label: Sottomenu
+                    widget: list
+                    required: false
+                    summary: '{{label}}'
+                    fields:
+                      - { name: label, label: Etichetta, widget: string }
+                      - { name: href, label: Link, widget: string }
+              - name: footer
+                label: Footer (HTML)
+                widget: code
+                default_language: html
+                allow_language_selection: false
+                output_code_only: true
+          - { name: en, label: English, widget: object, fields: *layout_fields }

@@ -65,6 +65,25 @@ I form Contatti e Visite scuole (IT/EN) inviano a `POST /api/form`, una Vercel F
 
 Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_API_URL`, `FORM_FROM`, `FORM_TO`, `CAP_SECRET`.
 
+## CMS (Sveltia CMS)
+
+[Sveltia CMS](https://sveltiacms.app) è in `static/admin/` (pagina `/admin/index.html`, configurazione `/admin/config.yml`).
+Modifica direttamente i JSON in `src/content/`: titolo, descrizione e HTML delle pagine (divise in Pagine, News,
+Impianti, Certificazioni e Società trasparente), più menu, contatti e footer (`layout.json`).
+I campi non esposti (alternates, forms, bodyClass, …) vengono conservati così come sono.
+
+- **Online**: `/admin/index.html` → "Accedi con Token di Accesso", con un token GitHub *fine-grained* su
+  `monemasrl/gida-spa` con permessi *Contents* e *Pull requests* in lettura/scrittura.
+  Con `publish_mode: editorial_workflow` ogni modifica apre una pull request (con anteprima Vercel);
+  va in produzione solo quando la si pubblica dal CMS (merge su `main`).
+- **In locale**: `npm run dev`, apri `http://localhost:5173/admin/index.html` in Chrome/Edge →
+  "Lavora con Repository Locale" e scegli la cartella del progetto. Le modifiche vengono scritte sui file.
+- Per l'accesso con "Accedi con GitHub" serve un server OAuth (es. [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth))
+  da indicare in `backend.base_url`, togliendo `auth_methods: [token]`.
+- Non si possono creare o eliminare pagine dal CMS (i JSON hanno una struttura derivata da Drupal), e gli archivi
+  annuali di Società trasparente non sono modificabili: cambiare il titolo di un documento non aggiorna l'elenco dell'archivio.
+- **Attenzione**: `npm run import` rigenera i JSON e sovrascrive le modifiche fatte dal CMS.
+
 ## Deploy (Vercel)
 
 `@sveltejs/adapter-vercel` (Node 24): le 589 pagine sono prerenderizzate come statiche, solo `/api/*` è una Function.
