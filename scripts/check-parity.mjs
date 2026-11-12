@@ -29,7 +29,14 @@ const { pages } = buildSite(raw, dims);
 function canon(html) {
 	const $ = cheerio.load(html, null, false);
 	$('[class*="js-view-dom-id-"]').each((_, e) => $(e).attr('class', $(e).attr('class').replace(/js-view-dom-id-\S+/, 'js-view-dom-id')));
-	$('[id^="faqfield_"]').attr('id', 'faqfield');
+	$('[id^="faqfield_"]').attr('id', 'faqfield').removeAttr('class').removeAttr('role');
+	// FAQ: classi e attributi che su Drupal aggiungeva jQuery UI Accordion via JS (qui sono nel markup)
+	$('.ui-accordion-header-icon').remove();
+	$('.faqfield-question, .faqfield-answer').each((_, e) => {
+		const keep = $(e).hasClass('faqfield-question') ? 'faqfield-question' : 'faqfield-answer';
+		for (const a of Object.keys(e.attribs)) $(e).removeAttr(a);
+		$(e).attr('class', keep);
+	});
 	// markup cosmetico che l'editor visuale non conserva (stili inline, font/span, paragrafi vuoti):
 	// il CSS del sito non ne dipende, quindi non conta come differenza.
 	const BLOCK = 'p,h1,h2,h3,h4,h5,h6';
