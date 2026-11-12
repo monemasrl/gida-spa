@@ -159,6 +159,20 @@ disattivato, `default: false`).
   con l'URL di R2; `node scripts/upload-r2.mjs` (dopo `npx wrangler login`) carica su R2 i file che sono in `static/`
   e mancano sul bucket.
 
+### Content Security Policy
+
+`vercel.json` dichiara una `Content-Security-Policy-Report-Only` (non blocca nulla): una per il sito e una per
+`/admin/` (Sveltia CMS: unpkg, font da jsDelivr, API GitHub, R2). Le violazioni arrivano a `/api/csp-report` e
+finiscono nei log della Function: Vercel → `gida-sito` → Logs, cercando `[csp]`, oppure
+
+```bash
+vercel logs --scope monema-5f86ca5f --since 24h --query "[csp]"
+```
+
+Prima di renderla effettiva (header `Content-Security-Policy`): togliere `'unsafe-inline'` da `script-src` del sito
+e usare la CSP di SvelteKit in modalità `hash` (lo script inline di avvio cambia per ogni pagina); aggiungere ogni
+nuovo servizio esterno (video, mappe, analytics) alla policy.
+
 ## Deploy (Vercel)
 
 `@sveltejs/adapter-vercel` (Node 24): le 589 pagine sono prerenderizzate come statiche, solo `/api/*` è una Function.
