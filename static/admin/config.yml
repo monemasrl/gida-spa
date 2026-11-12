@@ -33,16 +33,17 @@ display_url: https://www.gida-spa.it
 media_folder: /static/sites/default/files
 public_folder: /sites/default/files
 
-# Nuovi file e immagini: bucket Cloudflare R2 `gida-spa` (posizione EEUR, giurisdizione predefinita:
-# API https://<account_id>.r2.cloudflarestorage.com), pubblico su media.gida-spa.it.
+# Nuovi file e immagini: bucket Cloudflare R2 `gida-media` (giurisdizione EU:
+# API https://<account_id>.eu.r2.cloudflarestorage.com), pubblico su media.gida-spa.it.
 # La Secret Access Key non va qui: ogni editor la inserisce nel CMS al primo uso (vedi README).
 media_libraries:
   default: false
   cloudflare_r2:
     label: Archivio file GIDA
     access_key_id: 13646c65d2216c8e2111d18b0ceeb55e
-    bucket: gida-spa
+    bucket: gida-media
     account_id: fdbdfea43bd4b5b2f80ec9fa90255e8f
+    jurisdiction: eu
     public_url: https://media.gida-spa.it
     prefix: sites/default/files/
 

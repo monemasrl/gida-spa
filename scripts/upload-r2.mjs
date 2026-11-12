@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Copia static/sites/default/files/** sul bucket R2 `gida-spa` con le stesse chiavi
+ * Copia static/sites/default/files/** sul bucket R2 `gida-media` (giurisdizione EU) con le stesse chiavi
  * (sites/default/files/<percorso>), così i file restano raggiungibili su https://media.gida-spa.it/...
  *
  * Usa Wrangler con il login Cloudflare del browser (`npx wrangler login`): nessuna chiave nel terminale.
@@ -14,7 +14,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 
-const BUCKET = 'gida-spa';
+const BUCKET = 'gida-media';
+const JURISDICTION = 'eu';
 const PUBLIC_URL = 'https://media.gida-spa.it';
 const ROOT = 'static';
 const DIR = 'sites/default/files';
@@ -59,7 +60,7 @@ async function alreadyThere(key, size) {
 
 function put(file, key) {
 	const ext = path.extname(file).slice(1).toLowerCase();
-	const args = ['wrangler@4', 'r2', 'object', 'put', `${BUCKET}/${key}`, '--file', file, '--remote'];
+	const args = ['wrangler@4', 'r2', 'object', 'put', `${BUCKET}/${key}`, '--file', file, '--remote', '--jurisdiction', JURISDICTION];
 	if (TYPES[ext]) args.push('--content-type', TYPES[ext]);
 	return new Promise((resolve) => {
 		const child = spawn('npx', ['-y', ...args], { stdio: ['ignore', 'ignore', 'pipe'] });

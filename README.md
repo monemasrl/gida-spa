@@ -139,13 +139,13 @@ Gli editor accedono con il proprio account GitHub, che deve avere accesso in scr
 
 ### File e immagini (Cloudflare R2)
 
-I file caricati dal CMS vanno sul bucket R2 `gida-spa` (account Cloudflare di GIDA, posizione EEUR) e sono
+I file caricati dal CMS vanno sul bucket R2 `gida-media` (account Cloudflare di GIDA, giurisdizione EU) e sono
 pubblici su `https://media.gida-spa.it/sites/default/files/...`; nei contenuti viene salvato l'URL completo.
 Configurazione in `static/admin/config.yml` → `media_libraries.cloudflare_r2` (lo storage nel repository è
 disattivato, `default: false`).
 
 - **Editor, primo accesso alla libreria file**: il CMS chiede la *Secret Access Key* del token R2
-  `gida-cms-editor` (Object Read & Write solo sul bucket `gida-spa`), da prendere in 1Password. Resta salvata nel
+  `gida-cms-editor` (Object Read & Write solo sul bucket `gida-media`), da prendere in 1Password. Resta salvata nel
   browser. Se il token viene rigenerato, ognuno reinserisce la nuova chiave.
 - **CORS del bucket**: deve ammettere l'origin del CMS (`https://gida-sito.vercel.app`, poi `https://www.gida-spa.it`;
   `http://localhost:5173` in sviluppo). Il CMS delle anteprime Vercel non può caricare file finché la sua origin non
