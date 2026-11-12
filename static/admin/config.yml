@@ -29,8 +29,22 @@ publish_mode: editorial_workflow
 site_url: https://gida-sito.vercel.app
 display_url: https://www.gida-spa.it
 
+# File esistenti: /sites/default/files/... (copie in static/ e su R2 con le stesse chiavi).
 media_folder: /static/sites/default/files
 public_folder: /sites/default/files
+
+# Nuovi file e immagini: bucket Cloudflare R2 `gida-spa` (posizione EEUR, giurisdizione predefinita:
+# API https://<account_id>.r2.cloudflarestorage.com), pubblico su media.gida-spa.it.
+# La Secret Access Key non va qui: ogni editor la inserisce nel CMS al primo uso (vedi README).
+media_libraries:
+  default: false
+  cloudflare_r2:
+    label: Archivio file GIDA
+    access_key_id: 13646c65d2216c8e2111d18b0ceeb55e
+    bucket: gida-spa
+    account_id: fdbdfea43bd4b5b2f80ec9fa90255e8f
+    public_url: https://media.gida-spa.it
+    prefix: sites/default/files/
 
 output:
   json:

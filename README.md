@@ -137,6 +137,25 @@ Configurazione (una volta):
 
 Gli editor accedono con il proprio account GitHub, che deve avere accesso in scrittura al repository.
 
+### File e immagini (Cloudflare R2)
+
+I file caricati dal CMS vanno sul bucket R2 `gida-spa` (account Cloudflare di GIDA, posizione EEUR) e sono
+pubblici su `https://media.gida-spa.it/sites/default/files/...`; nei contenuti viene salvato l'URL completo.
+Configurazione in `static/admin/config.yml` → `media_libraries.cloudflare_r2` (lo storage nel repository è
+disattivato, `default: false`).
+
+- **Editor, primo accesso alla libreria file**: il CMS chiede la *Secret Access Key* del token R2
+  `gida-cms-editor` (Object Read & Write solo sul bucket `gida-spa`), da prendere in 1Password. Resta salvata nel
+  browser. Se il token viene rigenerato, ognuno reinserisce la nuova chiave.
+- **CORS del bucket**: deve ammettere l'origin del CMS (`https://gida-sito.vercel.app`, poi `https://www.gida-spa.it`;
+  `http://localhost:5173` in sviluppo). Il CMS delle anteprime Vercel non può caricare file finché la sua origin non
+  è aggiunta.
+- **File esistenti**: `static/sites/default/files/**` è copiato su R2 con le stesse chiavi da
+  `node scripts/upload-r2.mjs` (dopo `npx wrangler login`; salta i file già presenti). Se un file non è più in
+  `static/`, `src/routes/sites/default/files/[...path]` reindirizza allo stesso percorso su `media.gida-spa.it`,
+  quindi i vecchi link funzionano anche dopo aver tolto i documenti dal repository.
+- Le immagini su R2 non hanno `width`/`height` calcolati in build (si leggono solo dai file in `static/`).
+
 ## Deploy (Vercel)
 
 `@sveltejs/adapter-vercel` (Node 24): le 589 pagine sono prerenderizzate come statiche, solo `/api/*` è una Function.
