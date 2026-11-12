@@ -78,6 +78,22 @@ function afterContent(cols: { col: string; region: string; html: string }[]) {
 // ---------------------------------------------------------------------------------------------
 // Pagine
 // ---------------------------------------------------------------------------------------------
+/**
+ * Una FAQ con il markup che jQuery UI Accordion produceva su Drupal (stesse classi, quindi stesso CSS):
+ * la prima risposta aperta, le altre chiuse. Apertura e chiusura: src/lib/accordion.ts.
+ */
+function faqItem(f: Faq, i: number) {
+	const open = i === 0;
+	const q = `faq-q-${i + 1}`;
+	const a = `faq-a-${i + 1}`;
+	const head = open ? 'ui-accordion-header-active ui-state-active' : 'ui-accordion-header-collapsed ui-corner-all';
+	return (
+		`<h3 class="faqfield-question ui-accordion-header ui-corner-top ${head} ui-state-default ui-accordion-icons" role="tab" id="${q}" aria-controls="${a}" aria-selected="${open}" aria-expanded="${open}" tabindex="${open ? 0 : -1}">` +
+		`<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-${open ? 's' : 'e'}"></span>${f.title}</h3>` +
+		`<div class="faqfield-answer ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content${open ? ' ui-accordion-content-active' : ''}" id="${a}" aria-labelledby="${q}" role="tabpanel" aria-hidden="${!open}"${open ? '' : ' style="display: none;"'}>${f.answer}</div>`
+	);
+}
+
 export function renderPagina(p: Pagina, site: SiteData) {
 	let html = '';
 	if (p.hero) html += lb('block-field-blocknodepagefield-immagine-principale', `<div class="field field--name-field-immagine-principale field--type-entity-reference field--label-hidden field__item">${media(site, p.hero, 'full')}</div>`);
@@ -88,8 +104,8 @@ export function renderPagina(p: Pagina, site: SiteData) {
 	const body = text(p) + (p.sezioni ?? []).map((s) => renderSezione(s, site)).join('');
 	if (body) html += lb('block-field-blocknodepagebody', textField(body));
 	if (p.faq && site.faq.length) {
-		const items = [...site.faq].sort(byOrder).map((f) => `<h3 class="faqfield-question">${f.title}</h3><div class="faqfield-answer">${f.answer}</div>`).join('');
-		html += lb('block-field-blocknodepagefield-campo-faq', `<div class="field field--name-field-campo-faq field--type-faqfield field--label-hidden field__items"><div class="field__item"><div id="faqfield_field_campo_faq">${items}</div></div></div>`);
+		const items = [...site.faq].sort(byOrder).map((f, i) => faqItem(f, i)).join('');
+		html += lb('block-field-blocknodepagefield-campo-faq', `<div class="field field--name-field-campo-faq field--type-faqfield field--label-hidden field__items"><div class="field__item"><div id="faqfield_field_campo_faq" class="ui-accordion ui-widget ui-helper-reset" role="tablist">${items}</div></div></div>`);
 	}
 	const blocks = p.blocks ?? [];
 	const first = blocks.filter((b) => b.type !== 'trasparenza').map((b) => renderBlock(b, site)).join('');

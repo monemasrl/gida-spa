@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mount, unmount } from 'svelte';
 	import Form from '#lib/components/Form.svelte';
+	import { enhanceAccordions } from '#lib/accordion.ts';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -29,6 +30,12 @@
 				unmount(component);
 				slot.remove();
 			});
+	});
+
+	// FAQ: fisarmonica come jQuery UI su Drupal (markup da render.ts)
+	$effect(() => {
+		void p.path;
+		if (root) return enhanceAccordions(root);
 	});
 </script>
 
