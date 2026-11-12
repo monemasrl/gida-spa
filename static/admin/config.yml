@@ -26,6 +26,11 @@ backend:
 # e va in produzione solo quando viene pubblicata/unita. Va al primo livello, non dentro `backend`.
 publish_mode: editorial_workflow
 
+# Niente anteprima nell'editor (quella generica di Sveltia non somiglia al sito); resta il secondo
+# pannello per affiancare italiano e inglese.
+editor:
+  preview: false
+
 site_url: https://gida-sito.vercel.app
 display_url: https://www.gida-spa.it
 
