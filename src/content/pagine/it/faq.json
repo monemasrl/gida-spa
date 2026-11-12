@@ -2,7 +2,7 @@
 	"title": "Faq",
 	"path": "/faq",
 	"hero": {
-		"src": "/sites/default/files/2022-01/faq_1.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/faq_1.jpg",
 		"alt": "faq"
 	},
 	"faq": true

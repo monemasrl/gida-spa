@@ -22,7 +22,7 @@
 	},
 	"dati": {
 		"logo": {
-			"src": "/sites/default/files/inline-images/logo3.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/inline-images/logo3.jpg",
 			"alt": "logo"
 		},
 		"righe": [
@@ -75,12 +75,12 @@
 				"links": [
 					{
 						"label": "Privacy Policy",
-						"href": "/sites/default/files/2022-02/INF_A_PrivacyPolicyUtenti_SW_GIDA_SpA_2022.pdf",
+						"href": "https://media.gida-spa.it/sites/default/files/2022-02/INF_A_PrivacyPolicyUtenti_SW_GIDA_SpA_2022.pdf",
 						"newTab": true
 					},
 					{
 						"label": "Cookie Policy",
-						"href": "/sites/default/files/2022-01/INF_B_CookiePolicyUtenti_SW_GIDA_SpA_0.pdf",
+						"href": "https://media.gida-spa.it/sites/default/files/2022-01/INF_B_CookiePolicyUtenti_SW_GIDA_SpA_0.pdf",
 						"newTab": true
 					}
 				]
@@ -149,26 +149,26 @@
 		"loghi": [
 			{
 				"image": {
-					"src": "/sites/default/files/2022-01/logo_3.png",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/logo_3.png",
 					"alt": "kiwa14001"
 				},
-				"href": "/sites/default/files/2025-06/CERT_8110_ITA_2025 _ISO 14001_  GIDA_0.pdf",
+				"href": "https://media.gida-spa.it/sites/default/files/2025-06/CERT_8110_ITA_2025 _ISO 14001_  GIDA_0.pdf",
 				"newTab": true
 			},
 			{
 				"image": {
-					"src": "/sites/default/files/2022-01/kiwa9001.png",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/kiwa9001.png",
 					"alt": "kiwa9001"
 				},
-				"href": "/sites/default/files/2024-01/CERT_2023_ 8110_ ISO 9001_GIDA_1.pdf",
+				"href": "https://media.gida-spa.it/sites/default/files/2024-01/CERT_2023_ 8110_ ISO 9001_GIDA_1.pdf",
 				"newTab": true
 			},
 			{
 				"image": {
-					"src": "/sites/default/files/2022-01/LOGO-EMAS2.png",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/LOGO-EMAS2.png",
 					"alt": "logo emas"
 				},
-				"href": "/sites/default/files/2025-10/IT-001624 scad 2028.pdf",
+				"href": "https://media.gida-spa.it/sites/default/files/2025-10/IT-001624 scad 2028.pdf",
 				"newTab": true
 			}
 		],

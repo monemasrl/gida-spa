@@ -2,7 +2,7 @@
 	"title": "About us",
 	"path": "/en/about-us",
 	"hero": {
-		"src": "/sites/default/files/2022-01/chi-siamo-header.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/chi-siamo-header.jpg",
 		"alt": "chi siamo"
 	},
 	"sezioni": [

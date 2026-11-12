@@ -2,7 +2,7 @@
 	"title": "Gida for schools",
 	"path": "/en/gida-scuole",
 	"hero": {
-		"src": "/sites/default/files/2022-01/scuole_0.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/scuole_0.jpg",
 		"alt": "scuole"
 	},
 	"blocks": [

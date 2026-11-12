@@ -2,11 +2,11 @@
 	"title": "Recupero",
 	"path": "/recupero",
 	"hero": {
-		"src": "/sites/default/files/2022-01/recupero header.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/recupero header.jpg",
 		"alt": "recupero"
 	},
 	"icon": {
-		"src": "/sites/default/files/2022-01/recupero.png",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/recupero.png",
 		"alt": "icona recupero"
 	},
 	"sezioni": [
@@ -18,17 +18,17 @@
 			"type": "galleria",
 			"images": [
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti18.jpg",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti18.jpg",
 					"alt": "itl"
 				},
 				{
-					"src": "/sites/default/files/2022-01/WhatsApp Image 2021-11-05 at 14.38.21.jpeg"
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/WhatsApp Image 2021-11-05 at 14.38.21.jpeg"
 				},
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti17.jpg"
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti17.jpg"
 				},
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti20.jpg",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti20.jpg",
 					"alt": "itl"
 				}
 			]
@@ -36,12 +36,12 @@
 		{
 			"type": "allegati",
 			"files": [
-				"/sites/default/files/2024-02/Schema a Blocchi Riciclo Acque Reflue.pdf",
-				"/sites/default/files/2024-02/Aspetti tecnici legati al riciclo delle Acque Reflue.pdf",
-				"/sites/default/files/2024-02/Dati e Tabelle Riciclo 2023.pdf",
-				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2024.pdf",
-				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2025.pdf",
-				"/sites/default/files/2026-08/Dati e Tabelle Riciclo 2026.pdf"
+				"https://media.gida-spa.it/sites/default/files/2024-02/Schema a Blocchi Riciclo Acque Reflue.pdf",
+				"https://media.gida-spa.it/sites/default/files/2024-02/Aspetti tecnici legati al riciclo delle Acque Reflue.pdf",
+				"https://media.gida-spa.it/sites/default/files/2024-02/Dati e Tabelle Riciclo 2023.pdf",
+				"https://media.gida-spa.it/sites/default/files/2026-08/Dati e Tabelle Riciclo 2024.pdf",
+				"https://media.gida-spa.it/sites/default/files/2026-08/Dati e Tabelle Riciclo 2025.pdf",
+				"https://media.gida-spa.it/sites/default/files/2026-08/Dati e Tabelle Riciclo 2026.pdf"
 			]
 		}
 	]

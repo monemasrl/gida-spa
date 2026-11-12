@@ -1,7 +1,7 @@
 {
 	"title": "Home",
 	"hero": {
-		"src": "/sites/default/files/2022-01/home_head_3.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/home_head_3.jpg",
 		"alt": "home header"
 	},
 	"mission": "<h1>la nostra mission</h1><p>Forniamo ai cittadini e alle industrie della Provincia di Prato servizi ambientali nel settore delle acque di scarico e dei rifiuti liquidi.<br>Offriamo servizi di recupero e distribuzione delle acque usate, ci occupiamo di svolgere lo smaltimento in proprio di gran parte dei residui di depurazione dei prodotti e forniamo servizi a costi competitivi.<br><strong>Svolgiamo le nostre attività nel rispetto dell’ambiente e della normativa ambientale.</strong></p>",
@@ -10,7 +10,7 @@
 		"items": [
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-depurazione.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-depurazione.png",
 					"alt": "icona settore"
 				},
 				"title": "depurazione",
@@ -19,7 +19,7 @@
 			},
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-recupero_1.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-recupero_1.png",
 					"alt": "icona settore"
 				},
 				"title": "recupero",
@@ -28,7 +28,7 @@
 			},
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-trattamento.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-trattamento.png",
 					"alt": "icona settore"
 				},
 				"title": "trattamento",
@@ -39,22 +39,22 @@
 	},
 	"percorso": {
 		"background": {
-			"src": "/sites/default/files/2022-01/back-percorso_1.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2022-01/back-percorso_1.jpg",
 			"alt": "back percorso acqua"
 		},
 		"icon": {
-			"src": "/sites/default/files/inline-images/icona-acqua_0.png",
+			"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-acqua_0.png",
 			"alt": "icona acqua"
 		},
 		"text": "Scarica la mappa con il percorso dell'acqua",
-		"file": "/sites/default/files/2024-10/GIDA FLYERWEB2024.pdf"
+		"file": "https://media.gida-spa.it/sites/default/files/2024-10/GIDA FLYERWEB2024.pdf"
 	},
 	"ricerca": {
 		"title": "Formazione e ricerca",
 		"text": "Notevole è l’impegno della società nell’attività di ricerca, di studio e di sperimentazione. Spesso le ricerche sono effettuate in collaborazione con enti esterni, in prevalenza istituti universitari, e sono finalizzate all’approfondimento di temi più generali e più propriamente scientifici. GIDA sperimenta nuove forme di riutilizzo dell’acqua depurata nel settore industriale, vivaistico e paesaggistico",
 		"link": "/formazione-e-ricerca",
 		"image": {
-			"src": "/sites/default/files/2021-12/home-ricerca.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/home-ricerca.jpg",
 			"alt": "home ricerca"
 		}
 	},
@@ -63,11 +63,11 @@
 		"linkText": "Richiedi una visita guidata alla nostra struttura",
 		"link": "/gida-scuole",
 		"mascotte": {
-			"src": "/sites/default/files/2021-12/mascotte.png",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/mascotte.png",
 			"alt": "mascotte-gida"
 		},
 		"background": {
-			"src": "/sites/default/files/2021-12/back-scuole.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/back-scuole.jpg",
 			"alt": "back-scuola"
 		}
 	}

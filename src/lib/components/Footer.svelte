@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { Footer, Link } from '#lib/layout.ts';
+	import { url } from '#lib/media.ts';
 	import { svgDx, svgSx } from './cruscotto-svg.ts';
 
 	let { footer }: { footer: Footer } = $props();
 
-	const url = (p: string) => (/^[a-z]+:/i.test(p) || p.startsWith('#') ? p : encodeURI(p));
 	const c = $derived(footer.cruscotto);
 </script>
 

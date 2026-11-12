@@ -1,7 +1,7 @@
 {
 	"title": "Home",
 	"hero": {
-		"src": "/sites/default/files/2022-01/home_head_3.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/home_head_3.jpg",
 		"alt": "home header"
 	},
 	"mission": "<h1>Our mission</h1><p>We provide citizens and companies of the Province of Prato with environmental services in the field of wastewater and liquid waste sector.</p><p>We offer wastewater recovery and distribution services, we deal with the disposing of most of the purification residues and we provide services at competitive costs.</p><p><strong>We carry out our activities respecting the environment and environmental legislation.</strong></p>",
@@ -10,7 +10,7 @@
 		"items": [
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-depurazione.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-depurazione.png",
 					"alt": "icona settore"
 				},
 				"title": "Depuration",
@@ -19,7 +19,7 @@
 			},
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-recupero_1.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-recupero_1.png",
 					"alt": "icona settore"
 				},
 				"title": "Retrieval",
@@ -28,7 +28,7 @@
 			},
 			{
 				"icon": {
-					"src": "/sites/default/files/inline-images/icona-trattamento.png",
+					"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-trattamento.png",
 					"alt": "icona settore"
 				},
 				"title": "Treatment",
@@ -39,22 +39,22 @@
 	},
 	"percorso": {
 		"background": {
-			"src": "/sites/default/files/2022-01/back-percorso_1.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2022-01/back-percorso_1.jpg",
 			"alt": "back percorso acqua"
 		},
 		"icon": {
-			"src": "/sites/default/files/inline-images/icona-acqua_0.png",
+			"src": "https://media.gida-spa.it/sites/default/files/inline-images/icona-acqua_0.png",
 			"alt": "icona acqua"
 		},
 		"text": "Download the map with the water route",
-		"file": "/sites/default/files/2024-10/GIDA FLYERWEB2024.pdf"
+		"file": "https://media.gida-spa.it/sites/default/files/2024-10/GIDA FLYERWEB2024.pdf"
 	},
 	"ricerca": {
 		"title": "Education and research",
 		"text": "The company's commitment to research, study and experimentation is remarkable. Often the research is carried out in collaboration with external bodies, mainly university institutes, and is aimed at deepening more general and more properly scientific themes. GIDA experiments with new forms of reuse of purified water in the industrial, nursery and landscape sectors",
 		"link": "/en/research-and-education",
 		"image": {
-			"src": "/sites/default/files/2021-12/home-ricerca.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/home-ricerca.jpg",
 			"alt": "home ricerca"
 		}
 	},
@@ -63,11 +63,11 @@
 		"linkText": "Request a guided tour of our structure",
 		"link": "/en/gida-scuole",
 		"mascotte": {
-			"src": "/sites/default/files/2021-12/mascotte.png",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/mascotte.png",
 			"alt": "mascotte-gida"
 		},
 		"background": {
-			"src": "/sites/default/files/2021-12/back-scuole.jpg",
+			"src": "https://media.gida-spa.it/sites/default/files/2021-12/back-scuole.jpg",
 			"alt": "back-scuola"
 		}
 	}

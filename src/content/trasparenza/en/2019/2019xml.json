@@ -2,7 +2,7 @@
 	"title": "2019.xml",
 	"path": "/en/2019xml",
 	"files": [
-		"/sites/default/files/2022-05/2019.xml"
+		"https://media.gida-spa.it/sites/default/files/2022-05/2019.xml"
 	],
 	"tipo": "adempimenti-anac-xml",
 	"order": 87

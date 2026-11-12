@@ -2,11 +2,11 @@
 	"title": "Trattamento Rifiuti Liquidi su Gomma",
 	"path": "/trattamento-rifiuti-liquidi-su-gomma",
 	"hero": {
-		"src": "/sites/default/files/2022-01/trattamento-header_0.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/trattamento-header_0.jpg",
 		"alt": "trattamento"
 	},
 	"icon": {
-		"src": "/sites/default/files/2022-01/trattamento.png",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/trattamento.png",
 		"alt": "icona trattamento"
 	},
 	"sezioni": [
@@ -30,19 +30,19 @@
 			"type": "galleria",
 			"images": [
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti3.jpg",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti3.jpg",
 					"alt": "itl"
 				},
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti2.jpg",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti2.jpg",
 					"alt": "itl"
 				},
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti4.jpg",
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti4.jpg",
 					"alt": "itl"
 				},
 				{
-					"src": "/sites/default/files/2022-01/itl_impianti17.jpg"
+					"src": "https://media.gida-spa.it/sites/default/files/2022-01/itl_impianti17.jpg"
 				}
 			]
 		}

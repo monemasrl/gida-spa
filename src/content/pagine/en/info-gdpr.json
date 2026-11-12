@@ -2,7 +2,7 @@
 	"title": "Info Gdpr",
 	"path": "/en/info-gdpr",
 	"hero": {
-		"src": "/sites/default/files/2022-01/gdpr.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/gdpr.jpg",
 		"alt": "gdpr"
 	},
 	"sezioni": [
@@ -14,9 +14,9 @@
 			"type": "allegati",
 			"elenco": true,
 			"files": [
-				"/sites/default/files/2025-05/INFORMATIVA GDPR FORNITORI REV3.pdf",
-				"/sites/default/files/2025-05/INFORMATIVA GDPR CLIENTI REV3.pdf",
-				"/sites/default/files/2025-05/INFORMATIVA GDPR POTENZIALI CLIENTI.pdf"
+				"https://media.gida-spa.it/sites/default/files/2025-05/INFORMATIVA GDPR FORNITORI REV3.pdf",
+				"https://media.gida-spa.it/sites/default/files/2025-05/INFORMATIVA GDPR CLIENTI REV3.pdf",
+				"https://media.gida-spa.it/sites/default/files/2025-05/INFORMATIVA GDPR POTENZIALI CLIENTI.pdf"
 			]
 		},
 		{

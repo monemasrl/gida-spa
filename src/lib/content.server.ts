@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-import { imageSize } from 'image-size';
+import { building, dev } from '$app/env';
+import { loadDims } from './image-dims.ts';
 import { buildSite, type RawContent } from './site.ts';
 import type { Page } from './types.ts';
 
@@ -7,19 +7,11 @@ import type { Page } from './types.ts';
 const modules = import.meta.glob(['/src/content/**/*.json', '!/src/content/layout/**'], { eager: true, import: 'default' });
 const raw: RawContent = Object.fromEntries(Object.entries(modules).map(([k, v]) => [k.replace('/src/content/', ''), v]));
 
-/** Dimensioni delle immagini lette dai file in static/ (solo in build/prerender). */
-const sizes = new Map<string, { width: number; height: number } | undefined>();
-function dims(src: string) {
-	if (!sizes.has(src)) {
-		try {
-			const { width, height } = imageSize(fs.readFileSync(`static${src}`));
-			sizes.set(src, { width, height });
-		} catch {
-			sizes.set(src, undefined);
-		}
-	}
-	return sizes.get(src);
-}
+/**
+ * Dimensioni delle immagini (file in static/ o su R2), solo in build/prerender e in sviluppo:
+ * le Function /api non rendono pagine e non devono scaricare immagini all'avvio.
+ */
+const dims = building || dev ? await loadDims(raw) : () => undefined;
 
 let site: ReturnType<typeof buildSite> | undefined;
 const get = () => (site ??= buildSite(raw, dims));
