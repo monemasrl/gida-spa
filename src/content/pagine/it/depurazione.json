@@ -2,11 +2,11 @@
 	"title": "Depurazione",
 	"path": "/depurazione",
 	"hero": {
-		"src": "/sites/default/files/2022-01/depurazione-header.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/depurazione-header.jpg",
 		"alt": "depurazione"
 	},
 	"icon": {
-		"src": "/sites/default/files/2022-01/depurazione_0.png",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/depurazione_0.png",
 		"alt": "icona depurazione"
 	},
 	"body": "<p>Il sistema centralizzato di depurazione è formato da pochi grandi impianti collegati con gli utenti domestici e industriali da un reticolo fognario.<br>Il processo depurativo base degli impianti gestiti è biologico a fanghi attivi: ognuno si differenzia per dimensioni, potenzialità e la presenza di specifiche sezioni di trattamento.<br>Al sistema centralizzato di depurazione, insieme a Gida Spa partecipano le aziende ad umido, rappresentate da un’apposita Società di scopo (il Consorzio Progetto Acqua Spa) il Comune di Prato e in misura diversa gli altri comuni interessati .</p>",

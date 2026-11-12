@@ -29,7 +29,8 @@ publish_mode: editorial_workflow
 site_url: https://gida-sito.vercel.app
 display_url: https://www.gida-spa.it
 
-# File esistenti: /sites/default/files/... (copie in static/ e su R2 con le stesse chiavi).
+# I file sono su R2 (sotto). In static/sites/default/files restano solo favicon e frecce del tema;
+# i vecchi link /sites/default/files/... reindirizzano a media.gida-spa.it.
 media_folder: /static/sites/default/files
 public_folder: /sites/default/files
 
@@ -92,7 +93,7 @@ _f:
     summary: '{{title}}'
     fields:
       - { name: title, label: Testo, widget: string, i18n: true }
-      - { name: href, label: Link (URL o file), widget: string, i18n: true, hint: 'Es. /sites/default/files/... oppure https://...' }
+      - { name: href, label: Link (URL o file), widget: string, i18n: true, hint: 'Es. https://media.gida-spa.it/sites/default/files/... oppure /pagina' }
 
 _c:
   entries: &entries

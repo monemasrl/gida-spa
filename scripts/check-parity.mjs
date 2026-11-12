@@ -6,8 +6,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
-import { imageSize } from 'image-size';
 import { buildSite } from '../src/lib/site.ts';
+import { loadDims } from '../src/lib/image-dims.ts';
+import { MEDIA_URL } from '../src/lib/media.ts';
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const verbose = process.argv.includes('--verbose');
@@ -21,14 +22,7 @@ const raw = {};
 		else if (f.name.endsWith('.json')) raw[path.relative(contentDir, full)] = JSON.parse(fs.readFileSync(full, 'utf8'));
 	}
 })(contentDir);
-const dims = (src) => {
-	try {
-		const { width, height } = imageSize(fs.readFileSync(path.join('static', src)));
-		return { width, height };
-	} catch {
-		return undefined;
-	}
-};
+const dims = await loadDims(raw);
 const { pages } = buildSite(raw, dims);
 
 /** Forma canonica: spazi normalizzati, URL decodificati, id variabili rimossi. */
@@ -56,6 +50,8 @@ function canon(html) {
 			try {
 				v = decodeURI(v);
 			} catch {}
+			// i file ora sono su R2: stesso percorso di Drupal sotto media.gida-spa.it
+			if (v.startsWith(MEDIA_URL + '/')) v = v.slice(MEDIA_URL.length);
 			$(e).attr(a, v.replace(/freccia_\d\.png$/, 'freccia.png'));
 		}
 	});

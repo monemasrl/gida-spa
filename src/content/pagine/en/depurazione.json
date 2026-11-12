@@ -2,11 +2,11 @@
 	"title": "Depuration",
 	"path": "/en/purification",
 	"hero": {
-		"src": "/sites/default/files/2022-01/depurazione-header.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/depurazione-header.jpg",
 		"alt": "depurazione"
 	},
 	"icon": {
-		"src": "/sites/default/files/2022-01/depurazione_0.png",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/depurazione_0.png",
 		"alt": "icona depurazione"
 	},
 	"body": "<p>The centralized depuration system consists of a few large plants connected to domestic and industrial users by a sewage network.<br>The core depuration process of the plants is biological, with the use of activated sludge: each one differs in size, potential and because of the presence of specific treatment sections.<br>Gida Spa, the Municipality of Prato, to a different extent,&nbsp;the other municipalities concerned and those companies which use water in their production cycle originating wastewater,&nbsp; participate in the centralized purification system, represented by a special purpose company (called Consorzio Progetto Acqua Spa).</p>",

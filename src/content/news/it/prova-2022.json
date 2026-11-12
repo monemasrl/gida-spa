@@ -2,7 +2,7 @@
 	"title": "Prova 2022",
 	"path": "/prova-2022",
 	"image": {
-		"src": "/sites/default/files/2021-12/slider-img9.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2021-12/slider-img9.jpg",
 		"alt": "immagine principale evento"
 	},
 	"body": "<p>Prova per comunicazioni</p>"

@@ -2,7 +2,7 @@
 	"title": "Lavora con noi",
 	"path": "/lavora-con-noi",
 	"hero": {
-		"src": "/sites/default/files/2022-01/lavora.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/lavora.jpg",
 		"alt": "lavora con noi"
 	},
 	"sezioni": [
@@ -13,7 +13,7 @@
 		{
 			"type": "allegati",
 			"files": [
-				"/sites/default/files/2022-01/INF_C_InfomativaCandidati_SW_GIDA_SpA.pdf"
+				"https://media.gida-spa.it/sites/default/files/2022-01/INF_C_InfomativaCandidati_SW_GIDA_SpA.pdf"
 			]
 		},
 		{

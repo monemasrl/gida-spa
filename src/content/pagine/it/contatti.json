@@ -2,7 +2,7 @@
 	"title": "Contatti",
 	"path": "/contatti",
 	"hero": {
-		"src": "/sites/default/files/2022-01/contatti_0.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/contatti_0.jpg",
 		"alt": "contatti"
 	},
 	"blocks": [
@@ -19,7 +19,7 @@
 		{
 			"type": "immagine",
 			"image": {
-				"src": "/sites/default/files/2022-01/mappa_gida.jpg",
+				"src": "https://media.gida-spa.it/sites/default/files/2022-01/mappa_gida.jpg",
 				"alt": "mappa-gida-impianti"
 			},
 			"link": "https://www.google.com/maps/d/viewer?mid=1r3pFe8eO65lXB3lFMSF5SMh4FCWhES-y&ll=43.93604584588452%2C11.081549227237701&z=12"

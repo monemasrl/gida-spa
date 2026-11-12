@@ -2,7 +2,7 @@
 	"title": "Autorizzazioni",
 	"path": "/autorizzazioni",
 	"hero": {
-		"src": "/sites/default/files/2022-01/certificazioni_0.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/certificazioni_0.jpg",
 		"alt": " certificazioni"
 	},
 	"blocks": [

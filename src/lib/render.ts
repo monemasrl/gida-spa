@@ -4,6 +4,7 @@
  * scripts/check-parity.mjs per confrontare il risultato con l'HTML originale.
  */
 import type { Block, Certificazione, Documento, Faq, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Sezione, Tassonomie } from './model.ts';
+import { url } from './media.ts';
 
 export type Dims = (src: string) => { width: number; height: number } | undefined;
 
@@ -24,7 +25,7 @@ export type SiteData = {
 // ---------------------------------------------------------------------------------------------
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 /** Percorso così come lo salva il CMS (non codificato) → URL. */
-export const url = (p: string) => (/^[a-z]+:/i.test(p) || p.startsWith('#') ? p : encodeURI(p));
+export { url };
 const home = (lang: Lang) => (lang === 'en' ? '/en' : '/');
 
 function img(site: SiteData, i: Img, attrs: Record<string, string> = {}) {

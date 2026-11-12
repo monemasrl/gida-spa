@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { homeOf, type Lang, type LayoutData } from '#lib/layout.ts';
+	import { url } from '#lib/media.ts';
 
 	let { layout, lang }: { layout: LayoutData; lang: Lang } = $props();
 
@@ -99,7 +100,7 @@
 							<div id="it-region-logo-header" class="region logo_header">
 								<div id="it-block-brandingdelsito" class="block block-system block-system-branding-block">
 									<a href={homeOf(lang)} title="Home" rel="home">
-										<img src={layout.testata.logo} alt="Home" class="icon img-fluid" />
+										<img src={url(layout.testata.logo)} alt="Home" class="icon img-fluid" />
 										<div class="it-brand-text"></div>
 									</a>
 								</div>
@@ -120,7 +121,7 @@
 										<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 										<div class="overlay" style:display={menuOpen ? 'block' : 'none'} onclick={() => (menuOpen = false)}></div>
 										<div class="close-div">
-											<a href={homeOf(lang)}><img src={layout.testata.logo} alt="Home" /></a>
+											<a href={homeOf(lang)}><img src={url(layout.testata.logo)} alt="Home" /></a>
 											<button class="btn close-menu" type="button" aria-label="Chiudi menu" onclick={() => (menuOpen = false)}>
 												<svg class="icon"><use href="/themes/custom/italiagov/assets/icons/sprite.svg#it-close"></use></svg>
 											</button>

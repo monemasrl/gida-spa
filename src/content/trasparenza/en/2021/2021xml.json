@@ -2,7 +2,7 @@
 	"title": "2021xml",
 	"path": "/en/2021xml",
 	"files": [
-		"/sites/default/files/2023-06/2021.xml"
+		"https://media.gida-spa.it/sites/default/files/2023-06/2021.xml"
 	],
 	"tipo": "adempimenti-anac-xml",
 	"order": 118

@@ -2,7 +2,7 @@
 	"title": "Transparent Company",
 	"path": "/en/transparent-company",
 	"hero": {
-		"src": "/sites/default/files/2022-01/societa.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/societa.jpg",
 		"alt": "società trasparente"
 	},
 	"blocks": [

@@ -2,16 +2,16 @@
 	"title": "MOG 231-01",
 	"path": "/mog-231-01",
 	"hero": {
-		"src": "/sites/default/files/2022-01/gdpr.jpg",
+		"src": "https://media.gida-spa.it/sites/default/files/2022-01/gdpr.jpg",
 		"alt": "gdpr"
 	},
 	"sezioni": [
 		{
 			"type": "allegati",
 			"files": [
-				"/sites/default/files/2022-01/Gida_Sistema disciplinare-1.pdf",
-				"/sites/default/files/2022-01/Codice etico.pdf",
-				"/sites/default/files/2022-01/Parte Generale.pdf"
+				"https://media.gida-spa.it/sites/default/files/2022-01/Gida_Sistema disciplinare-1.pdf",
+				"https://media.gida-spa.it/sites/default/files/2022-01/Codice etico.pdf",
+				"https://media.gida-spa.it/sites/default/files/2022-01/Parte Generale.pdf"
 			]
 		}
 	]

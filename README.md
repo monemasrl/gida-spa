@@ -53,7 +53,7 @@ per le traduzioni:
 - Una pagina senza `path` usa `/<nome-file>` (`/en/<nome-file>`): le voci nuove create dal CMS non devono indicarlo.
 - `src/routes/[...path=page]` è un'unica route catch-all che prerenderizza tutte le pagine.
 - Header (menu, lingua, header sticky) è un componente Svelte; footer dall'HTML originale ripulito.
-- Gli URL sono **identici** a quelli di Drupal (anche `/sites/default/files/...`), così SEO e link esterni restano validi.
+- Gli URL delle pagine sono **identici** a quelli di Drupal, così SEO e link esterni restano validi; i file `/sites/default/files/...` sono su `media.gida-spa.it` e i vecchi indirizzi reindirizzano lì.
 - Il JS di Bootstrap Italia (≈500 KB) è sostituito da poche righe Svelte (collapse, dropdown, menu mobile, header sticky, torna-su).
 
 ## Comandi
@@ -139,9 +139,10 @@ Gli editor accedono con il proprio account GitHub, che deve avere accesso in scr
 
 ### File e immagini (Cloudflare R2)
 
-I file caricati dal CMS vanno sul bucket R2 `gida-media` (account Cloudflare di GIDA, giurisdizione EU) e sono
-pubblici su `https://media.gida-spa.it/sites/default/files/...`; nei contenuti viene salvato l'URL completo.
-Configurazione in `static/admin/config.yml` → `media_libraries.cloudflare_r2` (lo storage nel repository è
+Tutti i file (PDF, immagini, allegati) sono sul bucket R2 `gida-media` (account Cloudflare di GIDA, giurisdizione EU),
+pubblici su `https://media.gida-spa.it/sites/default/files/...`; i contenuti in `src/content` usano questi URL completi.
+Nel repository (`static/sites/default/files`) restano solo i file usati dal codice: favicon e frecce del tema.
+Configurazione del CMS in `static/admin/config.yml` → `media_libraries.cloudflare_r2` (storage nel repository
 disattivato, `default: false`).
 
 - **Editor, primo accesso alla libreria file**: il CMS chiede la *Secret Access Key* del token R2
@@ -150,11 +151,13 @@ disattivato, `default: false`).
 - **CORS del bucket**: deve ammettere l'origin del CMS (`https://gida-sito.vercel.app`, poi `https://www.gida-spa.it`;
   `http://localhost:5173` in sviluppo). Il CMS delle anteprime Vercel non può caricare file finché la sua origin non
   è aggiunta.
-- **File esistenti**: `static/sites/default/files/**` è copiato su R2 con le stesse chiavi da
-  `node scripts/upload-r2.mjs` (dopo `npx wrangler login`; salta i file già presenti). Se un file non è più in
-  `static/`, `src/routes/sites/default/files/[...path]` reindirizza allo stesso percorso su `media.gida-spa.it`,
-  quindi i vecchi link funzionano anche dopo aver tolto i documenti dal repository.
-- Le immagini su R2 non hanno `width`/`height` calcolati in build (si leggono solo dai file in `static/`).
+- **Vecchi link** `/sites/default/files/...` (siti esterni, email): `src/routes/sites/default/files/[...path]`
+  reindirizza allo stesso percorso su `media.gida-spa.it`.
+- **Dimensioni delle immagini** (`width`/`height`): in build e in sviluppo `src/lib/image-dims.ts` legge le immagini
+  citate nei contenuti da `static/` se ci sono, altrimenti le scarica da R2.
+- **Dopo un re-import da Drupal** (che produce percorsi relativi): `node scripts/media-urls.mjs` riscrive i percorsi
+  con l'URL di R2; `node scripts/upload-r2.mjs` (dopo `npx wrangler login`) carica su R2 i file che sono in `static/`
+  e mancano sul bucket.
 
 ## Deploy (Vercel)
 
