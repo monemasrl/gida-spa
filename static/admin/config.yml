@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.262.4/schema/sveltia-cms.json
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.263.0/schema/sveltia-cms.json
 #
 # Sveltia CMS per il sito GIDA. I contenuti sono in src/content/<collezione>/<lingua>/<chiave>.json:
 # le traduzioni hanno lo stesso nome di file e si modificano affiancate.
@@ -65,49 +65,8 @@ i18n:
   # le voci nuove partono solo in italiano; la traduzione inglese si attiva quando serve
   initial_locales: default
 
-# ---------------------------------------------------------------------------------------------
-# Campi riutilizzati (ancore YAML)
-# ---------------------------------------------------------------------------------------------
-_f:
-  title: &title { name: title, label: Titolo, widget: string, i18n: true }
-  description: &description
-    { name: description, label: Descrizione (meta), widget: text, required: false, i18n: true, hint: Testo per i motori di ricerca }
-  path: &path
-    name: path
-    label: URL
-    widget: string
-    required: false
-    i18n: true
-    hint: Lasciare vuoto per usare il nome del file (es. /nome-file, /en/nome-file). Cambiarlo rompe i link esistenti.
-    pattern: ['^/[a-z0-9][a-z0-9/._-]*$', "Percorso che inizia con / (minuscole, numeri e trattini)"]
-  body: &body { name: body, label: Testo, widget: richtext, format: html, required: false, i18n: true }
-  order: &order
-    { name: order, label: Ordine negli elenchi, widget: number, value_type: int, required: false, i18n: duplicate, hint: I numeri più bassi vengono prima }
-  unlisted: &unlisted
-    { name: unlisted, label: Nascondi negli elenchi, widget: boolean, required: false, default: false, i18n: duplicate, hint: La pagina resta raggiungibile dal suo URL }
-  image: &image
-    widget: object
-    i18n: true
-    summary: '{{alt}}'
-    fields:
-      - { name: src, label: Immagine, widget: image, i18n: true }
-      - { name: alt, label: Testo alternativo, widget: string, required: false, i18n: true }
-  link: &link
-    widget: object
-    i18n: true
-    summary: '{{title}}'
-    fields:
-      - { name: title, label: Testo, widget: string, i18n: true }
-      - { name: href, label: Link (URL o file), widget: string, i18n: true, hint: 'Es. https://media.gida-spa.it/sites/default/files/... oppure /pagina' }
-
-_c:
-  entries: &entries
-    format: json
-    i18n: true
-    identifier_field: title
-    slug: '{{slug}}'
-    duplicate: false
-    sortable_fields: [title, path]
+# Campi e opzioni riutilizzati: ancore YAML (&nome) definite al primo uso, poi richiamate con *nome.
+# Non vanno in chiavi di primo livello a parte: lo schema di Sveltia non ammette opzioni sconosciute.
 
 collections:
   # -------------------------------------------------------------------------------------------
@@ -116,18 +75,18 @@ collections:
     label_singular: Pagina
     icon: description
     folder: /src/content/pagine
-    <<: *entries
+    <<: &entries {format: json, i18n: true, identifier_field: title, slug: '{{slug}}', duplicate: false, sortable_fields: [title, path]}
     summary: '{{title}} — {{path}}'
     table_columns:
       - title
       - { field: path, label: URL }
     fields:
-      - *title
-      - *description
-      - *path
-      - { name: hero, label: Immagine di testata, required: false, <<: *image }
+      - &title {name: title, label: Titolo, widget: string, i18n: true}
+      - &description {name: description, label: Descrizione (meta), widget: text, required: false, i18n: true, hint: Testo per i motori di ricerca}
+      - &path {name: path, label: URL, widget: string, required: false, i18n: true, hint: 'Lasciare vuoto per usare il nome del file (es. /nome-file, /en/nome-file). Cambiarlo rompe i link esistenti.', pattern: ['^/[a-z0-9][a-z0-9/._-]*$', 'Percorso che inizia con / (minuscole, numeri e trattini)']}
+      - { name: hero, label: Immagine di testata, required: false, <<: &image {widget: object, i18n: true, summary: '{{alt}}', fields: [{name: src, label: Immagine, widget: image, i18n: true}, {name: alt, label: Testo alternativo, widget: string, required: false, i18n: true}]} }
       - { name: icon, label: Icona, required: false, <<: *image }
-      - *body
+      - &body {name: body, label: Testo, widget: richtext, format: html, required: false, i18n: true}
       - name: sezioni
         label: Contenuto a sezioni
         label_singular: Sezione
@@ -245,7 +204,7 @@ collections:
                 widget: list
                 i18n: true
                 fields:
-                  - { name: document, label: Documento, required: false, <<: *link }
+                  - { name: document, label: Documento, required: false, <<: &link {widget: object, i18n: true, summary: '{{title}}', fields: [{name: title, label: Testo, widget: string, i18n: true}, {name: href, label: Link (URL o file), widget: string, i18n: true, hint: 'Es. https://media.gida-spa.it/sites/default/files/... oppure /pagina'}]} }
                   - { name: links, label: Link esterni, widget: list, required: false, i18n: true, summary: '{{title}}', fields: [{ name: title, label: Testo, widget: string, i18n: true }, { name: href, label: URL, widget: string, i18n: true }] }
           - name: trasparenza
             label: Società trasparente (documenti dell'anno corrente e archivio)
@@ -285,7 +244,7 @@ collections:
     fields:
       - { name: title, label: Domanda, widget: string, i18n: true }
       - { name: answer, label: Risposta, widget: richtext, format: html, i18n: true }
-      - *order
+      - &order {name: order, label: Ordine negli elenchi, widget: number, value_type: int, required: false, i18n: duplicate, hint: I numeri più bassi vengono prima}
 
   # -------------------------------------------------------------------------------------------
   - name: impianti
@@ -335,7 +294,7 @@ collections:
         display_fields: [certificazioni.*.it]
         search_fields: [certificazioni.*.it]
       - *order
-      - *unlisted
+      - &unlisted {name: unlisted, label: Nascondi negli elenchi, widget: boolean, required: false, default: false, i18n: duplicate, hint: La pagina resta raggiungibile dal suo URL}
 
   # -------------------------------------------------------------------------------------------
   - name: trasparenza
