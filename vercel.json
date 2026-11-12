@@ -1,0 +1,31 @@
+{
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"headers": [
+		{
+			"source": "/((?!admin/).*)",
+			"headers": [
+				{
+					"key": "Content-Security-Policy-Report-Only",
+					"value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://media.gida-spa.it; media-src 'self' https://media.gida-spa.it; connect-src 'self'; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; report-uri /api/csp-report; report-to csp"
+				},
+				{
+					"key": "Reporting-Endpoints",
+					"value": "csp=\"/api/csp-report\""
+				}
+			]
+		},
+		{
+			"source": "/admin/(.*)",
+			"headers": [
+				{
+					"key": "Content-Security-Policy-Report-Only",
+					"value": "default-src 'self'; script-src 'self' https://unpkg.com 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' blob: data: https://media.gida-spa.it https://avatars.githubusercontent.com; media-src 'self' blob: https://media.gida-spa.it; connect-src 'self' blob: data: https://api.github.com https://unpkg.com https://fdbdfea43bd4b5b2f80ec9fa90255e8f.eu.r2.cloudflarestorage.com https://media.gida-spa.it; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; report-uri /api/csp-report; report-to csp"
+				},
+				{
+					"key": "Reporting-Endpoints",
+					"value": "csp=\"/api/csp-report\""
+				}
+			]
+		}
+	]
+}
