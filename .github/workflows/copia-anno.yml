@@ -26,12 +26,16 @@ concurrency:
 jobs:
   copia:
     runs-on: ubuntu-latest
+    # `shell: bash` esplicito = bash -eo pipefail: un errore dello script non viene nascosto da `| tee`
+    defaults:
+      run:
+        shell: bash
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
