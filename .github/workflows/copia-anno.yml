@@ -26,6 +26,10 @@ concurrency:
 jobs:
   copia:
     runs-on: ubuntu-latest
+    # `shell: bash` esplicito = bash -eo pipefail: un errore dello script non viene nascosto da `| tee`
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v7
         with:
