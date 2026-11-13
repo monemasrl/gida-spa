@@ -545,6 +545,17 @@ collections:
         fields:
           - { name: annoCorrente, label: Anno corrente, widget: string, pattern: ['^\d{4}$', Anno a quattro cifre], hint: Documenti mostrati nella pagina Società trasparente; gli anni precedenti vanno in Archivio }
           - { name: anni, label: Anni con pagina d'archivio, label_singular: Anno, widget: list, hint: "Gli anni che hanno documenti (cartelle in Società trasparente) si aggiungono da soli", field: { name: anno, label: Anno, widget: string } }
+      # Pubblicando questo documento parte la GitHub Action .github/workflows/copia-anno.yml, che copia i documenti
+      # di Società trasparente (scripts/copia-anno.mjs) e scrive qui l'esito. Il sito non lo legge.
+      - name: copia-anno
+        label: Copia anno (Società trasparente)
+        icon: content_copy
+        file: /src/content/configurazioni/copia-anno.json
+        format: json
+        fields:
+          - { name: da, label: Anno da copiare, widget: string, pattern: ['^\d{4}$', Anno a quattro cifre], hint: "Indica i due anni, salva e **pubblica**: entro un minuto i documenti vengono copiati nel nuovo anno (anno sostituito in nome, URL e titolo; testo, categoria e file identici, da aggiornare poi). Ricarica il CMS per vederli. I documenti già presenti nel nuovo anno non vengono toccati. Per ripetere la stessa copia bisogna cambiare almeno un anno." }
+          - { name: a, label: Anno nuovo, widget: string, pattern: ['^\d{4}$', Anno a quattro cifre] }
+          - { name: esito, label: Esito dell'ultima copia, widget: text, required: false, readonly: true }
       - name: categorie
         label: Categorie
         icon: category
