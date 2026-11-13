@@ -108,9 +108,12 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - Società trasparente: i documenti sono divisi in cartelle per anno, che compaiono come sottocartelle nella barra
   laterale; l'anno si cambia con "Cartella superiore" (sposta il file in tutte le lingue). Per un anno nuovo:
   "Nuova cartella" nel selettore mentre si crea il documento.
-- Copia di un anno (es. 2025 → 2026): pulsante "Copia anno di Società trasparente" nella barra in alto del CMS. Apre
-  su GitHub l'azione `.github/workflows/copia-anno.yml` (Run workflow, anno da copiare e anno nuovo), che lancia
-  `scripts/copia-anno.mjs` e fa il commit su `main` (senza pull request). Anno nel nome del file, nell'URL e nel
+- Copia di un anno (es. 2025 → 2026): Configurazioni → "Copia anno (Società trasparente)", anno da copiare e anno
+  nuovo, Salva e **Pubblica**. Il documento (`src/content/configurazioni/copia-anno.json`, ignorato dal sito) che
+  arriva su `main` fa partire l'azione `.github/workflows/copia-anno.yml`, che lancia `scripts/copia-anno.mjs`, fa
+  il commit su `main` e scrive l'esito nel campo "Esito dell'ultima copia" (ricaricare il CMS dopo circa un minuto).
+  Se gli anni non cambiano l'azione non riparte. Riserva: GitHub → Actions → "Copia anno di Società
+  trasparente" → Run workflow. Anno nel nome del file, nell'URL e nel
   titolo sostituito (se manca, `-<anno>` in fondo a nome e URL); testo, categoria, ordine e file identici: i PDF su
   R2 restano gli stessi, vanno sostituiti nei documenti nuovi (non cancellati dalla Libreria file, li usa ancora
   l'anno vecchio). Non tocca i documenti già presenti e si ferma se un URL esiste già. Poi: Configurazioni → Anni →

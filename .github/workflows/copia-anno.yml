@@ -1,9 +1,13 @@
 # Copia i documenti di Società trasparente da un anno a un altro (scripts/copia-anno.mjs) e fa il commit su main.
-# Si avvia a mano: dal CMS (pulsante "Copia anno") o da GitHub → Actions → "Copia anno di Società trasparente"
-# → Run workflow. Serve il permesso di scrittura sul repository.
+# Parte da sola quando viene pubblicato dal CMS il documento Configurazioni → "Copia anno (Società trasparente)"
+# (src/content/configurazioni/copia-anno.json: campi `da` e `a`), e scrive l'esito nel campo `esito` dello stesso file.
+# Riserva: GitHub → Actions → "Copia anno di Società trasparente" → Run workflow.
 name: Copia anno di Società trasparente
 
 on:
+  push:
+    branches: [main]
+    paths: [src/content/configurazioni/copia-anno.json]
   workflow_dispatch:
     inputs:
       da:
@@ -23,10 +27,13 @@ concurrency:
   group: copia-anno
   cancel-in-progress: false
 
+env:
+  RICHIESTA: src/content/configurazioni/copia-anno.json
+
 jobs:
   copia:
     runs-on: ubuntu-latest
-    # `shell: bash` esplicito = bash -eo pipefail: un errore dello script non viene nascosto da `| tee`
+    # `shell: bash` esplicito = bash -eo pipefail
     defaults:
       run:
         shell: bash
@@ -39,24 +46,78 @@ jobs:
         with:
           node-version: 24
 
-      - name: Copia i documenti
+      - name: Anni da copiare
+        id: anni
         env:
           DA: ${{ inputs.da }}
           A: ${{ inputs.a }}
-        run: node scripts/copia-anno.mjs "$DA" "$A" | tee -a "$GITHUB_STEP_SUMMARY"
-
-      - name: Commit su main
-        env:
-          DA: ${{ inputs.da }}
-          A: ${{ inputs.a }}
-          ACTOR: ${{ github.actor }}
         run: |
-          git add src/content/trasparenza
-          if git diff --cached --quiet; then
-            echo "Nessun documento nuovo da salvare." | tee -a "$GITHUB_STEP_SUMMARY"
+          # Lancio manuale: anni dal modulo; pubblicazione dal CMS: anni dal documento
+          if [ -z "$DA$A" ]; then
+            DA=$(node -p "require('./$RICHIESTA').da ?? ''")
+            A=$(node -p "require('./$RICHIESTA').a ?? ''")
+          fi
+          if [ -z "$DA" ] || [ -z "$A" ]; then
+            echo "Nessun anno indicato in $RICHIESTA: niente da copiare." | tee -a "$GITHUB_STEP_SUMMARY"
+            echo "esegui=no" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Società trasparente: copia $DA → $A" -m "Avviata da $ACTOR con la GitHub Action \"Copia anno\"."
-          git push origin HEAD:main
+          { echo "esegui=si"; echo "da=$DA"; echo "a=$A"; } >> "$GITHUB_OUTPUT"
+
+      - name: Copia i documenti e scrive l'esito
+        id: copia
+        if: steps.anni.outputs.esegui == 'si'
+        env:
+          DA: ${{ steps.anni.outputs.da }}
+          A: ${{ steps.anni.outputs.a }}
+          TZ: Europe/Rome
+        run: |
+          set +e
+          node scripts/copia-anno.mjs "$DA" "$A" > copia.log 2>&1
+          codice=$?
+          set -e
+          cat copia.log | tee -a "$GITHUB_STEP_SUMMARY"
+          quando=$(date '+%d/%m/%Y alle %H:%M')
+          if [ $codice -eq 0 ]; then
+            esito="$(tail -n 1 copia.log) Eseguita il $quando."
+          else
+            esito="$(cat copia.log) (tentativo del $quando: nessun documento copiato)"
+          fi
+          ESITO="$esito" node -e '
+            const fs = require("fs"), f = process.env.RICHIESTA;
+            const d = { da: process.env.DA, a: process.env.A, esito: process.env.ESITO };
+            fs.writeFileSync(f, JSON.stringify(d, null, "\t") + "\n");'
+          rm copia.log
+          echo "codice=$codice" >> "$GITHUB_OUTPUT"
+
+      - name: Commit su main
+        if: steps.anni.outputs.esegui == 'si'
+        env:
+          DA: ${{ steps.anni.outputs.da }}
+          A: ${{ steps.anni.outputs.a }}
+          ACTOR: ${{ github.actor }}
+          CODICE: ${{ steps.copia.outputs.codice }}
+        run: |
+          git add src/content/trasparenza "$RICHIESTA"
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare." | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            titolo="Società trasparente: copia $DA → $A"
+            [ "$CODICE" = 0 ] || titolo="Società trasparente: copia $DA → $A non riuscita (solo esito)"
+            git commit -m "$titolo" -m "Avviata da $ACTOR con la GitHub Action \"Copia anno\"."
+            # Se intanto main è andato avanti (es. un'altra pubblicazione dal CMS), riparte da lì
+            for tentativo in 1 2 3; do
+              if git push origin HEAD:main; then exit 0; fi
+              git pull --rebase origin main
+            done
+            echo "Push su main non riuscito dopo 3 tentativi." >&2
+            exit 1
+          fi
+
+      - name: Esito
+        if: steps.anni.outputs.esegui == 'si' && steps.copia.outputs.codice != '0'
+        run: |
+          echo "La copia non è riuscita: vedi il passo \"Copia i documenti e scrive l'esito\"."
+          exit 1
