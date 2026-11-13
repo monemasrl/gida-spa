@@ -108,6 +108,13 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
 - Società trasparente: i documenti sono divisi in cartelle per anno, che compaiono come sottocartelle nella barra
   laterale; l'anno si cambia con "Cartella superiore" (sposta il file in tutte le lingue). Per un anno nuovo:
   "Nuova cartella" nel selettore mentre si crea il documento.
+- Copia di un anno (es. 2025 → 2026): pulsante "Copia anno di Società trasparente" nella barra in alto del CMS. Apre
+  su GitHub l'azione `.github/workflows/copia-anno.yml` (Run workflow, anno da copiare e anno nuovo), che lancia
+  `scripts/copia-anno.mjs` e fa il commit su `main` (senza pull request). Anno nel nome del file, nell'URL e nel
+  titolo sostituito (se manca, `-<anno>` in fondo a nome e URL); testo, categoria, ordine e file identici: i PDF su
+  R2 restano gli stessi, vanno sostituiti nei documenti nuovi (non cancellati dalla Libreria file, li usa ancora
+  l'anno vecchio). Non tocca i documenti già presenti e si ferma se un URL esiste già. Poi: Configurazioni → Anni →
+  Anno corrente. In locale: `node scripts/copia-anno.mjs 2025 2026`.
 - Elenchi generati: un nuovo documento di Società trasparente compare nella pagina principale se il suo anno è
   l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
   "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.

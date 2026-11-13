@@ -1,0 +1,58 @@
+# Copia i documenti di Società trasparente da un anno a un altro (scripts/copia-anno.mjs) e fa il commit su main.
+# Si avvia a mano: dal CMS (pulsante "Copia anno") o da GitHub → Actions → "Copia anno di Società trasparente"
+# → Run workflow. Serve il permesso di scrittura sul repository.
+name: Copia anno di Società trasparente
+
+on:
+  workflow_dispatch:
+    inputs:
+      da:
+        description: Anno da copiare (es. 2025)
+        required: true
+        type: string
+      a:
+        description: Anno nuovo (es. 2026)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+# Una copia alla volta, per non creare commit in conflitto
+concurrency:
+  group: copia-anno
+  cancel-in-progress: false
+
+jobs:
+  copia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Copia i documenti
+        env:
+          DA: ${{ inputs.da }}
+          A: ${{ inputs.a }}
+        run: node scripts/copia-anno.mjs "$DA" "$A" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit su main
+        env:
+          DA: ${{ inputs.da }}
+          A: ${{ inputs.a }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          git add src/content/trasparenza
+          if git diff --cached --quiet; then
+            echo "Nessun documento nuovo da salvare." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Società trasparente: copia $DA → $A" -m "Avviata da $ACTOR con la GitHub Action \"Copia anno\"."
+          git push origin HEAD:main
