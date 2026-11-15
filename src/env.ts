@@ -14,13 +14,6 @@ export const variables = defineEnvVars({
 		description: 'Destinatari dei form, separati da virgola',
 		schema: (v) => (v || 'gida@gida-spa.it').split(',').map((s) => s.trim()).filter(Boolean)
 	},
-	GITHUB_OAUTH_CLIENT_ID: { description: 'Client ID della GitHub OAuth App del CMS', schema: optional },
-	GITHUB_OAUTH_CLIENT_SECRET: { description: 'Client secret della GitHub OAuth App del CMS (secret)', schema: optional },
-	CMS_ALLOWED_ORIGINS: {
-		description:
-			'Origin da cui il CMS può ricevere il token OAuth, separate da virgola (`*` = un\'etichetta DNS). Default in #lib/server/cms-auth.ts',
-		schema: (v) => (v ? v.split(',').map((s) => s.trim().replace(/\/$/, '')).filter(Boolean) : undefined)
-	},
 	CAP_SECRET: {
 		description: 'Segreto HMAC per firmare challenge e token Cap (es. openssl rand -hex 32)',
 		schema: (v) => {

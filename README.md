@@ -122,28 +122,26 @@ Variabili (vedi `.env.example` e `src/env.ts`): `PROCMAIL_API_KEY`, `PROCMAIL_AP
   l'anno corrente, altrimenti nell'archivio del suo anno; una certificazione compare negli elenchi del suo tipo.
   "Ordine negli elenchi" e "Nascondi negli elenchi" controllano posizione e visibilità.
 - **Online**: `/admin/index.html` → "Accedi con GitHub" (serve un account GitHub con accesso in scrittura a
-  `monemasrl/gida-spa`; vedi *Accesso con GitHub (OAuth)* sotto).
+  `monemasrl/gida-spa`; vedi *Accesso con GitHub* sotto).
   Con `publish_mode: editorial_workflow` ogni modifica apre una pull request (con anteprima Vercel);
   va in produzione solo quando la si pubblica dal CMS (merge su `main`).
 - **In locale**: `npm run dev`, apri `http://localhost:5173/admin/index.html` in Chrome/Edge →
   "Lavora con Repository Locale" e scegli la cartella del progetto. Le modifiche vengono scritte sui file.
 
-### Accesso con GitHub (OAuth)
+### Accesso con GitHub
 
-Il client OAuth è nel sito stesso (al posto di sveltia-cms-auth su Cloudflare): `src/routes/api/cms-auth/`
-(`auth` → GitHub → `callback`) e `src/lib/server/cms-auth.ts`. Il CMS lo raggiunge da `backend.base_url` +
-`auth_endpoint` in `static/admin/config.yml`, sempre sull'host di produzione perché la OAuth App ammette un solo
-callback URL. Anche il CMS delle anteprime Vercel (`gida-sito-*-monema-5f86ca5f.vercel.app`) accede da lì: il
-token viene consegnato solo alle origin ammesse (`CMS_ALLOWED_ORIGINS`, default in `cms-auth.ts`).
+Il login passa da un authenticator esterno: **`https://monema-cms-auth.vercel.app`**
+([sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) su Vercel, repository `monemasrl/cms-auth`).
+In `static/admin/config.yml` basta `backend.base_url` (niente `auth_endpoint`: il CMS usa `/auth` di default).
 
-Configurazione (una volta):
-
-1. GitHub → organizzazione `monemasrl` → Settings → Developer settings → **OAuth Apps** → New OAuth App:
-   *Homepage URL* `https://gida-sito.vercel.app`, *Authorization callback URL*
-   `https://gida-sito.vercel.app/api/cms-auth/callback`. Poi "Generate a new client secret".
-2. Vercel → progetto `gida-sito` → Settings → Environment Variables (Production e Preview):
-   `GITHUB_OAUTH_CLIENT_ID` e `GITHUB_OAUTH_CLIENT_SECRET` (*Sensitive*), quindi un nuovo deploy.
-3. Col dominio definitivo: cambiare `base_url` in `config.yml` e il callback URL nella OAuth App.
+- Usa la **GitHub App** `monema-cms-auth` (non una OAuth App), installata solo su `monemasrl/gida-spa`: il token
+  dell'editor vale solo per questo repository, anche se il suo account ne vede altri.
+- Il token della GitHub App scade dopo 8 ore: il CMS lo rinnova da solo con una richiesta al servizio
+  (POST su `/auth`), per questo `https://monema-cms-auth.vercel.app` è in `connect-src` della CSP di `/admin`
+  (`vercel.json`).
+- Client ID/secret della GitHub App e origin ammesse a ricevere il token (`ALLOWED_DOMAINS`) sono variabili del
+  progetto Vercel dell'authenticator, non di questo sito: lì devono comparire `gida-sito.vercel.app`, le anteprime
+  (`gida-sito-*-monema-5f86ca5f.vercel.app`) e, quando arriva, il dominio definitivo.
 
 Gli editor accedono con il proprio account GitHub, che deve avere accesso in scrittura al repository.
 
