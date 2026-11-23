@@ -48,6 +48,42 @@
 	let capEl = $state<HTMLElement & { reset?: () => void }>();
 	let idemKey = crypto.randomUUID();
 
+	// "Invia" resta disabilitato finché le caselle obbligatorie (informativa) non sono spuntate
+	// e la verifica Cap non è riuscita.
+	let capSolved = $state(false);
+	let checksOk = $state(false);
+	const button = $derived(form.querySelector<HTMLInputElement>('[type="submit"]'));
+	const updateChecks = () =>
+		(checksOk = [...form.querySelectorAll<HTMLInputElement>('input[type="checkbox"][required]')].every((c) => c.checked));
+
+	$effect(() => {
+		if (button) button.disabled = status === 'sending' || !capSolved || !checksOk;
+	});
+
+	$effect(() => {
+		updateChecks();
+		// dopo form.reset() i valori cambiano solo al termine dell'evento
+		const onReset = () => setTimeout(updateChecks);
+		form.addEventListener('change', updateChecks);
+		form.addEventListener('reset', onReset);
+		return () => {
+			form.removeEventListener('change', updateChecks);
+			form.removeEventListener('reset', onReset);
+		};
+	});
+
+	$effect(() => {
+		if (!capEl) return;
+		const solved = () => (capSolved = true);
+		const unsolved = () => (capSolved = false);
+		capEl.addEventListener('solve', solved);
+		for (const ev of ['reset', 'error', 'progress']) capEl.addEventListener(ev, unsolved);
+		return () => {
+			capEl!.removeEventListener('solve', solved);
+			for (const ev of ['reset', 'error', 'progress']) capEl!.removeEventListener(ev, unsolved);
+		};
+	});
+
 	onMount(async () => {
 		// WASM servito dal sito: nessuna richiesta a CDN di terze parti
 		(window as unknown as { CAP_CUSTOM_WASM_URL: string }).CAP_CUSTOM_WASM_URL = '/cap/cap_wasm_bg.wasm';
@@ -87,13 +123,9 @@
 		data.set('_lang', lang);
 		data.set('_page', location.pathname);
 
-		const button = form.querySelector<HTMLInputElement>('[type="submit"]');
 		const label = button?.value;
 		status = 'sending';
-		if (button) {
-			button.disabled = true;
-			button.value = t.sending;
-		}
+		if (button) button.value = t.sending;
 		try {
 			const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Idempotency-Key': idemKey } });
 			const body = await res.json().catch(() => ({}));
@@ -115,10 +147,9 @@
 		} finally {
 			// il token Cap è monouso: serve una nuova verifica per il prossimo invio
 			capEl?.reset?.();
-			if (button) {
-				button.disabled = false;
-				if (label) button.value = label;
-			}
+			capSolved = false;
+			if (status === 'sending') status = 'idle';
+			if (button && label) button.value = label;
 		}
 	}
 

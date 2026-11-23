@@ -7,3 +7,13 @@
 .gida-form-status.error { color: #d9364f; }
 .gida-form-status.ok { color: #008758; }
 .gida-cap { min-height: 60px; }
+/* Checkbox obbligatorie: Bootstrap Italia disegna la casella con label::after, lo stesso pseudo-elemento
+   che Drupal usa per l'asterisco dei campi obbligatori (.form-required::after). Senza questa correzione
+   l'asterisco finisce dentro la casella e non si capisce che è una checkbox: l'asterisco va dopo il testo. */
+.form-check [type='checkbox'] + label.form-required::after { background-image: none; vertical-align: baseline; }
+.form-check [type='checkbox'] + label.form-required > span::after {
+	display: inline-block; width: 6px; height: 6px; margin: 0 .3em; content: ''; vertical-align: super;
+	background: url(/core/misc/icons/ee0000/required.svg) no-repeat; background-size: 6px 6px;
+}
+.form-check [type='checkbox'] + label { cursor: pointer; }
+input[type='submit']:disabled { opacity: .5; cursor: not-allowed; }
