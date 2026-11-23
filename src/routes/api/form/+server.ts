@@ -15,8 +15,9 @@ export const prerender = false;
  * Variabili d'ambiente (Vercel → Settings → Environment Variables):
  *   PROCMAIL_API_KEY   chiave API procmail (secret)
  *   PROCMAIL_API_URL   default https://api-eu.procmail.sh
- *   FORM_FROM          mittente su un dominio abilitato all'invio su procmail
- *   FORM_TO            destinatari, separati da virgola (default gida@gida-spa.it)
+ *   FORM_FROM          mittente su un dominio abilitato all'invio su procmail, anche con un nome
+ *                      visualizzato: "Form Contatti" <sito@gida-spa.it>
+ *   FORM_TO            destinatari separati da virgola, anche con nome: "GIDA" <gida@gida-spa.it>, altro@…
  */
 
 // Definizioni dei form (src/content/forms.json): le etichette italiane vanno nell'email
