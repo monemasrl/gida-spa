@@ -17,3 +17,4 @@
 }
 .form-check [type='checkbox'] + label { cursor: pointer; }
 input[type='submit']:disabled { opacity: .5; cursor: not-allowed; }
+.gida-hp { position: absolute !important; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }

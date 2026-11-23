@@ -48,13 +48,16 @@
 	let capEl = $state<HTMLElement & { reset?: () => void }>();
 	let idemKey = crypto.randomUUID();
 
-	// "Invia" resta disabilitato finché le caselle obbligatorie (informativa) non sono spuntate
-	// e la verifica Cap non è riuscita.
+	// "Invia" resta disabilitato finché tutti i campi obbligatori non sono compilati e validi
+	// (informativa spuntata, email valida...) e la verifica Cap non è riuscita.
 	let capSolved = $state(false);
 	let checksOk = $state(false);
 	const button = $derived(form.querySelector<HTMLInputElement>('[type="submit"]'));
-	const updateChecks = () =>
-		(checksOk = [...form.querySelectorAll<HTMLInputElement>('input[type="checkbox"][required]')].every((c) => c.checked));
+	const updateChecks = () => (checksOk = form.checkValidity());
+
+	// Honeypot: campo nascosto con il CSS (non con display:none, che alcuni bot riconoscono).
+	// Una persona non lo vede e lo lascia vuoto; se è compilato il server finge l'invio.
+	const hpId = $derived(`${def.id}-website`);
 
 	$effect(() => {
 		if (button) button.disabled = status === 'sending' || !capSolved || !checksOk;
@@ -64,9 +67,11 @@
 		updateChecks();
 		// dopo form.reset() i valori cambiano solo al termine dell'evento
 		const onReset = () => setTimeout(updateChecks);
+		form.addEventListener('input', updateChecks);
 		form.addEventListener('change', updateChecks);
 		form.addEventListener('reset', onReset);
 		return () => {
+			form.removeEventListener('input', updateChecks);
 			form.removeEventListener('change', updateChecks);
 			form.removeEventListener('reset', onReset);
 		};
@@ -159,6 +164,10 @@
 	});
 </script>
 
+<div class="gida-hp" aria-hidden="true">
+	<label for={hpId}>{lang === 'en' ? 'Leave this field empty' : 'Lascia vuoto questo campo'}</label>
+	<input type="text" id={hpId} name="website" tabindex="-1" autocomplete="off" />
+</div>
 <div class="form-item form-group gida-cap">
 	{#if capReady}
 		<cap-widget bind:this={capEl} data-cap-api-endpoint="/api/cap/" data-cap-lang={lang} {...lang === 'it' ? CAP_IT : {}}></cap-widget>

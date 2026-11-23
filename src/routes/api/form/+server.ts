@@ -9,7 +9,8 @@ import type { RequestHandler } from './$types';
 export const prerender = false;
 
 /**
- * POST /api/form — riceve i form del sito, verifica Cap e invia l'email tramite procmail.sh.
+ * POST /api/form — riceve i form del sito, scarta i bot (honeypot), verifica Cap e invia l'email
+ * tramite procmail.sh.
  *
  * Variabili d'ambiente (Vercel → Settings → Environment Variables):
  *   PROCMAIL_API_KEY   chiave API procmail (secret)
@@ -51,6 +52,13 @@ export const POST: RequestHandler = async ({ request, url }) => {
 
 	const def = FORMS.get(String(data.get('_form') ?? ''));
 	if (!def) return json({ ok: false, error: 'unknown_form' }, { status: 400 });
+
+	// 0. Honeypot: il campo `website` è nascosto con il CSS, una persona lo lascia vuoto.
+	//    Se è compilato è un bot: si risponde come se l'invio fosse riuscito, senza inviare nulla.
+	if (String(data.get('website') ?? '').trim()) {
+		console.warn('[form] honeypot compilato, invio ignorato', def.id);
+		return json({ ok: true });
+	}
 
 	// 1. Cap: token firmato e non scaduto (vedi #lib/server/cap.ts)
 	const capToken = String(data.get('cap-token') ?? '');
