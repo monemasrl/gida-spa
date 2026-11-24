@@ -225,6 +225,12 @@ collections:
     <<: *entries
     sortable_fields: { fields: [date, title], default: { field: date, direction: descending } }
     summary: '{{date}} — {{title}}'
+    # Elenco a tabella: miniatura dell'immagine (se presente), data, titolo e lingue in cui la news esiste
+    thumbnail: image.src
+    table_columns:
+      - { field: "{{date | date('DD/MM/YYYY')}}", label: Data }
+      - title
+      - { field: '{{locales}}', label: Traduzioni }
     fields:
       - *title
       - *description
