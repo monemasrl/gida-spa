@@ -25,7 +25,7 @@ backend:
 
 # Ogni modifica diventa una pull request (con il suo deploy di anteprima su Vercel)
 # e va in produzione solo quando viene pubblicata/unita. Va al primo livello, non dentro `backend`.
-publish_mode: editorial_workflow
+publish_mode: simple
 
 # Niente anteprima nell'editor (quella generica di Sveltia non somiglia al sito); resta il secondo
 # pannello per affiancare italiano e inglese.
