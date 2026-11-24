@@ -57,7 +57,10 @@ export function buildSite(raw: RawContent, dims: Dims) {
 				impianti: of<Impianto>('impianti', lang),
 				certificazioni: of<Certificazione>('certificazioni', lang),
 				documenti: of<Documento>('trasparenza', lang),
-				faq: faq[lang] ?? []
+				faq: faq[lang] ?? [],
+				// dalla più recente; a parità di data (o senza data, in fondo) per titolo
+				news: of<News>('news', lang).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || a.title.localeCompare(b.title)),
+				newsPage: of<Pagina>('pagine', lang).find((p) => p.news)
 			}
 		])
 	) as Record<Lang, SiteData>;

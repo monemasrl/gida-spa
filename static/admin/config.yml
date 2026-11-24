@@ -159,6 +159,7 @@ collections:
             fields:
               - { name: html, label: HTML, widget: code, default_language: html, allow_language_selection: false, output_code_only: true, i18n: true }
       - { name: faq, label: Mostra le FAQ, widget: boolean, required: false, default: false, i18n: duplicate, hint: Elenca le domande della collezione FAQ (nel loro ordine) }
+      - { name: news, label: Pagina delle news, widget: boolean, required: false, default: false, i18n: duplicate, hint: 'Mostra la news più recente della collezione News al posto di icona, titolo e testo della pagina (che restano solo se non ci sono news); con più news aggiunge l''indice e i link precedente/successiva' }
       - name: blocks
         label: Blocchi sotto il contenuto
         label_singular: Blocco
@@ -222,10 +223,13 @@ collections:
     icon: newspaper
     folder: /src/content/news
     <<: *entries
+    sortable_fields: { fields: [date, title], default: { field: date, direction: descending } }
+    summary: '{{date}} — {{title}}'
     fields:
       - *title
       - *description
       - *path
+      - { name: date, label: Data, widget: datetime, time_format: false, format: YYYY-MM-DD, default: '{{now}}', i18n: duplicate, hint: 'Ordina le news: la più recente è quella mostrata nella pagina News' }
       - { name: image, label: Immagine, required: false, <<: *image }
       - *body
 

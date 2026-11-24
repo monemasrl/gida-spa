@@ -27,5 +27,27 @@
 				}
 			]
 		}
+	],
+	"redirects": [
+		{
+			"source": "/prova-2021",
+			"destination": "/news",
+			"permanent": true
+		},
+		{
+			"source": "/prova-2021-0",
+			"destination": "/news",
+			"permanent": true
+		},
+		{
+			"source": "/prova-2022",
+			"destination": "/news",
+			"permanent": true
+		},
+		{
+			"source": "/premio-lo-sviluppo-sostenibile-2023-0",
+			"destination": "/news",
+			"permanent": true
+		}
 	]
 }

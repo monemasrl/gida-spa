@@ -3,7 +3,7 @@
  * originale continua a funzionare. Funzioni pure: usate dal sito in prerender e da
  * scripts/check-parity.mjs per confrontare il risultato con l'HTML originale.
  */
-import type { Block, Certificazione, Documento, Faq, FormEntry, Home, Img, Impianto, Lang, News, Pagina, Sezione, Tassonomie } from './model.ts';
+import type { Block, Certificazione, Documento, Faq, FormEntry, Home, Img, Impianto, Lang, Link, News, Pagina, Sezione, Tassonomie } from './model.ts';
 import { url } from './media.ts';
 
 export type Dims = (src: string) => { width: number; height: number } | undefined;
@@ -18,6 +18,10 @@ export type SiteData = {
 	certificazioni: Certificazione[];
 	documenti: Documento[];
 	faq: Faq[];
+	/** news della lingua, dalla più recente */
+	news: News[];
+	/** pagina delle news (`news: true`): testata e percorso dell'elenco */
+	newsPage?: Pagina;
 };
 
 // ---------------------------------------------------------------------------------------------
@@ -95,10 +99,23 @@ function faqItem(f: Faq, i: number) {
 }
 
 export function renderPagina(p: Pagina, site: SiteData) {
+	if (p.news && site.news.length) return renderNewsView(site.news[0], site);
+	return mainWrap(node('page', layout(pageHead(p, site) + pageMain(p, site)))) + pageAfter(p, site);
+}
+
+/** Testata della pagina: immagine e briciole di pane (`parent`: voce intermedia). */
+function pageHead(p: Pagina, site: SiteData, parent?: Link) {
 	let html = '';
 	if (p.hero) html += lb('block-field-blocknodepagefield-immagine-principale', `<div class="field field--name-field-immagine-principale field--type-entity-reference field--label-hidden field__item">${media(site, p.hero, 'full')}</div>`);
-	html += `<div class="block block-system block-system-breadcrumb-block" id="it-"> <nav class="breadcrumb-container" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"> <a href="${home(site.lang)}">Home</a><span class="separator">/</span></li><li class="breadcrumb-item active" aria-current="page">${esc(p.title)}</li></ol></nav></div>`;
+	const crumb = (l: Link) => `<li class="breadcrumb-item"> <a href="${esc(l.href)}">${esc(l.title)}</a><span class="separator">/</span></li>`;
+	html += `<div class="block block-system block-system-breadcrumb-block" id="it-"> <nav class="breadcrumb-container" aria-label="breadcrumb"><ol class="breadcrumb">${crumb({ title: 'Home', href: home(site.lang) })}${parent ? crumb(parent) : ''}<li class="breadcrumb-item active" aria-current="page">${esc(p.title)}</li></ol></nav></div>`;
 	html += lb('block-extra-field-blocknodepagelinks', '');
+	return html;
+}
+
+/** Icona, titolo, testo e FAQ della pagina. */
+function pageMain(p: Pagina, site: SiteData) {
+	let html = '';
 	if (p.icon) html += lb('block-field-blocknodepagefield-icona', `<div class="field field--name-field-icona field--type-entity-reference field--label-hidden field__item">${media(site, p.icon, 'default')}</div>`);
 	html += lb('block-field-blocknodepagetitle', ` <span class="field field--name-title field--type-string field--label-above">${esc(p.title)}</span>`);
 	const body = text(p) + (p.sezioni ?? []).map((s) => renderSezione(s, site)).join('');
@@ -107,12 +124,17 @@ export function renderPagina(p: Pagina, site: SiteData) {
 		const items = [...site.faq].sort(byOrder).map((f, i) => faqItem(f, i)).join('');
 		html += lb('block-field-blocknodepagefield-campo-faq', `<div class="field field--name-field-campo-faq field--type-faqfield field--label-hidden field__items"><div class="field__item"><div id="faqfield_field_campo_faq" class="ui-accordion ui-widget ui-helper-reset" role="tablist">${items}</div></div></div>`);
 	}
+	return html;
+}
+
+/** Blocchi sotto la pagina (form, elenchi, Società trasparente). */
+function pageAfter(p: Pagina, site: SiteData) {
 	const blocks = p.blocks ?? [];
 	const first = blocks.filter((b) => b.type !== 'trasparenza').map((b) => renderBlock(b, site)).join('');
 	const cols = [];
 	if (first) cols.push({ col: 'first', region: 'after_content_first', html: first });
 	if (blocks.some((b) => b.type === 'trasparenza')) cols.push({ col: 'fourth', region: 'societa_trasparente', html: renderTrasparenza(site) });
-	return mainWrap(node('page', layout(html))) + afterContent(cols);
+	return afterContent(cols);
 }
 
 /** Aggiunge un attributo ai tag di apertura indicati (solo a quelli senza attributi). */
@@ -220,21 +242,48 @@ const plain = (s: string) => s.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').t
 // ---------------------------------------------------------------------------------------------
 // Altri tipi
 // ---------------------------------------------------------------------------------------------
+const NEWS = {
+	it: { index: 'Tutte le news', prev: 'Precedente', next: 'Successiva', nav: 'Navigazione tra le news' },
+	en: { index: 'All news', prev: 'Previous', next: 'Next', nav: 'News navigation' }
+};
+/** Indirizzo di una news: la più recente si legge nella pagina delle news. */
+const newsHref = (n: News, site: SiteData) => (n === site.news[0] && site.newsPage?.path) || n.path!;
+const newsDate = (n: News, lang: Lang) =>
+	n.date ? new Date(`${n.date}T12:00:00Z`).toLocaleDateString(lang === 'en' ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : '';
+
 export function renderNews(n: News, site: SiteData) {
-	const image = (label: boolean) =>
-		n.image
-			? lb(
-					'block-field-blocknodenewsfield-immagine-news',
-					label
-						? `<div class="field field--name-field-immagine-news field--type-image field--label-above"><div class="field__label">Immagine-news</div><div class="field__item"> ${img(site, n.image, { class: 'img-fluid' })}</div></div>`
-						: `<div class="field field--name-field-immagine-news field--type-image field--label-hidden field__item"> ${img(site, n.image, { class: 'img-fluid' })}</div>`
-				)
-			: '';
-	let html = image(false);
-	html += lb('block-field-blocknodenewstitle', ` <span class="field field--name-title field--type-string field--label-hidden">${esc(n.title)}</span>`);
-	if (text(n)) html += lb('block-field-blocknodenewsbody', textField(text(n)));
-	html += image(true);
-	return mainWrap(node('news', layout(html), true).trimStart());
+	return renderNewsView(n, site);
+}
+
+/**
+ * Una news con l'aspetto della pagina delle news (testata, icona = immagine della news, titolo, testo).
+ * Con più news: indice a sinistra e link alla precedente (più vecchia) e alla successiva (più recente).
+ */
+function renderNewsView(n: News, site: SiteData) {
+	const page = site.newsPage;
+	const p: Pagina = { title: n.title, hero: page?.hero, icon: n.image, body: text(n) };
+	const parent = page && n !== site.news[0] ? { title: 'News', href: page.path! } : undefined;
+	if (site.news.length < 2) return mainWrap(node('page', layout(pageHead(p, site, parent) + pageMain(p, site))));
+	const t = NEWS[site.lang];
+	const i = site.news.indexOf(n);
+	const older = site.news[i + 1];
+	const newer = site.news[i - 1];
+	const index = site.news
+		.map((o) => {
+			const date = o.date ? `<span class="gida-news-index__date">${esc(newsDate(o, site.lang))}</span>` : '';
+			return o === n
+				? `<li class="gida-news-index__item active"><span aria-current="page">${esc(o.title)}</span>${date}</li>`
+				: `<li class="gida-news-index__item"><a href="${esc(newsHref(o, site))}">${esc(o.title)}</a>${date}</li>`;
+		})
+		.join('');
+	const link = (o: News | undefined, rel: 'prev' | 'next') =>
+		o
+			? `<a class="gida-news-nav__link gida-news-nav__${rel}" rel="${rel}" href="${esc(newsHref(o, site))}"><span class="gida-news-nav__label">${rel === 'prev' ? `‹ ${t.prev}` : `${t.next} ›`}</span><span class="gida-news-nav__title">${esc(o.title)}</span></a>`
+			: '<span></span>';
+	const nav = `<nav class="gida-news-nav" aria-label="${t.nav}">${link(older, 'prev')}${link(newer, 'next')}</nav>`;
+	const aside = `<aside class="col-lg-3 order-2 order-lg-1 gida-news-index"><h2 class="gida-news-index__title">${t.index}</h2><ul>${index}</ul></aside>`;
+	const main = `<div class="col-lg-9 order-1 order-lg-2">${pageMain(p, site)}${nav}</div>`;
+	return mainWrap(node('page', layout(pageHead(p, site, parent) + `<div class="container"><div class="row gida-news">${aside}${main}</div></div>`)));
 }
 
 export function renderImpianto(i: Impianto, site: SiteData) {

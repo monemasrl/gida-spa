@@ -43,9 +43,12 @@ export type Pagina = Base & Text & {
 	sezioni?: Sezione[];
 	/** mostra l'elenco delle FAQ (collezione `faq`) */
 	faq?: boolean;
+	/** pagina delle news: mostra la news più recente, l'indice delle altre e la navigazione */
+	news?: boolean;
 	blocks?: Block[];
 };
-export type News = Base & Text & { image?: Img };
+/** `date`: data di pubblicazione (AAAA-MM-GG), ordina le news dalla più recente. */
+export type News = Base & Text & { image?: Img; date?: string };
 /** Domanda frequente: il titolo è la domanda. */
 export type Faq = { title: string; answer: string; order?: number };
 export type Impianto = Base & Text & { image?: Img; order?: number };

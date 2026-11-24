@@ -1,6 +1,7 @@
 {
 	"title": "Sustainable Development Award 2023",
 	"path": "/en/news",
+	"news": true,
 	"hero": {
 		"src": "https://media.gida-spa.it/sites/default/files/2022-01/news_0.jpg",
 		"alt": "news"
