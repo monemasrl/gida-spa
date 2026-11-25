@@ -4,15 +4,15 @@
 		"items": [
 			{
 				"label": "Daily Usage",
-				"value": "2860.0 KWh"
+				"value": "5860.0 KWh"
 			},
 			{
 				"label": "CO2 Avoided",
-				"value": "1076.0 Ton"
+				"value": "2076.0 Ton"
 			},
 			{
 				"label": "T.E.P.",
-				"value": "175.4"
+				"value": "295.4"
 			}
 		],
 		"totale": {
@@ -43,7 +43,8 @@
 				"links": [
 					{
 						"label": "gida@gida-spa.it",
-						"href": "mailto:gida@gida-spa.it"
+						"href": "mailto:gida@gida-spa.it",
+						"newTab": false
 					}
 				]
 			},
@@ -52,7 +53,8 @@
 				"links": [
 					{
 						"label": "gida@pec.uipservizi.it",
-						"href": "mailto:gida@pec.uipservizi.it"
+						"href": "mailto:gida@pec.uipservizi.it",
+						"newTab": false
 					}
 				]
 			},
@@ -89,7 +91,8 @@
 				"links": [
 					{
 						"label": "Whistleblowing",
-						"href": "https://gida-spa.integrityline.com/"
+						"href": "https://gida-spa.integrityline.com/",
+						"newTab": false
 					}
 				]
 			}
@@ -98,51 +101,63 @@
 	"menu": [
 		{
 			"label": "About us",
-			"href": "/en/about-us"
+			"href": "/en/about-us",
+			"newTab": false
 		},
 		{
 			"label": "Contact",
-			"href": "/en/contact"
+			"href": "/en/contact",
+			"newTab": false
 		},
 		{
 			"label": "Depuration",
-			"href": "/depurazione"
+			"href": "/depurazione",
+			"newTab": false
 		},
 		{
 			"label": "Education and research",
-			"href": "/en/research-and-education"
+			"href": "/en/research-and-education",
+			"newTab": false
 		},
 		{
 			"label": "Retrieval",
-			"href": "/en/retrieval"
+			"href": "/en/retrieval",
+			"newTab": false
 		},
 		{
 			"label": "Treatment",
-			"href": "/en/liquid-waste-treatment-road"
+			"href": "/en/liquid-waste-treatment-road",
+			"newTab": false
 		},
 		{
 			"label": "Info Gdpr",
-			"href": "/en/info-gdpr"
+			"href": "/en/info-gdpr",
+			"newTab": false
 		},
 		{
 			"label": "MOG 231-01",
-			"href": "/en"
+			"href": "/en",
+			"newTab": false
 		},
 		{
 			"label": "Albo fornitori",
-			"href": "https://albofornitori.gida-spa.it/login"
+			"href": "https://albofornitori.gida-spa.it/login",
+			"newTab": false
 		},
 		{
 			"label": "Work with us",
-			"href": "/en/work-us"
+			"href": "/en/work-us",
+			"newTab": false
 		},
 		{
 			"label": "Società trasparente",
-			"href": "/en/transparent-company"
+			"href": "/en/transparent-company",
+			"newTab": false
 		},
 		{
 			"label": "Faq",
-			"href": "/en/faq"
+			"href": "/en/faq",
+			"newTab": false
 		}
 	],
 	"certificazioni": {
@@ -175,15 +190,18 @@
 		"links": [
 			{
 				"label": "Certifications",
-				"href": "/en/certifications"
+				"href": "/en/certifications",
+				"newTab": false
 			},
 			{
 				"label": "Authorizations",
-				"href": "/en/permissions"
+				"href": "/en/permissions",
+				"newTab": false
 			},
 			{
 				"label": "Regulations",
-				"href": "/en/regulations"
+				"href": "/en/regulations",
+				"newTab": false
 			}
 		]
 	}

@@ -4,15 +4,15 @@
 		"items": [
 			{
 				"label": "Utilizzo Quotidiano",
-				"value": "2860.0 KWh"
+				"value": "5860.0 KWh"
 			},
 			{
 				"label": "CO2 Evitata",
-				"value": "1076.0 Ton"
+				"value": "2076.0 Ton"
 			},
 			{
 				"label": "T.E.P.",
-				"value": "175.4"
+				"value": "295.4"
 			}
 		],
 		"totale": {
@@ -43,7 +43,8 @@
 				"links": [
 					{
 						"label": "gida@gida-spa.it",
-						"href": "mailto:gida@gida-spa.it"
+						"href": "mailto:gida@gida-spa.it",
+						"newTab": false
 					}
 				]
 			},
@@ -52,7 +53,8 @@
 				"links": [
 					{
 						"label": "gida@pec.uipservizi.it",
-						"href": "mailto:gida@pec.uipservizi.it"
+						"href": "mailto:gida@pec.uipservizi.it",
+						"newTab": false
 					}
 				]
 			},
@@ -89,7 +91,8 @@
 				"links": [
 					{
 						"label": "Whistleblowing",
-						"href": "https://gida-spa.integrityline.com/"
+						"href": "https://gida-spa.integrityline.com/",
+						"newTab": false
 					}
 				]
 			}
@@ -98,51 +101,63 @@
 	"menu": [
 		{
 			"label": "Chi siamo",
-			"href": "/chi-siamo"
+			"href": "/chi-siamo",
+			"newTab": false
 		},
 		{
 			"label": "Contatti",
-			"href": "/contatti"
+			"href": "/contatti",
+			"newTab": false
 		},
 		{
 			"label": "Depurazione",
-			"href": "/depurazione"
+			"href": "/depurazione",
+			"newTab": false
 		},
 		{
 			"label": "Formazione e ricerca",
-			"href": "/formazione-e-ricerca"
+			"href": "/formazione-e-ricerca",
+			"newTab": false
 		},
 		{
 			"label": "Recupero",
-			"href": "/recupero"
+			"href": "/recupero",
+			"newTab": false
 		},
 		{
 			"label": "Trattamento",
-			"href": "/trattamento-rifiuti-liquidi-su-gomma"
+			"href": "/trattamento-rifiuti-liquidi-su-gomma",
+			"newTab": false
 		},
 		{
 			"label": "Info Gdpr",
-			"href": "/info-gdpr"
+			"href": "/info-gdpr",
+			"newTab": false
 		},
 		{
 			"label": "MOG 231-01",
-			"href": "/mog-231-01"
+			"href": "/mog-231-01",
+			"newTab": false
 		},
 		{
 			"label": "Albo fornitori",
-			"href": "https://albofornitori.gida-spa.it/login"
+			"href": "https://albofornitori.gida-spa.it/login",
+			"newTab": false
 		},
 		{
 			"label": "lavora con noi",
-			"href": "/lavora-con-noi"
+			"href": "/lavora-con-noi",
+			"newTab": false
 		},
 		{
 			"label": "Società trasparente",
-			"href": "/societa-trasparente"
+			"href": "/societa-trasparente",
+			"newTab": false
 		},
 		{
 			"label": "Faq",
-			"href": "/faq"
+			"href": "/faq",
+			"newTab": false
 		}
 	],
 	"certificazioni": {
@@ -152,14 +167,16 @@
 					"src": "https://media.gida-spa.it/sites/default/files/2026-08/ISO_14001_27854_06102025_0.jpg",
 					"alt": "Kiwa 14001 2026"
 				},
-				"href": "https://media.gida-spa.it/sites/default/files/2025-06/CERT_8110_ITA_2025 _ISO 14001_  GIDA.pdf"
+				"href": "https://media.gida-spa.it/sites/default/files/2025-06/CERT_8110_ITA_2025 _ISO 14001_  GIDA.pdf",
+				"newTab": false
 			},
 			{
 				"image": {
 					"src": "https://media.gida-spa.it/sites/default/files/2026-08/ISO_9001_27852_06102025_0.jpg",
 					"alt": "Kiwa 9001 2026"
 				},
-				"href": "https://media.gida-spa.it/sites/default/files/2024-01/CERT_2023_ 8110_ ISO 9001_GIDA_0.pdf"
+				"href": "https://media.gida-spa.it/sites/default/files/2024-01/CERT_2023_ 8110_ ISO 9001_GIDA_0.pdf",
+				"newTab": false
 			},
 			{
 				"image": {
@@ -173,15 +190,18 @@
 		"links": [
 			{
 				"label": "Certificazioni",
-				"href": "/certificazioni"
+				"href": "/certificazioni",
+				"newTab": false
 			},
 			{
 				"label": "Autorizzazioni",
-				"href": "/autorizzazioni"
+				"href": "/autorizzazioni",
+				"newTab": false
 			},
 			{
 				"label": "Regolamenti",
-				"href": "/regolamenti"
+				"href": "/regolamenti",
+				"newTab": false
 			}
 		]
 	}
