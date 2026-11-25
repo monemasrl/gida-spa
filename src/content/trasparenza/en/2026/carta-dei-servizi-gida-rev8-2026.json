@@ -1,10 +1,11 @@
 {
-	"title": "Carta dei Servizi GIDA Rev8 2026",
-	"path": "/en/carta-dei-servizi-gida-rev8-2026",
-	"body": "<p>The document published is the one in force as of October 06, 2025.</p>",
+	"title": "Carta dei Servizi GIDA Rev9 2026",
+	"path": "/en/carta-dei-servizi-gida-rev9-2026",
+	"tipo": "carta-dei-servizi-e-standard-di-qualita",
+	"body": "<p>The document published is the one in force as of November 06, 2026</p>",
 	"files": [
 		"https://media.gida-spa.it/sites/default/files/2025-11/Carta dei Servizi_GIDA-Rev8_del_06.10.2025_0.pdf"
 	],
-	"tipo": "carta-dei-servizi-e-standard-di-qualita",
-	"order": 218
+	"order": 218,
+	"unlisted": false
 }
