@@ -4,7 +4,7 @@
 		"items": [
 			{
 				"label": "Daily Usage",
-				"value": "5860.0 KWh"
+				"value": "2850.0 KWh"
 			},
 			{
 				"label": "CO2 Avoided",
@@ -17,7 +17,7 @@
 		],
 		"totale": {
 			"label": "Total",
-			"value": "1996.0 MWh"
+			"value": "3996.0 MWh"
 		}
 	},
 	"dati": {

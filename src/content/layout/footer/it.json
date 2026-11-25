@@ -4,7 +4,7 @@
 		"items": [
 			{
 				"label": "Utilizzo Quotidiano",
-				"value": "5860.0 KWh"
+				"value": "2850.0 KWh"
 			},
 			{
 				"label": "CO2 Evitata",
@@ -17,7 +17,7 @@
 		],
 		"totale": {
 			"label": "Totale",
-			"value": "1996.0 MWh"
+			"value": "3996.0 MWh"
 		}
 	},
 	"dati": {
